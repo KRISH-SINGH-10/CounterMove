@@ -6,6 +6,7 @@ import { forPhone, usePhone } from "./phone";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo, useRef, useState } from "react";
 import type { CaseRecord } from "@/lib/types";
+import { DoctorPanel, ReservePanel } from "./AfterPanels";
 import ApiTrail from "./ApiTrail";
 import { AlertsFeed } from "./AutopilotPanel";
 import { useCases } from "./CasesProvider";
@@ -259,6 +260,10 @@ export default function Insights() {
         <Kpi label="Handled by autopilot" value={s ? `${s.autopilot} of ${s.answered}` : "-"} sub="Responses sent without you" />
         <Kpi label="Disputes" value={s ? String(data?.cases.length ?? 0) : "-"} sub={s ? `${s.open} still open` : undefined} />
       </div>
+
+      <ReservePanel cases={data?.cases ?? []} />
+
+      <DoctorPanel cases={data?.cases ?? []} />
 
       <InboxCharts shown={shown} activeClaim={claim} onClaim={filterClaim} />
 
