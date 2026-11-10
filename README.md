@@ -1,6 +1,8 @@
 # Countermove
 
-**An AI agent that defends small online sellers in PayPal disputes.**
+**Stop scammers before you ship. Settle the rest without a fight.**
+
+An AI agent that protects small online sellers before, during and after a PayPal dispute.
 
 **[Live demo](https://rebuttal-6j9a.onrender.com)** (no login) · **[Demo video](https://youtu.be/GnCHcMgndKA)** (under 3 min) · Built for [Build What's Next with PayPal and AI](https://paypalaihackathon.devpost.com/)
 
@@ -13,6 +15,23 @@ _The demo runs on Render's free tier: if nobody has used it for a while, the fir
 - **What it does:** when PayPal's dispute webhook arrives, a Gemini agent investigates through the PayPal Agent Toolkit and recommends fight, partial refund or refund, with every fact traced to its source. The seller approves, and the server answers through the PayPal Disputes API.
 - **Before and after the dispute:** it checks paid orders for dispute risk before they ship, negotiates partial refunds inside a ceiling the buyer never sees, and warns a shop about buyers other shops have already proven wrong.
 - **Try it:** the Simulator returns PayPal's own payloads with no login, and one toggle switches to the real PayPal sandbox.
+
+## Before, during and after a dispute
+
+| When | What Countermove does | Where |
+|---|---|---|
+| **Before** | Checks every paid PayPal order for dispute risk and offers one action: refund it through PayPal, require a signature, or ship to the PayPal address only. | Protect |
+| **Before** | Warns about buyers other shops have already proven wrong (a salted hash of the email, nothing else). | Protect |
+| **Before** | Gives the buyer a "fix it first" page: tracking is answered at once from the shop's records, and a refund or replacement request reaches the seller instead of PayPal. | `/fix/{order}` and Protect |
+| **During** | Investigates each dispute through the PayPal Agent Toolkit and recommends fight, partial refund or refund. The evidence statement is written and ready behind one control. | Disputes |
+| **During** | Negotiates a partial refund inside a ceiling the buyer never sees, and heals its own failed PayPal calls. | Dispute page |
+| **After** | **Dispute Reserve:** what to keep in the PayPal balance for the next 30 days, from open disputes and the last 90 days' results. | Insights |
+| **After** | **Dispute Doctor:** the repeated causes behind refunds, each with one fix (a signature rule, listing text, an autopilot limit). | Insights |
+| **Throughout** | **PayPal API trail:** every PayPal call made by the agent, autopilot, the seller or the server, with status and debug id. | Dispute page and Insights |
+
+**Judge mode** (top bar) plays this whole story in the Simulator in under a minute, on the real pages and API routes.
+
+Dispute Reserve and Dispute Doctor are arithmetic and fixed rules over the shop's own cases (`src/lib/insights.ts`), with no model call, so they give the same answer every time and need no AI quota.
 
 ## What makes this different
 
@@ -89,7 +108,7 @@ The inbox works as a triage queue: disputes are ranked by money at risk and days
 
 ## Try it (no PayPal login needed)
 
-The demo opens on the **Simulator**. Open **Simulator tools** and click **Simulate a new dispute**: a simulated buyer files a $28 claim, the simulator delivers the same `CUSTOMER.DISPUTE.CREATED` webhook PayPal would, the agent investigates, and autopilot refunds it within your $30 rule. Watch **Latest alerts**. In **Autopilot rules**, set **Send evidence on its own** to 90% and simulate again to see autopilot fight a signed-delivery case. Open a dispute and the agent starts investigating (a saved real Gemini run, replayed). Approve its recommendation, and a few seconds later the simulator plays PayPal's side: the ruling on a fight, or the buyer accepting an offer. Click **PayPal rules for buyer** during the countdown to see a loss instead. Open the $96 mug dispute and click **Let the agent negotiate** to watch the agent haggle with a simulated buyer. On the **Protect** tab, the **Dispute shield** checks three paid orders; click a row to see what the agent found and what to do before shipping. **Simulator tools → Reset demo** starts over. On Disputes, search or filter by claim, stage and amount; the pinned totals row tracks money at risk and kept for whatever is shown. On **Insights**, **Export outcomes (CSV)** downloads the ledger with plain-number amounts. The toggle at the top switches to **Live PayPal sandbox**, which shows real disputes filed by sandbox buyers.
+The demo opens on the **Simulator**. The quickest tour is **Judge mode** in the top bar: one click plays the story before, during and after a dispute. To drive it yourself, open **Simulator tools** and click **Simulate a new dispute**: a simulated buyer files a $28 claim, the simulator delivers the same `CUSTOMER.DISPUTE.CREATED` webhook PayPal would, the agent investigates, and autopilot refunds it within your $30 rule. Watch **Latest alerts**. In **Autopilot rules**, set **Send evidence on its own** to 90% and simulate again to see autopilot fight a signed-delivery case. Open a dispute and the agent starts investigating (a saved real Gemini run, replayed). Approve its recommendation, and a few seconds later the simulator plays PayPal's side: the ruling on a fight, or the buyer accepting an offer. Click **PayPal rules for buyer** during the countdown to see a loss instead. Open the $96 mug dispute and click **Let the agent negotiate** to watch the agent haggle with a simulated buyer. On the **Protect** tab, the **Dispute shield** checks three paid orders; click a row to see what the agent found and what to do before shipping. **Simulator tools → Reset demo** starts over. On Disputes, search or filter by claim, stage and amount; the pinned totals row tracks money at risk and kept for whatever is shown. On **Insights**, **Export outcomes (CSV)** downloads the ledger with plain-number amounts. The toggle at the top switches to **Live PayPal sandbox**, which shows real disputes filed by sandbox buyers.
 
 Each browser gets its own simulator, kept by a cookie: several judges can try the demo at once without seeing each other's clicks, and **Reset demo** resets only yours. The live sandbox is one shared PayPal account, so on a production server it is view-only (cases, saved investigations and outcomes); set `LIVE_SANDBOX_WRITABLE=1` to approve and rule on live disputes, as local development does by default.
 
@@ -247,7 +266,7 @@ Without them the app runs exactly as the hackathon demo, with no sign-in. `/api/
 ## Tests
 
 ```bash
-npm test   # 116 tests (108 without a database), about 30 seconds, no API keys needed
+npm test   # 130 tests (122 without a database), about 30 seconds, no API keys needed
 ```
 
 The agent-loop tests drive the real loop and the PayPal simulator with a scripted model. They cover parallel tool results, retries after invalid recommendations, and tool errors returned to the model. The autopilot tests cover every rule and guardrail, a webhook dispute refunded end-to-end, one left for approval, and a repeated webhook. The negotiation tests cover the guardrails, a full haggle settled at $32, the rule fallback and a hand-back. The recovery tests cover reading PayPal's errors, healing an outage and an expired token end to end, no retries on a refused refund, the alternative's guardrails and the rule fallback. The shield tests cover dispute memory, the tools the model may call, the fixed rule score (the same order always gets the same level, whatever the model says) and the rule-based fallback when the model fails. The network tests cover the salted buyer hash, which buyers get flagged, the shield's network signal and what this shop shares. The bulk-approve tests cover the server-side cap and guardrails and a PayPal failure on one row. The Gemini tests cover moving to the fallback model on 429, 503 and timeouts, temperature 0, and the saved analysis with its notice when every model fails. The health test checks `/api/health` answers without calling PayPal or Gemini. The AG Studio tests cover mapping Studio turns to Gemini and back, thought signatures, the recursive-schema fix, the one-of argument repair, moving to the next model on a rate limit or an empty answer, and the replay key staying the same across two runs of one question. The store tests run one contract (merges, concurrent writes, tenant separation, the incident cap, webhook de-duplication) against memory and Postgres, and the account tests cover passwords, encrypted PayPal secrets, sessions and per-seller data. The trail tests check that an investigation records its four read tools as the agent's, an approval records its write with status 200 as the seller's, an injected outage records both 503s and then the retry that went through, and that `?case=` filters and each visitor sees only their own calls. The grid-ask tests check a valid answer becomes AG Grid filter models, unknown columns and wrong filter shapes are dropped, an answer with nothing valid left is refused, a saved answer replays without calling the model, the six example answers ship with the repo, and new questions hit the 429 limit. The pre-ship tests check a refund keeps its receipt and trail entry, a shipping rule makes no PayPal write, a second action gets 409, an injected 503 during the refund heals, an order acted on stops counting as to review, and the live sandbox stays view-only for anonymous visitors. Set `TEST_DATABASE_URL` to a scratch Postgres database to include the Postgres runs.
