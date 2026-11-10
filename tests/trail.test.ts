@@ -99,3 +99,21 @@ describe("PayPal API trail", () => {
     }),
   );
 });
+
+describe("replayed investigations", () => {
+  it("repeat their PayPal lookups, so the trail shows the agent's reads", async () => {
+    const { runAs } = await import("../src/lib/visitor");
+    const { runAnalysis } = await import("../src/lib/analysis");
+    const { syncCases } = await import("../src/lib/cases");
+    const { listCalls } = await import("../src/lib/trail");
+    await runAs({ id: "00000000-0000-4000-8000-00000000r3p1", mode: "mock" }, async () => {
+      await syncCases();
+      // PP-D-27800 ships with a saved investigation (cache/investigations/JK-1042-*.json).
+      const rec = await runAnalysis("PP-D-27800");
+      expect(rec.status).toBe("READY");
+      const reads = listCalls("PP-D-27800").filter((c) => c.by === "agent" && c.method === "GET");
+      expect(reads.length).toBeGreaterThanOrEqual(3);
+      expect(reads.some((c) => c.endpoint.startsWith("/v2/checkout/orders/"))).toBe(true);
+    });
+  }, 30_000);
+});

@@ -460,7 +460,7 @@ export default function CaseView({ id }: { id: string }) {
 
       {c.history ? null : (
         <Panel title="PayPal API trail">
-          <p className="text-xs text-muted">Every PayPal call made for this dispute, by the AI agent, autopilot, you or the server, with PayPal&apos;s status and debug id. A replayed investigation makes no new calls.</p>
+          <p className="text-xs text-muted">Every PayPal call made for this dispute, by the AI agent, autopilot, you or the server, with PayPal&apos;s status and debug id. A replayed investigation repeats its PayPal lookups, so they show here too.</p>
           <ApiTrail caseId={c.id} refreshKey={`${c.status}|${c.updated_at}|${c.trace.length}|${busy ?? ""}`} />
         </Panel>
       )}

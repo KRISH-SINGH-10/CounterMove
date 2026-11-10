@@ -7,6 +7,8 @@ import { withCaseLock } from "./locks";
 import { claudeModel } from "./model";
 import { RateLimitError } from "./model/gemini";
 import { paypal } from "./paypal";
+import { AGENT_TOOL_NAMES } from "./paypal/gateway";
+import { asActor } from "./trail";
 import type { CaseRecord, TraceStep } from "./types";
 import { READ_ONLY_MESSAGE } from "./visitor";
 
@@ -76,8 +78,17 @@ async function investigate(caseId: string, onStep: ((s: TraceStep) => void) | un
 async function replay(caseId: string, saved: NonNullable<ReturnType<typeof loadInvestigation>>, emit: (s: TraceStep) => void, why?: string, flush: () => Promise<unknown> = async () => {}) {
   const date = saved.saved_at.slice(0, 10);
   emit({ at: new Date().toISOString(), kind: "note", summary: why ?? `Saved investigation from ${date} (${saved.model}). Re-run for a fresh one.` });
+  const gw = paypal();
   for (const s of saved.trace) {
     await new Promise((r) => setTimeout(r, REPLAY_STEP_MS));
+    // The reasoning is saved, but the PayPal lookups are made again, so the API trail
+    // shows the reads behind this investigation. A failed re-read doesn't stop the replay.
+    if (s.kind === "tool" && s.tool && (AGENT_TOOL_NAMES as readonly string[]).includes(s.tool)) {
+      // The saved run may be for an earlier copy of this dispute; read this one.
+      const input = { ...((s.input ?? {}) as Record<string, unknown>) };
+      if ("dispute_id" in input) input.dispute_id = caseId;
+      await asActor("agent", () => gw.runTool(s.tool!, input), caseId).catch(() => {});
+    }
     emit({ ...s, at: new Date().toISOString() });
   }
   await flush();
