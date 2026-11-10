@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import Account, { AccountsOff } from "@/components/Account";
 import { accountsEnabled } from "@/lib/auth/sellers";
 
-export const metadata = { title: "Account · Rebuttal" };
+export const metadata = { title: "Account · Countermove" };
 
 export default function AccountPage() {
   return (

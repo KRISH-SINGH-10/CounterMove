@@ -70,7 +70,7 @@ function BuyerCell({ data }: ICellRendererParams<Row>) {
       <span className="font-medium">
         {t?.buyer?.name ?? "Unknown buyer"}
         {shops ? (
-          <span title={`Reported by ${shops} other Rebuttal shop${shops === 1 ? "" : "s"}. See Protect.`} className="ml-1.5 inline-block whitespace-nowrap rounded-full px-1.5 align-middle text-[10px] font-semibold leading-4" style={{ color: "var(--danger)", border: "1px solid currentColor" }}>
+          <span title={`Reported by ${shops} other Countermove shop${shops === 1 ? "" : "s"}. See Protect.`} className="ml-1.5 inline-block whitespace-nowrap rounded-full px-1.5 align-middle text-[10px] font-semibold leading-4" style={{ color: "var(--danger)", border: "1px solid currentColor" }}>
             Network: {shops}
           </span>
         ) : null}

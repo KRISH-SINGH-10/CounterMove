@@ -1,4 +1,4 @@
-// Where Rebuttal keeps its records. Every record belongs to a tenant: one simulator
+// Where Countermove keeps its records. Every record belongs to a tenant: one simulator
 // visitor ("mock:<visitor id>"), the shared demo sandbox ("sandbox"), or a signed-in
 // seller ("seller:<seller id>").
 //

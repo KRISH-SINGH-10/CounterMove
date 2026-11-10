@@ -5,7 +5,7 @@ import { AllCommunityModule, checkboxStyleDefault, iconSetQuartzBold, inputStyle
 // AG Grid Community, registered once for every grid in the app.
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-// The Rebuttal grid theme, built with the AG Grid Theming API (no grid CSS overrides).
+// The Countermove grid theme, built with the AG Grid Theming API (no grid CSS overrides).
 // Every color is one of the app's CSS variables, so all six grids follow light and dark
 // mode with the rest of the app. Quartz is the base; the parts swap in bold icons,
 // bordered inputs for the inline editors and filters, and the default checkbox style
@@ -24,7 +24,7 @@ export const gridTheme = themeQuartz
     headerCellHoverBackgroundColor: "var(--accent-soft)",
     borderColor: "var(--line)",
     browserColorScheme: "inherit",
-    // Brand: the Rebuttal accent (indigo) for focus, selection, checkboxes and resize handles
+    // Brand: the Countermove accent (indigo) for focus, selection, checkboxes and resize handles
     accentColor: "var(--accent)",
     rowHoverColor: "var(--accent-soft)",
     selectedRowBackgroundColor: "color-mix(in srgb, var(--accent) 12%, transparent)",

@@ -239,11 +239,11 @@ export default function Insights() {
   }
 
   function exportExcel() {
-    grid.current?.api.exportDataAsExcel({ fileName: `rebuttal-outcomes-${new Date().toISOString().slice(0, 10)}.xlsx`, sheetName: "Outcomes" });
+    grid.current?.api.exportDataAsExcel({ fileName: `countermove-outcomes-${new Date().toISOString().slice(0, 10)}.xlsx`, sheetName: "Outcomes" });
   }
 
   function exportCsv() {
-    grid.current?.api.exportDataAsCsv({ fileName: `rebuttal-outcomes-${new Date().toISOString().slice(0, 10)}.csv`, columnKeys: ["id", "buyer", "claim", "amount", "decision", "by", "result", "closed", "kept", "refunded"], processCellCallback: (p) => (p.value instanceof Date ? p.value.toISOString().slice(0, 10) : p.value) });
+    grid.current?.api.exportDataAsCsv({ fileName: `countermove-outcomes-${new Date().toISOString().slice(0, 10)}.csv`, columnKeys: ["id", "buyer", "claim", "amount", "decision", "by", "result", "closed", "kept", "refunded"], processCellCallback: (p) => (p.value instanceof Date ? p.value.toISOString().slice(0, 10) : p.value) });
   }
 
   return (

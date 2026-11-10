@@ -57,7 +57,7 @@ const COLS: ColDef<Account>[] = [
   { colId: "order", headerName: "Ordering from you", width: 200, cellRenderer: OrderCell, valueGetter: (p) => (p.data?.pending_order ? 0 : 1), sort: "asc", sortIndex: 0 },
 ];
 
-// The headline of Protect: repeat disputers reported across Rebuttal shops.
+// The headline of Protect: repeat disputers reported across Countermove shops.
 export default function NetworkPanel({ mode }: { mode?: "mock" | "sandbox" }) {
   const phone = usePhone();
   const phoneCols = useMemo(() => forPhone(COLS, phone, ["shops", "claims", "evidence"], ["order"]), [phone]);
@@ -74,7 +74,7 @@ export default function NetworkPanel({ mode }: { mode?: "mock" | "sandbox" }) {
       title="Repeat-scammer network"
       subtitle={
         <>
-          One seller&apos;s proven dispute protects every other seller. When a Rebuttal shop wins a dispute because its evidence contradicted the buyer (a parcel signed for, then claimed &ldquo;never arrived&rdquo;), it shares a report. Shops share only a one-way hash of the buyer&apos;s PayPal email, the claim type and what the evidence showed: no names, addresses or amounts.
+          One seller&apos;s proven dispute protects every other seller. When a Countermove shop wins a dispute because its evidence contradicted the buyer (a parcel signed for, then claimed &ldquo;never arrived&rdquo;), it shares a report. Shops share only a one-way hash of the buyer&apos;s PayPal email, the claim type and what the evidence showed: no names, addresses or amounts.
           {mode === "mock" ? " In this demo the other shops are simulated; your own reports come from your real case history." : ""}
         </>
       }

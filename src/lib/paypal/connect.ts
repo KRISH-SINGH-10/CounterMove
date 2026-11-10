@@ -52,7 +52,7 @@ export async function connectPayPal(sellerId: string, env: PayPalEnv, clientId: 
   if (disputes.status === 401 || disputes.status === 403) {
     throw new ConnectError("This PayPal app isn't allowed to read disputes. In the PayPal developer dashboard, open the app and turn on the Disputes feature, then connect again.");
   }
-  if (!disputes.ok) warnings.push(`PayPal didn't list disputes (${disputes.status}); Rebuttal will retry when you open the inbox.`);
+  if (!disputes.ok) warnings.push(`PayPal didn't list disputes (${disputes.status}); Countermove will retry when you open the inbox.`);
 
   const base = publicBaseUrl();
   if (!base) {
@@ -76,7 +76,7 @@ export async function connectPayPal(sellerId: string, env: PayPalEnv, clientId: 
   return { webhook_id: null, warnings };
 }
 
-// Removes Rebuttal's webhook from the seller's PayPal app. Best effort: the seller may
+// Removes Countermove's webhook from the seller's PayPal app. Best effort: the seller may
 // have already deleted the app or rotated its secret.
 export async function disconnectPayPal(env: PayPalEnv, clientId: string, secret: string, webhookId: string | null) {
   if (!webhookId) return;

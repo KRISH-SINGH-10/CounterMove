@@ -1,7 +1,7 @@
 // Paid orders waiting to ship at the demo shop, for the dispute shield. Each is the
 // PayPal order a seller would see after PAYMENT.CAPTURE.COMPLETED, plus how many earlier
 // orders the buyer completed with the shop. Disputes the buyer filed are not listed
-// here: the shield reads them from Rebuttal's own case history ("dispute memory").
+// here: the shield reads them from Countermove's own case history ("dispute memory").
 
 export type PendingOrder = {
   key: string;

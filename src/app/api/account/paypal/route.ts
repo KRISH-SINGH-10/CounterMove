@@ -21,7 +21,7 @@ export const POST = withVisitor(async (req: Request) => {
   try {
     const before = await getSeller(ref.id);
     const result = await connectPayPal(ref.id, env, client_id, secret);
-    // Replacing a different app: take Rebuttal's webhook off the old one.
+    // Replacing a different app: take Countermove's webhook off the old one.
     if (before?.paypal && (before.paypal.client_id !== client_id || before.paypal.env !== env)) {
       await disconnectPayPal(before.paypal.env, before.paypal.client_id, paypalSecret(before.paypal), before.paypal.webhook_id);
     }

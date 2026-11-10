@@ -10,7 +10,7 @@ export const GET = withVisitor(async () => {
   await connection();
   try {
     const cases = await syncCases();
-    // Open disputes from buyers other Rebuttal shops have reported: case id -> number of shops.
+    // Open disputes from buyers other Countermove shops have reported: case id -> number of shops.
     const network: Record<string, number> = {};
     for (const c of cases) {
       if (c.history || c.outcome) continue;

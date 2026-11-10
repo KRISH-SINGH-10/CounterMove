@@ -2,7 +2,7 @@
 //
 // A seller connects PayPal by pasting the Client ID and Secret of a REST app from their
 // own PayPal developer dashboard (sandbox or live). That works today, for any PayPal
-// business account, without Rebuttal joining PayPal's partner program. The secret is
+// business account, without Countermove joining PayPal's partner program. The secret is
 // stored encrypted (see secrets.ts) and only decrypted on the server to call PayPal.
 
 import crypto from "node:crypto";

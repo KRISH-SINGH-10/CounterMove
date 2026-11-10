@@ -2,7 +2,7 @@
 // come back as a dispute and what to do about it now, while the seller still can (ask
 // for a signature, confirm the address, hold the parcel). It reads the PayPal order with
 // the Agent Toolkit's get_order and the buyer's history, including every dispute
-// Rebuttal has handled for that buyer ("dispute memory").
+// Countermove has handled for that buyer ("dispute memory").
 
 import { currentShop, describeShop, type Shop } from "./shop";
 import crypto from "node:crypto";
@@ -51,7 +51,7 @@ What matters:
 - Shipping somewhere other than the buyer's PayPal address, especially a package forwarder or a different recipient name. PayPal Seller Protection generally only covers items shipped to the address on the transaction.
 - A first-time buyer, an unverified PayPal account, an expensive order, and paid overnight shipping together, which is the usual pattern of stolen-account fraud.
 - Past disputes the buyer filed with this shop, and whether the shop's evidence contradicted them (for example a "not received" claim on a parcel signed for by the buyer). Say this plainly; it is the strongest signal.
-- Reports from other Rebuttal shops (network) on the same PayPal account, where their evidence contradicted the buyer's claim. Name it as the Rebuttal network.
+- Reports from other Countermove shops (network) on the same PayPal account, where their evidence contradicted the buyer's claim. Name it as the Countermove network.
 - A repeat buyer with completed orders and no disputes lowers the risk.
 
 Rules:
@@ -78,7 +78,7 @@ const SUBMIT_TOOL: ToolDef = {
 const HISTORY_TOOL: ToolDef = {
   name: "get_buyer_history",
   description:
-    "Look up a buyer's history with the shop by their PayPal email: completed orders, and every dispute they have filed that Rebuttal handled, with what the shop's evidence showed (carrier delivery, signature) and how it ended, plus reports on the same PayPal account from other shops in the Rebuttal network.",
+    "Look up a buyer's history with the shop by their PayPal email: completed orders, and every dispute they have filed that Countermove handled, with what the shop's evidence showed (carrier delivery, signature) and how it ended, plus reports on the same PayPal account from other shops in the Countermove network.",
   input_schema: {
     type: "object",
     properties: { email: { type: "string", description: "The buyer's PayPal email address, from the order's payer." } },
@@ -109,7 +109,7 @@ export const RISK_WEIGHTS = {
   morePastDisputes: 15, // each further one
   contradicted: 15, // the shop's evidence contradicted a past claim (signed for, delivered)
   cleanRepeat: -5, // completed orders and no disputes
-  networkFirst: 20, // another Rebuttal shop reported this account
+  networkFirst: 20, // another Countermove shop reported this account
   networkMore: 5, // each further shop
 } as const;
 
@@ -158,7 +158,7 @@ export function scoreOrder(order: any, history: Pick<BuyerHistory, "completed_or
   const net = history.network;
   if (net?.other_shops) {
     const claims = [...new Set(net.reports.map((x) => String(x.claim).toLowerCase().replaceAll("_", " ").replace("merchandise or service ", "item ")))].join(", ");
-    add(W.networkFirst + W.networkMore * (net.other_shops - 1), `Rebuttal network: ${net.other_shops} other shop${net.other_shops === 1 ? "" : "s"} reported this PayPal account (${claims}) after their evidence contradicted the claim.`, "rebuttal_network");
+    add(W.networkFirst + W.networkMore * (net.other_shops - 1), `Countermove network: ${net.other_shops} other shop${net.other_shops === 1 ? "" : "s"} reported this PayPal account (${claims}) after their evidence contradicted the claim.`, "rebuttal_network");
   }
   if (!disputes.length && !net?.other_shops && history.completed_orders > 0) {
     const n = history.completed_orders;
@@ -185,7 +185,7 @@ export function ruleVerdict(rule: RuleCheck): RiskVerdict {
   return { ...rule, headline, actions };
 }
 
-// The buyer's history with the shop: completed orders, plus Rebuttal's memory of every
+// The buyer's history with the shop: completed orders, plus Countermove's memory of every
 // dispute they filed, with the evidence the shop had and how it ended.
 export async function getBuyerHistory(email: string) {
   const key = email.trim().toLowerCase();
@@ -218,7 +218,7 @@ export async function getBuyerHistory(email: string) {
     completed_orders: order?.prior_purchases ?? 0,
     disputes_filed: disputes.length,
     disputes,
-    // Other Rebuttal shops' reports on this PayPal account (hashed; no other shop's data).
+    // Other Countermove shops' reports on this PayPal account (hashed; no other shop's data).
     network: {
       other_shops: net.other_shops,
       reports: net.reports.map((r) => ({ claim: r.reason, evidence: r.evidence, outcome: r.outcome, reported: r.at.slice(0, 10) })),
@@ -308,7 +308,7 @@ function summarizeShield(tool: string, out: unknown): string {
   if (tool === "get_buyer_history") {
     const n = o.disputes_filed ?? 0;
     const net = o.network?.other_shops ?? 0;
-    return `${o.completed_orders ?? 0} completed order${o.completed_orders === 1 ? "" : "s"}, ${n} past dispute${n === 1 ? "" : "s"}${n ? ` (${o.disputes.map((d: any) => d.invoice_id).join(", ")})` : ""}${net ? `; reported by ${net} other Rebuttal shop${net === 1 ? "" : "s"}` : ""}`;
+    return `${o.completed_orders ?? 0} completed order${o.completed_orders === 1 ? "" : "s"}, ${n} past dispute${n === 1 ? "" : "s"}${n ? ` (${o.disputes.map((d: any) => d.invoice_id).join(", ")})` : ""}${net ? `; reported by ${net} other Countermove shop${net === 1 ? "" : "s"}` : ""}`;
   }
   return "Done";
 }

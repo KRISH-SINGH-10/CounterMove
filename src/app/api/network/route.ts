@@ -5,7 +5,7 @@ import { buyerHash, listNetwork, networkFor } from "@/lib/network";
 import { paypal } from "@/lib/paypal";
 import { withVisitor } from "@/lib/visitor";
 
-// The Rebuttal network for this shop: GET lists reported accounts (named only where the
+// The Countermove network for this shop: GET lists reported accounts (named only where the
 // shop has its own record of the buyer); ?case=<id> returns the match for one dispute.
 export const GET = withVisitor(async (req: Request) => {
   await connection();

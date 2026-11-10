@@ -6,7 +6,7 @@ import { REASON_LABEL } from "./format";
 
 type Match = { other_shops: number; reports: Array<{ shop: string; simulated_shop: boolean; reason: keyof typeof REASON_LABEL; evidence: string; outcome: string; at: string }> };
 
-// Shown on a dispute when other Rebuttal shops have reported the same PayPal account.
+// Shown on a dispute when other Countermove shops have reported the same PayPal account.
 export default function NetworkBanner({ caseId }: { caseId: string }) {
   const [m, setM] = useState<Match | null>(null);
   useEffect(() => {
@@ -14,10 +14,10 @@ export default function NetworkBanner({ caseId }: { caseId: string }) {
   }, [caseId]);
   if (!m?.other_shops) return null;
   return (
-    <section role="note" aria-label="Rebuttal network warning" className="rounded-lg border-2 px-4 py-3" style={{ borderColor: "var(--danger)", background: "color-mix(in srgb, var(--danger) 6%, transparent)" }}>
+    <section role="note" aria-label="Countermove network warning" className="rounded-lg border-2 px-4 py-3" style={{ borderColor: "var(--danger)", background: "color-mix(in srgb, var(--danger) 6%, transparent)" }}>
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h2 className="text-sm font-semibold" style={{ color: "var(--danger)" }}>
-          Repeat-dispute warning: {m.other_shops} other Rebuttal shop{m.other_shops === 1 ? "" : "s"} reported this PayPal account
+          Repeat-dispute warning: {m.other_shops} other Countermove shop{m.other_shops === 1 ? "" : "s"} reported this PayPal account
         </h2>
         <Link href="/protect" className="text-xs text-accent underline">See the network</Link>
       </div>

@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Rebuttal",
+  title: "Countermove",
   description: "An AI agent that defends small sellers in PayPal disputes.",
 };
 

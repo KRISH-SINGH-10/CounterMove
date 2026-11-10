@@ -17,7 +17,7 @@ const STEPS = [
   },
   {
     title: "Protect and Insights",
-    body: "Protect warns you about buyers other Rebuttal sellers already caught (the repeat-scammer network) and checks paid orders for dispute risk before you ship. Insights shows what the agent did: money kept, hours saved, and every PayPal incident it recovered from.",
+    body: "Protect warns you about buyers other Countermove sellers already caught (the repeat-scammer network) and checks paid orders for dispute risk before you ship. Insights shows what the agent did: money kept, hours saved, and every PayPal incident it recovered from.",
   },
 ];
 
@@ -47,7 +47,7 @@ export default function WelcomeTour() {
   const s = STEPS[step];
   const last = step === STEPS.length - 1;
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 px-4" role="dialog" aria-modal="true" aria-label="Welcome to Rebuttal">
+    <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 px-4" role="dialog" aria-modal="true" aria-label="Welcome to Countermove">
       <div className="w-full max-w-md rounded-xl border border-line bg-panel p-6 shadow-xl">
         <p className="text-xs font-semibold uppercase tracking-wide text-accent">Step {step + 1} of {STEPS.length}</p>
         <h2 className="mt-1 text-lg font-semibold">{s.title}</h2>

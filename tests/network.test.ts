@@ -7,7 +7,7 @@ import { getBuyerHistory, scoreOrder } from "../src/lib/shield";
 
 process.env.PAYPAL_MODE = "mock";
 
-describe("Rebuttal network", () => {
+describe("Countermove network", () => {
   beforeEach(async () => {
     resetMock();
     await resetCases();

@@ -57,7 +57,7 @@ export function AccountsOff() {
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link href="/" className={BUTTON.primary}>Open the disputes inbox</Link>
-          <a href="https://github.com/KRISH-SINGH-10/Rebuttal#seller-accounts-for-real-sellers" className={BUTTON.secondary} target="_blank" rel="noreferrer">How to turn accounts on</a>
+          <a href="https://github.com/KRISH-SINGH-10/Countermove#seller-accounts-for-real-sellers" className={BUTTON.secondary} target="_blank" rel="noreferrer">How to turn accounts on</a>
         </div>
       </Card>
     </div>
@@ -92,7 +92,7 @@ function SignInForm({ onDone }: { onDone: () => Promise<void> }) {
 
   return (
     <div className="mx-auto max-w-md">
-      <Card title={mode === "signin" ? "Sign in" : "Create your seller account"} subtitle="Rebuttal answers the disputes on your own PayPal account.">
+      <Card title={mode === "signin" ? "Sign in" : "Create your seller account"} subtitle="Countermove answers the disputes on your own PayPal account.">
         <form onSubmit={submit} className="space-y-3">
           {mode === "signup" ? (
             <label className="block text-sm">
@@ -115,7 +115,7 @@ function SignInForm({ onDone }: { onDone: () => Promise<void> }) {
           </button>
         </form>
         <p className="mt-3 text-center text-sm text-muted">
-          {mode === "signin" ? "New to Rebuttal? " : "Already have an account? "}
+          {mode === "signin" ? "New to Countermove? " : "Already have an account? "}
           <button className="font-medium text-accent underline" onClick={() => { setMode(mode === "signin" ? "signup" : "signin"); setError(null); }}>
             {mode === "signin" ? "Create an account" : "Sign in"}
           </button>
@@ -156,7 +156,7 @@ function SignedIn({ me, reload }: { me: Me; reload: () => Promise<void> }) {
   }
 
   async function disconnect() {
-    if (!confirm("Disconnect PayPal? Rebuttal stops reading and answering your disputes until you connect again. Your case history is kept.")) return;
+    if (!confirm("Disconnect PayPal? Countermove stops reading and answering your disputes until you connect again. Your case history is kept.")) return;
     setBusy(true);
     try {
       await post("/api/account/paypal", undefined, "DELETE");
@@ -183,7 +183,7 @@ function SignedIn({ me, reload }: { me: Me; reload: () => Promise<void> }) {
 
       <Card
         title="PayPal connection"
-        subtitle="Rebuttal reads your disputes and answers them through your own PayPal app."
+        subtitle="Countermove reads your disputes and answers them through your own PayPal app."
         right={seller.paypal ? <Badge tone="good">Connected · {seller.paypal.env === "live" ? "Live" : "Sandbox"}</Badge> : <Badge tone="warn">Not connected</Badge>}
       >
         {seller.paypal && !editing ? (
@@ -195,7 +195,7 @@ function SignedIn({ me, reload }: { me: Me; reload: () => Promise<void> }) {
               {seller.paypal.webhooks ? (
                 <>Dispute webhooks are on, so autopilot starts the moment a buyer opens a dispute.</>
               ) : (
-                <>Dispute webhooks aren&apos;t registered, so Rebuttal checks for new disputes when you open the inbox.</>
+                <>Dispute webhooks aren&apos;t registered, so Countermove checks for new disputes when you open the inbox.</>
               )}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -231,7 +231,7 @@ function SignedIn({ me, reload }: { me: Me; reload: () => Promise<void> }) {
               <input name="secret" type="password" required minLength={10} className={`${INPUT} mt-1 font-mono`} autoComplete="off" />
             </label>
             <p className="text-xs text-muted">
-              Your secret is encrypted before it is stored and is only used by the Rebuttal server to call PayPal for you. Money only moves when you approve, or when your autopilot rules allow it.
+              Your secret is encrypted before it is stored and is only used by the Countermove server to call PayPal for you. Money only moves when you approve, or when your autopilot rules allow it.
             </p>
             {error ? <p role="alert" className="text-danger">{error}</p> : null}
             <div className="flex gap-2">

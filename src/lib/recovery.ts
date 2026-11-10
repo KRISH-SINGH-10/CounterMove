@@ -1,4 +1,4 @@
-// Self-healing PayPal calls. When a write to PayPal fails while Rebuttal acts on a
+// Self-healing PayPal calls. When a write to PayPal fails while Countermove acts on a
 // dispute, the agent reads PayPal's error (status, name, debug_id) and recovers:
 // - a PayPal outage or timeout is retried with backoff, an expired token is refreshed
 //   and retried, all in code;
@@ -67,12 +67,12 @@ export async function withRecovery(c: CaseRecord, action: Decision, amount: numb
       attempts.push({ at: at(), what: `Retry ${i}: PayPal accepted the ${action === "REFUND" ? "refund" : action === "OFFER" ? "offer" : "evidence"}`, ok: true });
       const healed = await record(c, action, amount, failure, kind, attempts, {
         plan: "RETRIED",
-        diagnosis: kind === "AUTH" ? "PayPal's access token had expired. Rebuttal signed in to PayPal again and repeated the call." : `PayPal was briefly unavailable (${failure.status ?? failure.name}). Rebuttal retried with backoff and the call went through.`,
+        diagnosis: kind === "AUTH" ? "PayPal's access token had expired. Countermove signed in to PayPal again and repeated the call." : `PayPal was briefly unavailable (${failure.status ?? failure.name}). Countermove retried with backoff and the call went through.`,
         seller_steps: [],
         result: "HEALED",
         by: "rules",
       });
-      await addActivity(c.id, `Self-healed: PayPal returned ${failure.status ?? ""} ${failure.name} while Rebuttal tried to ${VERB[action]}. ${kind === "AUTH" ? "Rebuttal refreshed its PayPal sign-in" : `Rebuttal retried ${i} time${i === 1 ? "" : "s"}`} and it went through.`, "good");
+      await addActivity(c.id, `Self-healed: PayPal returned ${failure.status ?? ""} ${failure.name} while Countermove tried to ${VERB[action]}. ${kind === "AUTH" ? "Countermove refreshed its PayPal sign-in" : `Countermove retried ${i} time${i === 1 ? "" : "s"}`} and it went through.`, "good");
       return healed;
     } catch (e) {
       failure = parsePayPalError(e);
@@ -108,7 +108,7 @@ export class RecoveryPausedError extends Error {
 
 type Plan = Pick<Incident, "plan" | "diagnosis" | "seller_steps" | "alternative" | "by" | "model">;
 
-const SYSTEM = `You keep a small online shop's PayPal dispute responses working. A PayPal API call failed while Rebuttal acted on a dispute, and automatic retries are not appropriate or did not help. Read PayPal's error and choose how to recover, by calling choose_recovery once.
+const SYSTEM = `You keep a small online shop's PayPal dispute responses working. A PayPal API call failed while Countermove acted on a dispute, and automatic retries are not appropriate or did not help. Read PayPal's error and choose how to recover, by calling choose_recovery once.
 
 Plans:
 - PAUSE_FOR_SELLER: the seller must do something first (add funds, re-authorize, wait for PayPal). Give 1 to 3 concrete steps.

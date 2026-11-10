@@ -96,7 +96,7 @@ export type CaseStatus =
   | "REFUNDED"
   | "ERROR";
 
-// What PayPal answered when Rebuttal sent the seller's response: the proof it landed.
+// What PayPal answered when Countermove sent the seller's response: the proof it landed.
 export type PayPalReceipt = {
   method: "POST";
   endpoint: string; // e.g. /v1/customer/disputes/PP-D-123/provide-evidence
@@ -167,7 +167,7 @@ export type AutopilotRules = {
   negotiate_max_pct: number;
 };
 
-// A PayPal call that failed while Rebuttal was acting on a dispute, and how the agent recovered.
+// A PayPal call that failed while Countermove was acting on a dispute, and how the agent recovered.
 export type Incident = {
   id: string;
   at: string;

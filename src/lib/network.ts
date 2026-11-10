@@ -1,6 +1,6 @@
-// The Rebuttal network: one seller's proven dispute protects every other seller.
+// The Countermove network: one seller's proven dispute protects every other seller.
 //
-// When a shop on Rebuttal wins a dispute where its evidence contradicted the buyer
+// When a shop on Countermove wins a dispute where its evidence contradicted the buyer
 // (a "never arrived" claim on a parcel the carrier shows delivered or signed for, or an
 // "unauthorized" claim on a payment from the buyer's own account and address), it shares
 // a report: a one-way hash of the buyer's PayPal email, the claim type, what the evidence
@@ -38,7 +38,7 @@ export const buyerHash = (email: string) => crypto.createHash("sha256").update(`
 
 const DAY = 86_400_000;
 
-// Reports from other (simulated) Rebuttal shops. Emails are hashed at load, exactly as a
+// Reports from other (simulated) Countermove shops. Emails are hashed at load, exactly as a
 // shop would send them; the plain emails here exist only to build the demo.
 const OTHER_SHOPS: Array<{ email: string; shop: string; reason: DisputeReason; evidence: string; outcome: "WON" | "LOST"; days_ago: number }> = [
   // The forwarder order on Protect (JK-1088): two shops already caught this account.

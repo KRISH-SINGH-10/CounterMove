@@ -1,5 +1,5 @@
 // Autopilot: a PayPal dispute webhook arrives, the AI investigates on its own, and the
-// seller's rules decide whether Rebuttal answers PayPal by itself or alerts the seller
+// seller's rules decide whether Countermove answers PayPal by itself or alerts the seller
 // to approve. The live sandbox webhook and the simulator's "File a test dispute" both
 // come through here, so the demo runs the same code path as a real PayPal event.
 

@@ -85,7 +85,7 @@ function Detail({ data }: ICellRendererParams<Row>) {
   );
 }
 
-// Self-healing log: PayPal calls that failed while Rebuttal acted, and what the agent did.
+// Self-healing log: PayPal calls that failed while Countermove acted, and what the agent did.
 export default function IncidentsPanel({ mode, refreshKey }: { mode?: "mock" | "sandbox"; refreshKey: string }) {
   const [incidents, setIncidents] = useState<Incident[]>([]);
   const [open, setOpen] = useState<string | null>(null);

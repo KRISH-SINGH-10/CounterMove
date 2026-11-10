@@ -45,7 +45,7 @@ export default function TopBar() {
               <path d="M10.5 11.5 7 15l3.5 3.5" />
             </svg>
           </span>
-          Rebuttal
+          Countermove
         </Link>
         <nav aria-label="Main" className="-mx-1 flex gap-1 overflow-x-auto sm:mx-0">
           {TABS.map((t) => (

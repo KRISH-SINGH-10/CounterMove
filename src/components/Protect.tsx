@@ -28,7 +28,7 @@ const COLS: ColDef<Buyer>[] = [
   { field: "pendingOrder", headerName: "Open orders", flex: 1.2, minWidth: 220, cellRenderer: OrderCell, sort: "asc", sortIndex: 0, comparator: (a, b) => (a ? 0 : 1) - (b ? 0 : 1) },
 ];
 
-// Before you ship: the dispute shield, and the buyers Rebuttal remembers from past disputes.
+// Before you ship: the dispute shield, and the buyers Countermove remembers from past disputes.
 export default function Protect() {
   const phone = usePhone();
   const phoneCols = useMemo(() => forPhone(COLS, phone, ["email", "disputes", "disputed", "claims", "lastOutcome"], ["pendingOrder"]), [phone]);
