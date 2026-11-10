@@ -3,7 +3,7 @@
 import type { ColDef, ICellRendererParams } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { diagnose, forecastReserve, type Finding, type ReserveRow } from "@/lib/insights";
 import type { CaseRecord } from "@/lib/types";
 import { useCases } from "./CasesProvider";
@@ -28,17 +28,22 @@ const RESERVE_COLS: ColDef<ReserveRow>[] = [
 export function ReservePanel({ cases }: { cases: CaseRecord[] }) {
   const router = useRouter();
   const phone = usePhone();
-  const r = useMemo(() => forecastReserve(cases), [cases]);
+  // The forecast depends on today's date, so it is worked out in the browser after the
+  // page loads, never while the server prerenders it.
+  const [now, setNow] = useState<number | null>(null);
+  useEffect(() => setNow(Date.now()), []);
+  const r = useMemo(() => forecastReserve(cases, now ?? 0), [cases, now]);
   const cols = useMemo(() => forPhone(RESERVE_COLS, phone, ["claim", "amount", "loss_share", "basis"], ["expected_loss"]), [phone]);
   return (
     <Card title="Dispute Reserve: money at risk in the next 30 days" subtitle="What to keep in your PayPal balance so a refund never bounces. Worked out from your open disputes and your own results over the last 90 days: averages, not promises.">
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+      {now === null ? <p className="text-sm text-muted">Working out the forecast…</p> : null}
+      <div className={now === null ? "hidden" : "grid grid-cols-2 gap-3 md:grid-cols-4"}>
         <Kpi label="Set aside" value={money(r.reserve)} tone={r.reserve > 0 ? "warn" : "good"} sub="For the next 30 days" />
         <Kpi label="From open disputes" value={money(r.open_expected)} sub={`${r.open.length} open now`} />
         <Kpi label="From new disputes" value={money(r.new_expected)} sub={`About ${r.new_count} expected`} />
         <Kpi label="Your loss rate" value={`${Math.round(r.loss_share * 100)}%`} sub="Of disputed money refunded" />
       </div>
-      {r.open.length ? (
+      {now === null ? null : r.open.length ? (
         <div className="mt-3">
           <AgGridReact<ReserveRow>
             theme={gridTheme}

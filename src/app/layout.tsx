@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import CasesProvider from "@/components/CasesProvider";
+import JudgeMode from "@/components/JudgeMode";
 import TopBar from "@/components/TopBar";
 import { Suspense } from "react";
 import "./globals.css";
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Suspense fallback={<header className="h-[53px] border-b border-line bg-panel" />}>
             <TopBar />
           </Suspense>
+          <JudgeMode />
           <main className="mx-auto w-full max-w-6xl flex-1 px-3 py-5 sm:px-4 sm:py-6">{children}</main>
         </CasesProvider>
       </body>

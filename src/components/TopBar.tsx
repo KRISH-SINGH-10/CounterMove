@@ -23,6 +23,8 @@ export const FAULTS: Array<[Fault, string]> = [
 
 // Opens the welcome tour on the home page (see WelcomeTour).
 export const TOUR_EVENT = "rebuttal:tour";
+// Starts Judge mode (see JudgeMode): the whole story played in one click.
+export const JUDGE_EVENT = "countermove:judge";
 
 export default function TopBar() {
   const path = usePathname();
@@ -74,6 +76,9 @@ export default function TopBar() {
               ))}
             </div>
           ) : null}
+          <button onClick={() => window.dispatchEvent(new Event(JUDGE_EVENT))} className={BUTTON.primary} title="Plays the whole story in the Simulator: before, during and after a dispute">
+            <span aria-hidden>▶ </span>Judge mode
+          </button>
           {data?.mode === "mock" ? <SimulatorMenu onDone={reload} onError={setError} /> : null}
           <button onClick={() => setSettings(true)} className={BUTTON.secondary} aria-label="Autopilot rules"><span className="sm:hidden">Rules</span><span className="hidden sm:inline">Autopilot rules</span></button>
           {data?.accounts ? (
@@ -152,7 +157,7 @@ function SimulatorMenu({ onDone, onError }: { onDone: () => void; onError: (e: s
 
   return (
     <div ref={ref} className="relative">
-      <button onClick={() => setOpen((o) => !o)} aria-expanded={open} className={BUTTON.primary}>
+      <button onClick={() => setOpen((o) => !o)} aria-expanded={open} className={BUTTON.secondary}>
         {busy ? "Working..." : <><span className="sm:hidden">Tools</span><span className="hidden sm:inline">Simulator tools</span></>}
       </button>
       {open ? (

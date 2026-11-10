@@ -129,6 +129,7 @@ export default function FixRequestsPanel({ viewOnly }: { viewOnly: boolean }) {
       </p>
       {error ? <p className="mb-2 text-xs text-danger">{error}</p> : null}
       {requests.length ? (
+        <div data-judge="fix">
         <AgGridReact<FixRequest>
           theme={gridTheme}
           rowData={requests}
@@ -139,6 +140,7 @@ export default function FixRequestsPanel({ viewOnly }: { viewOnly: boolean }) {
           defaultColDef={{ cellStyle: { display: "flex", alignItems: "center" }, sortable: true }}
           suppressCellFocus
         />
+        </div>
       ) : (
         <p className="text-sm text-muted">No requests yet. Open one of the buyer pages above and ask for help to see it land here.</p>
       )}

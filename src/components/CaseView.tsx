@@ -174,6 +174,17 @@ export default function CaseView({ id }: { id: string }) {
       .catch(() => {});
   }, []);
 
+  // Something outside this page acted on the dispute (Judge mode approves through the
+  // API): read it again.
+  useEffect(() => {
+    const refresh = async () => {
+      const res = await fetch(`/api/cases/${id}`, { cache: "no-store" }).catch(() => null);
+      if (res?.ok) adopt(await res.json());
+    };
+    window.addEventListener("countermove:refresh", refresh);
+    return () => window.removeEventListener("countermove:refresh", refresh);
+  }, [id, adopt]);
+
   // Autopilot may be investigating this dispute in the background (it arrived by webhook):
   // follow its trace until it finishes.
   const background = c?.status === "ANALYZING" && busy === null;
