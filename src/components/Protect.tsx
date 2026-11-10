@@ -8,6 +8,7 @@ import type { ShieldRow } from "@/lib/shield";
 import { useCases } from "./CasesProvider";
 import { money, REASON_LABEL } from "./format";
 import { gridTheme } from "./grid";
+import FixRequestsPanel from "./FixRequestsPanel";
 import NetworkPanel from "./NetworkPanel";
 import ShieldPanel from "./ShieldPanel";
 import { Badge, Card, Empty } from "./ui";
@@ -75,6 +76,8 @@ export default function Protect() {
           <Empty title="No paid orders to check here">The shield runs on the Simulator&apos;s paid orders. A live install would check each order as PayPal&apos;s PAYMENT.CAPTURE.COMPLETED webhook arrives.</Empty>
         </Card>
       )}
+
+      {data?.mode === "mock" ? <FixRequestsPanel viewOnly={Boolean(data.viewOnly)} /> : null}
 
       <Card title="Dispute memory" subtitle="Buyers who have disputed with you. The shield and the investigator both read this history.">
         {buyers.length ? (

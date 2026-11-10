@@ -229,6 +229,9 @@ export default function ShieldPanel({ viewOnly }: { viewOnly: boolean }) {
   const checking = orders?.some((o) => o.status === "CHECKING") ?? true;
   useEffect(() => {
     load();
+    // Another panel acted on an order (a buyer request refunded it, or Judge mode).
+    window.addEventListener("countermove:refresh", load);
+    return () => window.removeEventListener("countermove:refresh", load);
   }, [load]);
   useEffect(() => {
     if (!checking) return;

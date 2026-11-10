@@ -374,10 +374,18 @@ export default function CaseView({ id }: { id: string }) {
                   <span className="text-muted">of {money(d.dispute_amount.value)}</span>
                 </label>
               ) : null}
-              <label className="block text-sm">
-                <span className="text-muted">{decision === "FIGHT" ? "Statement sent to PayPal with the evidence" : "Note sent to PayPal"}</span>
-                <textarea value={response} onChange={(e) => setResponse(e.target.value)} rows={9} maxLength={2000} className="mt-1 w-full rounded-md border border-line bg-bg p-3 text-sm leading-relaxed" />
-              </label>
+              {/* The evidence writer is one small control: the agent's text is ready to send, and opens to read or edit. */}
+              <details className="rounded-md border border-line text-sm" data-testid="evidence-writer">
+                <summary className="flex cursor-pointer flex-wrap items-center gap-2 px-3 py-2">
+                  <span aria-hidden className="rounded bg-accent-soft px-1.5 py-0.5 text-xs font-semibold text-accent">AI</span>
+                  <span className="font-medium">{decision === "FIGHT" ? "Evidence statement written by the agent" : "Note to PayPal written by the agent"}</span>
+                  <span className="text-xs text-accent underline">Read or edit</span>
+                </summary>
+                <label className="block border-t border-line p-3">
+                  <span className="text-xs text-muted">{decision === "FIGHT" ? "Sent to PayPal with the evidence" : "Sent to PayPal"}</span>
+                  <textarea value={response} onChange={(e) => setResponse(e.target.value)} rows={9} maxLength={2000} className="mt-1 w-full rounded-md border border-line bg-bg p-3 text-sm leading-relaxed" />
+                </label>
+              </details>
               <div className="flex items-center justify-between gap-3">
                 <span className="text-xs text-muted tabular">{response.length}/2000</span>
                 <button
