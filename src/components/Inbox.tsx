@@ -13,6 +13,7 @@ import WelcomeTour from "./WelcomeTour";
 import Link from "next/link";
 import { chunk, daysLeft, DECISION_COLOR, DECISION_LABEL, money, priorityOf, REASON_LABEL, statusLabel } from "./format";
 import { gridTheme } from "./grid";
+import GridAsk from "./GridAsk";
 import { Badge, BUTTON, Card, Empty, Kpi } from "./ui";
 
 
@@ -364,6 +365,7 @@ export default function Inbox() {
         flex: 1.6,
         minWidth: 170,
         valueGetter: (p) => p.data?.dispute?.disputed_transactions[0]?.buyer?.name,
+        filter: "agTextColumnFilter",
         getQuickFilterText: (p) => {
           const t = p.data?.dispute?.disputed_transactions[0];
           return [t?.buyer?.name, t?.items?.[0]?.item_description, t?.invoice_number, p.data?.id].filter(Boolean).join(" ");
@@ -413,6 +415,9 @@ export default function Inbox() {
         flex: 0.6,
         minWidth: 96,
         valueGetter: (p) => (p.data?.dispute ? priorityOf(p.data).score : undefined),
+        // Sorted by score, filtered by the label the seller reads ("Urgent", "Soon").
+        filter: "agTextColumnFilter",
+        filterValueGetter: (p) => (p.data?.dispute ? priorityOf(p.data).label ?? "" : ""),
         sort: "desc",
       },
       {
@@ -423,6 +428,7 @@ export default function Inbox() {
         flex: 0.8,
         minWidth: 96,
         valueGetter: (p) => (p.data?.submitted ? 999 : daysLeft(p.data?.dispute?.seller_response_due_date)),
+        filter: "agNumberColumnFilter",
       },
       {
         colId: "agent",
@@ -434,6 +440,7 @@ export default function Inbox() {
         flex: 1.8,
         minWidth: 220,
         valueGetter: (p) => (p.data?.dispute ? statusLabel(p.data) : undefined),
+        filter: "agTextColumnFilter",
       },
       {
         colId: "next",
@@ -445,8 +452,8 @@ export default function Inbox() {
         cellRendererSelector: pinned(blank),
       },
       // Export-only columns for the outcomes CSV (Insights exports the same data).
-      { colId: "decision", headerName: "Decision", hide: true, valueGetter: (p) => { const d = p.data?.submitted?.decision ?? p.data?.recommendation?.decision; return d ? DECISION_LABEL[d] : ""; } },
-      { colId: "status", headerName: "Status", hide: true, valueGetter: (p) => (p.data?.dispute ? statusLabel(p.data) : "") },
+      { colId: "decision", headerName: "Decision", hide: true, filter: "agTextColumnFilter", valueGetter: (p) => { const d = p.data?.submitted?.decision ?? p.data?.recommendation?.decision; return d ? DECISION_LABEL[d] : ""; } },
+      { colId: "status", headerName: "Status", hide: true, filter: "agTextColumnFilter", valueGetter: (p) => (p.data?.dispute ? statusLabel(p.data) : "") },
       // Export-only columns: plain numbers so the CSV adds up in a spreadsheet. Open cases count as 0 kept and 0 refunded.
       { colId: "amountUsd", headerName: "Amount (USD)", hide: true, valueGetter: (p) => (p.data?.dispute ? Number(p.data.dispute.dispute_amount.value) : "") },
       { colId: "kept", headerName: "Kept (USD)", hide: true, valueGetter: (p) => p.data?.outcome?.amount_kept ?? 0 },
@@ -541,6 +548,7 @@ export default function Inbox() {
       <WelcomeTour />
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Disputes</h1>
+        <p className="text-sm font-medium text-accent">Stop scammers before you ship. Settle the rest without a fight.</p>
         <p className="text-sm text-muted">The agent investigates each dispute as PayPal reports it and ranks them by money and deadline. Nothing goes to PayPal without your approval, except what your autopilot rules allow.</p>
       </div>
       {data ? (
@@ -572,6 +580,14 @@ export default function Inbox() {
       <Card title="Latest alerts" subtitle="PayPal webhooks and what autopilot did with them." right={<Link href="/insights" className="text-xs text-accent underline">Full history</Link>}>
         <AlertsFeed cases={data?.cases ?? []} mode={data?.mode} limit={3} />
       </Card>
+
+      <GridAsk<Row>
+        grid="disputes"
+        api={() => grid.current?.api}
+        enterprise={enterprise}
+        examples={["Urgent chargebacks first", "Unauthorized claims over $100", "Not investigated yet"]}
+        placeholder="Ask the grid: e.g. chargebacks over $100, most urgent first"
+      />
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <input

@@ -38,7 +38,13 @@ export default function TopBar() {
     <header className="border-b border-line bg-panel">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-3 py-2.5 sm:px-4">
         <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span aria-hidden className="grid h-7 w-7 place-items-center rounded-md bg-accent text-sm font-bold text-panel">R</span>
+          <span aria-hidden className="grid h-7 w-7 place-items-center rounded-md bg-accent text-panel">
+            {/* The mark: a move that turns back on itself (a countermove). */}
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 7h8a4 4 0 0 1 0 8H7" />
+              <path d="M10.5 11.5 7 15l3.5 3.5" />
+            </svg>
+          </span>
           Rebuttal
         </Link>
         <nav aria-label="Main" className="-mx-1 flex gap-1 overflow-x-auto sm:mx-0">

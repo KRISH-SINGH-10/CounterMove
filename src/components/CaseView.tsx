@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { CaseRecord, Decision, NegotiationTurn, PayPalReceipt, TraceStep } from "@/lib/types";
+import ApiTrail from "./ApiTrail";
 import EvidenceGrid from "./EvidenceGrid";
 import NegotiationPanel from "./NegotiationPanel";
 import NetworkBanner from "./NetworkBanner";
@@ -456,6 +457,13 @@ export default function CaseView({ id }: { id: string }) {
           ) : null}
         </div>
       </div>
+
+      {c.history ? null : (
+        <Panel title="PayPal API trail">
+          <p className="text-xs text-muted">Every PayPal call made for this dispute, by the AI agent, autopilot, you or the server, with PayPal&apos;s status and debug id. A replayed investigation makes no new calls.</p>
+          <ApiTrail caseId={c.id} refreshKey={`${c.status}|${c.updated_at}|${c.trace.length}|${busy ?? ""}`} />
+        </Panel>
+      )}
     </div>
   );
 }

@@ -24,7 +24,7 @@ export const gridTheme = themeQuartz
     headerCellHoverBackgroundColor: "var(--accent-soft)",
     borderColor: "var(--line)",
     browserColorScheme: "inherit",
-    // Brand: Rebuttal green for focus, selection, checkboxes and resize handles
+    // Brand: the Rebuttal accent (indigo) for focus, selection, checkboxes and resize handles
     accentColor: "var(--accent)",
     rowHoverColor: "var(--accent-soft)",
     selectedRowBackgroundColor: "color-mix(in srgb, var(--accent) 12%, transparent)",

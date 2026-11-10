@@ -7,11 +7,110 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ShieldRow } from "@/lib/shield";
 import { money } from "./format";
 import { gridTheme } from "./grid";
+import { BUTTON } from "./ui";
 
 const RISK_COLOR = { HIGH: "var(--danger)", MEDIUM: "var(--offer)", LOW: "var(--fight)" } as const;
 
 type ShieldGridRow = ShieldRow & { detail?: true };
-type Ctx = { open: string | null; recheck: (id: string) => void; viewOnly: boolean };
+type Action = "REFUND" | "SIGNATURE" | "PAYPAL_ADDRESS";
+type Ctx = { open: string | null; recheck: (id: string) => void; act: (invoiceId: string, action: Action) => Promise<string | null>; viewOnly: boolean };
+
+const ACTIONS: Array<{ id: Action; label: string; hint: string }> = [
+  { id: "REFUND", label: "Refund now", hint: "Give the money back through PayPal and don't ship." },
+  { id: "SIGNATURE", label: "Require signature", hint: "Ship, but only with signature confirmation." },
+  { id: "PAYPAL_ADDRESS", label: "Ship to PayPal address only", hint: "Ship only to the address on the PayPal transaction." },
+];
+const DONE_LABEL: Record<Action, string> = { REFUND: "Refunded", SIGNATURE: "Signature required", PAYPAL_ADDRESS: "PayPal address only" };
+
+// Which of the three actions the agent's first suggested step points at, if any.
+function suggested(steps: string[]): Action | null {
+  const first = (steps[0] ?? "").toLowerCase();
+  if (/refund/.test(first)) return "REFUND";
+  if (/signature/.test(first)) return "SIGNATURE";
+  if (/address/.test(first)) return "PAYPAL_ADDRESS";
+  return null;
+}
+
+// A fixed locale, so the time reads the same wherever it is rendered.
+const clock = (iso: string) => new Date(iso).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+
+function HeadlineCell({ data, value }: ICellRendererParams<ShieldGridRow>) {
+  return (
+    <span className="flex w-full min-w-0 items-center gap-2">
+      {data?.decision ? (
+        <span className="shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold" style={{ color: "var(--fight)", border: "1px solid currentColor" }}>✓ {DONE_LABEL[data.decision.action]}</span>
+      ) : null}
+      <span className="truncate">{value}</span>
+    </span>
+  );
+}
+
+// One clear action per risky order. A refund moves money, so it asks once more in the
+// page before calling PayPal.
+function OrderActions({ data, act }: { data: ShieldGridRow; act: Ctx["act"] }) {
+  const [confirm, setConfirm] = useState(false);
+  const [busy, setBusy] = useState<Action | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const d = data.decision;
+  if (d) {
+    const r = d.receipt;
+    return (
+      <div className="mt-3 rounded-md border p-2.5 text-sm" style={{ borderColor: "var(--fight)" }} data-testid="order-decision">
+        <p className="font-medium">
+          <span aria-hidden style={{ color: "var(--fight)" }}>✓ </span>
+          {d.action === "REFUND" ? `Refunded ${money(data.amount)} through PayPal` : d.action === "SIGNATURE" ? "Ship with signature confirmation only" : "Ship only to the address on the PayPal transaction"}
+          <span className="font-normal text-muted"> · {clock(d.at)}</span>
+        </p>
+        {r ? (
+          <p className="mt-1 break-all font-mono text-xs text-muted">
+            {r.method} {r.endpoint} · HTTP {r.http_status ?? 200}{r.debug_id ? ` · debug id ${r.debug_id}` : ""}
+          </p>
+        ) : (
+          <p className="mt-1 text-xs text-muted">Saved as a shipping rule for this order. No PayPal call was needed.</p>
+        )}
+      </div>
+    );
+  }
+  const pick = suggested(data.verdict?.actions ?? []);
+  async function run(action: Action) {
+    setBusy(action);
+    setError(null);
+    const failed = await act(data.invoice_id, action);
+    setBusy(null);
+    setConfirm(false);
+    if (failed) setError(failed);
+  }
+  return (
+    <div className="mt-3" data-testid="order-actions">
+      <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">Take one action</h3>
+      {confirm ? (
+        <div className="mt-1.5 flex flex-wrap items-center gap-2 rounded-md border border-danger p-2 text-sm">
+          <span>Refund {money(data.amount)} to {data.buyer} through PayPal and don&apos;t ship?</span>
+          <button onClick={() => run("REFUND")} disabled={busy !== null} className="rounded-md px-3 py-1 text-sm font-semibold text-panel disabled:opacity-60" style={{ background: "var(--danger)" }}>
+            {busy === "REFUND" ? "Refunding…" : "Confirm refund"}
+          </button>
+          <button onClick={() => setConfirm(false)} disabled={busy !== null} className={BUTTON.ghost}>Cancel</button>
+        </div>
+      ) : (
+        <div className="mt-1.5 flex flex-wrap gap-2">
+          {ACTIONS.map((a) => (
+            <button
+              key={a.id}
+              title={a.hint}
+              disabled={busy !== null}
+              onClick={() => (a.id === "REFUND" ? setConfirm(true) : run(a.id))}
+              className={a.id === pick ? BUTTON.primary : BUTTON.secondary}
+            >
+              {busy === a.id ? "Saving…" : a.label}
+              {a.id === pick ? <span className="ml-1.5 text-xs font-normal opacity-80">agent&apos;s pick</span> : null}
+            </button>
+          ))}
+        </div>
+      )}
+      {error ? <p className="mt-1.5 text-xs text-danger">{error}</p> : null}
+    </div>
+  );
+}
 
 function BuyerCell({ data }: ICellRendererParams<ShieldGridRow>) {
   return (
@@ -52,14 +151,14 @@ const COLS: ColDef<ShieldGridRow>[] = [
   { field: "ship_to", headerName: "Ships to", flex: 1.2, minWidth: 160, tooltipField: "ship_to", cellRenderer: (p: ICellRendererParams<ShieldGridRow>) => <span className="truncate text-muted">{p.value}</span> },
   { colId: "amount", headerName: "Amount", width: 110, type: "rightAligned", valueGetter: (p) => Number(p.data?.amount ?? 0), valueFormatter: (p) => money(p.value), cellClass: "tabular font-medium justify-end" },
   { colId: "risk", headerName: "Dispute risk", width: 190, valueGetter: (p) => p.data?.verdict?.score ?? -1, cellRenderer: RiskCell, sort: "desc" },
-  { colId: "headline", headerName: "Agent's read", valueGetter: (p) => p.data?.verdict?.headline ?? "", flex: 2, minWidth: 220, tooltipValueGetter: (p) => p.value, cellRenderer: (p: ICellRendererParams<ShieldGridRow>) => <span className="truncate">{p.value}</span> },
+  { colId: "headline", headerName: "Agent's read", valueGetter: (p) => p.data?.verdict?.headline ?? "", flex: 2, minWidth: 220, tooltipValueGetter: (p) => p.value, cellRenderer: HeadlineCell },
 ];
 
 // What the agent found and what to do before shipping, under the order's row.
 function ShieldDetail({ data, context }: ICellRendererParams<ShieldGridRow>) {
   const v = data?.verdict;
   if (!data || !v) return null;
-  const { recheck, viewOnly } = context as Ctx;
+  const { recheck, act, viewOnly } = context as Ctx;
   return (
     <div className="grid h-full gap-4 overflow-auto whitespace-normal border-l-4 bg-bg px-6 py-3 leading-normal md:grid-cols-2" style={{ borderColor: RISK_COLOR[v.risk] }}>
       <div>
@@ -82,6 +181,7 @@ function ShieldDetail({ data, context }: ICellRendererParams<ShieldGridRow>) {
             <li key={i}>{a}</li>
           ))}
         </ol>
+        {data.decision || (v.risk !== "LOW" && !viewOnly) ? <OrderActions data={data} act={act} /> : null}
         {data.notice ? <p className="mt-2 text-xs" style={{ color: "var(--offer)" }}>{data.notice}</p> : null}
         <p className="mt-2 text-xs text-muted">
           {data.model === "rules" ? "Rule-based check" : `Explained by ${data.model}`} · {data.trace.filter((t) => t.kind === "tool").map((t) => t.tool).join(", ")}
@@ -111,6 +211,13 @@ export default function ShieldPanel({ viewOnly }: { viewOnly: boolean }) {
     grid.current?.api?.refreshCells({ columns: ["expand"], force: true });
   }, [open]);
 
+  // The "Refunded" / "Signature required" chip sits in a cell whose value doesn't change,
+  // so redraw that column when an order's decision does.
+  const decided = (orders ?? []).map((o) => `${o.order_id}:${o.decision?.action ?? ""}`).join("|");
+  useEffect(() => {
+    grid.current?.api?.refreshCells({ columns: ["headline"], force: true });
+  }, [decided]);
+
   const load = useCallback(async () => {
     const res = await fetch("/api/orders", { cache: "no-store" });
     const json = await res.json();
@@ -136,8 +243,24 @@ export default function ShieldPanel({ viewOnly }: { viewOnly: boolean }) {
     load();
   }
 
+  // One action on a paid order (POST /api/orders/{invoice}/action). Returns the error
+  // to show under the buttons, or null when it worked.
+  async function act(invoiceId: string, action: Action): Promise<string | null> {
+    try {
+      const res = await fetch(`/api/orders/${encodeURIComponent(invoiceId)}/action`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action }) });
+      const json = (await res.json().catch(() => ({}))) as { order?: ShieldRow; error?: string };
+      if (!res.ok || !json.order) return json.error ?? "That didn't go through. Try again.";
+      const updated = json.order;
+      setOrders((os) => os?.map((o) => (o.order_id === updated.order_id ? updated : o)) ?? null);
+      return null;
+    } catch {
+      return "Couldn't reach the server. Try again.";
+    }
+  }
+
   if (!orders?.length) return null;
-  const flagged = orders.filter((o) => o.verdict && o.verdict.risk !== "LOW");
+  // Flagged MEDIUM or HIGH and not acted on yet.
+  const flagged = orders.filter((o) => o.to_review ?? (o.verdict && o.verdict.risk !== "LOW" && !o.decision));
   const held = flagged.reduce((n, o) => n + Number(o.amount), 0);
   const rows: ShieldGridRow[] = orders.flatMap((o) => (open === o.order_id && o.verdict ? [o, { ...o, detail: true as const }] : [o]));
 
@@ -146,7 +269,7 @@ export default function ShieldPanel({ viewOnly }: { viewOnly: boolean }) {
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h2 className="text-sm font-semibold">Dispute shield: paid orders, not shipped yet</h2>
-          <p className="text-xs text-muted">Before you ship, the agent checks each PayPal order for dispute risk, including every dispute this buyer has filed with you before.</p>
+          <p className="text-xs text-muted">Before you ship, the agent checks each PayPal order for dispute risk, including every dispute this buyer has filed with you before. Click a flagged order and take one action: refund it, require a signature, or ship to the PayPal address only.</p>
         </div>
         {flagged.length ? (
           <span className="rounded-full px-2.5 py-0.5 text-xs font-semibold" style={{ color: "var(--danger)", border: "1px solid currentColor" }}>
@@ -162,12 +285,12 @@ export default function ShieldPanel({ viewOnly }: { viewOnly: boolean }) {
           theme={gridTheme}
           rowData={rows}
           columnDefs={phoneCols}
-          context={{ open, recheck, viewOnly }}
+          context={{ open, recheck, act, viewOnly }}
           domLayout="autoHeight"
           getRowId={(p) => `${p.data.order_id}${p.data.detail ? ":detail" : ""}`}
           isFullWidthRow={(p) => Boolean(p.rowNode.data?.detail)}
           fullWidthCellRenderer={ShieldDetail}
-          getRowHeight={(p) => (p.data?.detail ? Math.max(216, 100 + 30 * (p.data.verdict?.signals.length ?? 0)) : 64)}
+          getRowHeight={(p) => (p.data?.detail ? Math.max(216, 100 + 30 * (p.data.verdict?.signals.length ?? 0)) + (p.data.decision || p.data.verdict?.risk !== "LOW" ? 72 : 0) : 64)}
           // Highest risk first; a detail row sorts with its order and stays right under it.
           postSortRows={(p) => {
             const ordered = p.nodes.filter((n) => !n.data?.detail).flatMap((n) => {

@@ -6,10 +6,12 @@ import { forPhone, usePhone } from "./phone";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo, useRef, useState } from "react";
 import type { CaseRecord } from "@/lib/types";
+import ApiTrail from "./ApiTrail";
 import { AlertsFeed } from "./AutopilotPanel";
 import { useCases } from "./CasesProvider";
 import { DECISION_LABEL, money, REASON_LABEL, statusLabel } from "./format";
 import { gridTheme } from "./grid";
+import GridAsk from "./GridAsk";
 import { useGridEnterprise } from "./gridEnterprise";
 import IncidentsPanel from "./IncidentsPanel";
 import InboxCharts from "./InboxCharts";
@@ -34,9 +36,9 @@ const COLS: ColDef<CaseRecord>[] = [
   { colId: "claim", headerName: "Claim", flex: 1, minWidth: 120, valueGetter: (p) => p.data && REASON_LABEL[p.data.dispute.reason], filter: "agTextColumnFilter", floatingFilter: true },
   { colId: "amount", headerName: "Amount", width: 100, type: "rightAligned", valueGetter: (p) => Number(p.data?.dispute.dispute_amount.value ?? 0), valueFormatter: (p) => money(p.value), cellClass: "tabular", filter: "agNumberColumnFilter" },
   { colId: "decision", headerName: "Decision", width: 120, valueGetter: (p) => decisionOf(p.data), filter: "agTextColumnFilter", floatingFilter: true },
-  { colId: "by", headerName: "Answered by", width: 120, valueGetter: (p) => (p.data?.submitted ? (p.data.submitted.by === "autopilot" ? "Autopilot" : "You") : "") },
-  { colId: "result", headerName: "Result", width: 120, valueGetter: (p) => p.data?.outcome?.result ?? (p.data ? statusLabel(p.data) : ""), cellRenderer: ResultCell },
-  { colId: "kept", headerName: "Kept", width: 100, type: "rightAligned", valueGetter: (p) => p.data?.outcome?.amount_kept ?? 0, valueFormatter: (p) => money(p.value), cellClass: "tabular" },
+  { colId: "by", headerName: "Answered by", width: 120, valueGetter: (p) => (p.data?.submitted ? (p.data.submitted.by === "autopilot" ? "Autopilot" : "You") : ""), filter: "agTextColumnFilter" },
+  { colId: "result", headerName: "Result", width: 120, valueGetter: (p) => p.data?.outcome?.result ?? (p.data ? statusLabel(p.data) : ""), cellRenderer: ResultCell, filter: "agTextColumnFilter" },
+  { colId: "kept", headerName: "Kept", width: 100, type: "rightAligned", valueGetter: (p) => p.data?.outcome?.amount_kept ?? 0, valueFormatter: (p) => money(p.value), cellClass: "tabular", filter: "agNumberColumnFilter" },
   {
     colId: "closed",
     headerName: "Closed",
@@ -49,7 +51,7 @@ const COLS: ColDef<CaseRecord>[] = [
     comparator: (a: Date | null, b: Date | null) => (a?.getTime() ?? Infinity) - (b?.getTime() ?? Infinity),
     sort: "desc",
   },
-  { colId: "refunded", headerName: "Refunded", width: 110, flex: 0.5, type: "rightAligned", valueGetter: (p) => p.data?.outcome?.amount_lost ?? 0, valueFormatter: (p) => money(p.value), cellClass: "tabular" },
+  { colId: "refunded", headerName: "Refunded", width: 110, flex: 0.5, type: "rightAligned", valueGetter: (p) => p.data?.outcome?.amount_lost ?? 0, valueFormatter: (p) => money(p.value), cellClass: "tabular", filter: "agNumberColumnFilter" },
 ];
 
 type Factor = NonNullable<NonNullable<CaseRecord["recommendation"]>["factors"]>[number];
@@ -275,6 +277,15 @@ export default function Insights() {
           </div>
         }
       >
+        <div className="mb-3">
+          <GridAsk<CaseRecord>
+            grid="outcomes"
+            api={() => grid.current?.api}
+            enterprise={enterprise}
+            examples={["Disputes we lost", "Refunds by claim type", "Biggest wins first"]}
+            placeholder="Ask the ledger: e.g. refunds over $50 this month"
+          />
+        </div>
         {enterprise ? <div ref={chartBox} className={chartOpen ? "mb-3 h-80 overflow-hidden rounded-md border border-line" : "hidden"} /> : null}
         <AgGridReact<CaseRecord>
           ref={grid}
@@ -308,6 +319,10 @@ export default function Insights() {
       <ScaleTest />
 
       <IncidentsPanel mode={data?.mode} refreshKey={(data?.cases ?? []).map((c) => c.updated_at).join("|")} />
+
+      <Card title="PayPal API trail" subtitle="Every PayPal call made this session, by the AI agent, autopilot, you or the server, with PayPal's status and debug id. Failed calls and their retries each get a row.">
+        <ApiTrail refreshKey={(data?.cases ?? []).map((c) => c.updated_at).join("|")} pageSize={10} />
+      </Card>
 
       <Card title="Autopilot history" subtitle="PayPal webhooks and what the agent did, newest first.">
         <AlertsFeed cases={data?.cases ?? []} mode={data?.mode} limit={20} />
