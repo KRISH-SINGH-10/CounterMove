@@ -53,12 +53,22 @@ The demo shop is **Laceline Resale**, a two-person sneaker resale shop: high-val
 
 ## Built with AG Grid
 
-- **Ask the grid:** type "unauthorized claims over $100" and Gemini sets the Disputes grid's filters and sort; "refunds by claim type" groups the Outcomes ledger. Saved answers replay with no AI quota.
-- **Live grids for the core story:** the dispute queue, the pre-ship check with action buttons in a full-width detail row, the scammer network, buyer requests, the PayPal API trail, Dispute Reserve and Dispute Doctor.
-- **Enterprise features on the Outcomes ledger:** row grouping with totals, pivoting, set filters, master-detail, cell selection with a status bar, integrated and cross-filter charts, and Excel export.
-- **AG Studio:** the Ask AI page builds a dashboard from a question, with Gemini driving AG Studio's agent framework.
-- **Scale:** 1,000,000 disputes behind the server-side row model, sorted, filtered and grouped in Postgres, with the time for each block shown.
-- **Also:** inline editing with validation for the autopilot rules, pinned totals rows, saved column layout, CSV export, and a 100,000-row client-side check.
+| Feature | What it does in Countermove | Where |
+|---|---|---|
+| Server-side row model | 1,000,000 disputes sorted, filtered and grouped on the server (Postgres), one block at a time, with the time per block shown | Insights → Scale check (Enterprise) |
+| Ask the grid | Plain English ("unauthorized claims over $100") becomes filters, sort and row grouping, set by Gemini and checked against the grid's real columns | Disputes, Insights → Outcomes ledger |
+| Integrated and cross-filter charts | Chart any cell range from the right-click menu; "Chart in grid" draws kept vs refunded by claim type, and a bar click filters the ledger | Insights → Outcomes ledger (Enterprise) |
+| Row grouping and pivoting | Ledger grouped by claim type with totals, a group-by bar, pivot mode and the Columns and Filters tool panels | Insights → Outcomes ledger (Enterprise) |
+| Master/detail | Each dispute expands into the evidence the agent weighed (its own grid) beside the dispute's timeline | Insights → Outcomes ledger (Enterprise) |
+| Live delta updates | `getRowId` with cell flash: the trust network, pre-ship orders and buyer requests update and flash as orders and reports arrive | Protect |
+| Full-width detail rows | The agent's reasoning under a dispute, and the pre-ship verdict with one-click actions under an order | Disputes, Protect |
+| Inline editing with validation | Autopilot rules edited in the grid, each cell checked against the others | Autopilot rules drawer |
+| Theming API | One custom `themeQuartz` theme from the app's CSS variables, so every grid follows light and dark mode | Every grid |
+| AG Studio | Ask AI builds a dashboard of charts, KPIs and grids from a question, with Gemini driving AG Studio's agents | Ask AI |
+| Excel and CSV export | The outcomes ledger to Excel (Enterprise) or CSV with plain-number amounts | Insights |
+| Also | Row selection for bulk approve, pinned totals rows, quick filter, saved column layout, pagination, a 100,000-row client-side check | Disputes, Insights |
+
+Without `AG_GRID_LICENSE_KEY` every grid runs on AG Grid Community with no watermark, and without `AG_STUDIO_LICENSE_KEY` the Ask AI page explains how to switch it on instead of loading AG Studio, so the browser console stays clean.
 
 ## Challenges we ran into
 
@@ -83,9 +93,26 @@ The demo shop is **Laceline Resale**, a two-person sneaker resale shop: high-val
 - Mark orders shipped from the seller's fulfilment system, so the pre-ship check list empties itself.
 - A shared scammer network across real shops, with the same hash-only privacy.
 
+## Every PayPal API we use
+
+| PayPal API | Calls | What Countermove does with it | Verified live in the sandbox |
+|---|---|---|---|
+| OAuth 2.0 | `POST /v1/oauth2/token` | Signs in before every call | Yes (200) |
+| Disputes API | list, read, `provide-evidence`, `provide-supporting-info`, `make-offer`, `send-message`, `accept-claim`, `adjudicate` (sandbox) | The inbox, the agent's investigation, every answer, the negotiator, and PayPal's ruling in demos | Reads: yes (200, 200), 11 Nov. Evidence and ruling: yes, on a real sandbox dispute ($184 claim ruled for the seller). Offers: not possible, because the sandbox opened every dispute as a chargeback |
+| Orders API v2 | create, read, `/track` | The agent reads each order; the pre-ship check reads every paid order; tracking is added before a fight | Create and read: yes (201, 200) |
+| Payments API v2 | `POST /v2/payments/captures/{id}/refund` | Refunds a risky order before it ships | Simulator only (needs a buyer-paid sandbox order) |
+| Shipment Tracking | read and add trackers | The agent checks delivery; tracking is added to the transaction | No: 403, the sandbox app lacks the tracking permission |
+| Transaction Search | `GET /v1/reporting/transactions` | The agent checks the buyer's history with the shop | No: 403, the sandbox app lacks Transaction Search |
+| Webhooks | `CUSTOMER.DISPUTE.*`, `PAYMENT.CAPTURE.COMPLETED`, `verify-webhook-signature`, register and list webhooks | Starts autopilot on a new dispute and the pre-ship check on a paid order | Signature check and listing: yes (200) |
+| PayPal Agent Toolkit | `get_dispute`, `get_order`, `get_shipment_tracking`, `list_transactions`, `list_disputes`, `accept_dispute_claim`, `create_shipment_tracking` | The model's read tools, passed to Gemini with PayPal's own schemas | Yes, through the reads above |
+
+`node --env-file=.env.local scripts/verify-live.mjs` repeats the live check and prints PayPal's status and debug id for each call. Everything runs against `api-m.sandbox.paypal.com`; nothing calls live PayPal.
+
 ## Honest limits of this demo
 
 - The other shops in the scammer network are simulated and labelled as such.
+- The photo forensics images are illustrations made for the demo, labelled as such.
+- Shipment tracking and Transaction Search return 403 for our sandbox app until those permissions are turned on, so on live sandbox disputes the agent works without those two lookups.
 - The buyer "fix it first" page runs as a preview in the seller's browser.
 - On the hosted demo the live PayPal sandbox is view-only, because every visitor shares one sandbox account. The video shows live calls.
 

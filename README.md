@@ -4,7 +4,7 @@
 
 An AI agent that protects small online sellers before, during and after a PayPal dispute.
 
-**[Live demo](https://rebuttal-6j9a.onrender.com)** (no login) · **[Demo video](https://youtu.be/GnCHcMgndKA)** (under 3 min) · Built for [Build What's Next with PayPal and AI](https://paypalaihackathon.devpost.com/)
+**[Live demo](https://rebuttal-6j9a.onrender.com)** (no login; if it has been idle, the first load can take a minute) · **[Demo video](https://youtu.be/GnCHcMgndKA)** (under 3 min) · Built for [Build What's Next with PayPal and AI](https://paypalaihackathon.devpost.com/)
 
 _The demo runs on Render's free tier: if nobody has used it for a while, the first load can take up to a minute._
 
@@ -275,6 +275,25 @@ Turn it on with these environment variables (the Render blueprint generates `REB
 | `APP_URL` | Public https address for webhooks (falls back to Render's `RENDER_EXTERNAL_URL`). |
 
 Without them the app runs exactly as the hackathon demo, with no sign-in. `/api/health` reports whether the database is reachable.
+
+## What the live demo needs
+
+`GET /api/health` reports which of these the server has (yes or no, never a value), so anyone can check the deployment.
+
+| Variable | Without it |
+|---|---|
+| `DATABASE_URL` | Cases and rules live in memory and reset on restart; seller accounts are off; the 1M-row check answers from memory |
+| `AG_GRID_LICENSE_KEY` | Every grid runs on AG Grid Community: no grouping, pivoting, integrated charts, master/detail or 1M-row server-side check |
+| `AG_STUDIO_LICENSE_KEY` | Ask AI says it needs the key instead of loading AG Studio |
+| `GEMINI_API_KEY` | Saved AI runs still replay (every Judge mode step and the example questions); new questions and re-runs can't run |
+| `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET` | Only the Simulator is available |
+| `PAYPAL_WEBHOOK_ID` | Live sandbox webhooks are refused (the signature can't be checked), so autopilot and the pre-ship check don't start on live events |
+
+The demo itself needs none of them: the Simulator, Judge mode and every saved AI run work with no keys and no login.
+
+### Avoiding the cold start
+
+Render's free instance sleeps after 15 minutes idle, and the first visit then takes about a minute. During judging, keep it awake with a free uptime monitor (for example UptimeRobot or Better Stack) that opens `https://rebuttal-6j9a.onrender.com/api/health` every 5 minutes, or move the service to a paid instance. The health check makes no PayPal or Gemini call, so the pings cost nothing.
 
 ## Deploy
 

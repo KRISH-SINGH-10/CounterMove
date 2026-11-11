@@ -19,7 +19,17 @@ async function live() {
 export async function GET() {
   await live(); // checked per request, never prerendered at build time
   const db = databaseConfigured() ? await dbHealthy() : null;
-  return Response.json({ ok: db !== false, service: "rebuttal", database: db === null ? "not configured" : db ? "ok" : "unreachable" }, { status: db === false ? 503 : 200, headers });
+  // What this server is set up with: yes/no only, never a value.
+  const set = (name: string) => Boolean(process.env[name]?.trim());
+  const configured = {
+    database: set("DATABASE_URL"),
+    gemini: set("GEMINI_API_KEY"),
+    paypal_sandbox: set("PAYPAL_CLIENT_ID") && set("PAYPAL_CLIENT_SECRET"),
+    paypal_webhook: set("PAYPAL_WEBHOOK_ID"),
+    ag_grid_enterprise: set("AG_GRID_LICENSE_KEY"),
+    ag_studio: set("AG_STUDIO_LICENSE_KEY"),
+  };
+  return Response.json({ ok: db !== false, service: "countermove", database: db === null ? "not configured" : db ? "ok" : "unreachable", configured }, { status: db === false ? 503 : 200, headers });
 }
 
 export async function HEAD() {

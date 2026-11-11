@@ -13,4 +13,12 @@ describe("/api/health", () => {
     expect(fetchSpy).not.toHaveBeenCalled();
     fetchSpy.mockRestore();
   });
+
+  it("says which services are configured, never their values", async () => {
+    process.env.GEMINI_API_KEY = "secret-value-123";
+    const body = await (await GET()).json();
+    expect(body.configured).toMatchObject({ gemini: true });
+    expect(JSON.stringify(body)).not.toContain("secret-value-123");
+    delete process.env.GEMINI_API_KEY;
+  });
 });
