@@ -56,7 +56,7 @@ export function AccountsOff() {
           Every page works without an account: your browser gets its own private Simulator, and the live PayPal sandbox is one click away in the top bar. Seller accounts, where a shop connects its own PayPal app, are switched off on this server because it has no database attached.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link href="/" className={BUTTON.primary}>Open the disputes inbox</Link>
+          <Link href="/disputes" className={BUTTON.primary}>Open the disputes inbox</Link>
           <a href="https://github.com/KRISH-SINGH-10/Countermove#seller-accounts-for-real-sellers" className={BUTTON.secondary} target="_blank" rel="noreferrer">How to turn accounts on</a>
         </div>
       </Card>

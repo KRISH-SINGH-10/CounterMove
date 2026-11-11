@@ -9,7 +9,6 @@ import type { AutopilotRules, CaseRecord } from "@/lib/types";
 import { AlertsFeed } from "./AutopilotPanel";
 import { useCases } from "./CasesProvider";
 import { useGridEnterprise } from "./gridEnterprise";
-import WelcomeTour from "./WelcomeTour";
 import Link from "next/link";
 import { chunk, daysLeft, DECISION_COLOR, DECISION_LABEL, money, priorityOf, REASON_LABEL, statusLabel } from "./format";
 import { gridTheme } from "./grid";
@@ -545,10 +544,9 @@ export default function Inbox() {
 
   return (
     <div className="space-y-5">
-      <WelcomeTour />
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Disputes</h1>
-        <p className="text-sm font-medium text-accent">Stop scammers before you ship. Settle the rest without a fight.</p>
+        <p className="text-sm font-medium text-accent">Settle the rest without a fight.</p>
         <p className="text-sm text-muted">The agent investigates each dispute as PayPal reports it and ranks them by money and deadline. Nothing goes to PayPal without your approval, except what your autopilot rules allow.</p>
       </div>
       {data ? (

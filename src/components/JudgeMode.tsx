@@ -74,7 +74,7 @@ export default function JudgeMode() {
         await wait(1200);
       });
       await at(1, async () => {
-        router.push("/protect");
+        router.push("/");
         // The shield checks each order in the background; wait for the forwarder order.
         await until(async () => {
           const o = (await (await fetch("/api/orders", { cache: "no-store" })).json()).orders as Array<{ invoice_id: string; verdict?: unknown }>;
@@ -94,7 +94,7 @@ export default function JudgeMode() {
         await wait(5000);
       });
       await at(4, async () => {
-        router.push("/");
+        router.push("/disputes");
         await wait(1200);
         const filed = (await (await post("/api/demo/dispute")).json()) as { id: string };
         await until(async () => {

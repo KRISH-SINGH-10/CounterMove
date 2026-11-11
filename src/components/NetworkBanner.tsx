@@ -19,7 +19,7 @@ export default function NetworkBanner({ caseId }: { caseId: string }) {
         <h2 className="text-sm font-semibold" style={{ color: "var(--danger)" }}>
           Repeat-dispute warning: {m.other_shops} other Countermove shop{m.other_shops === 1 ? "" : "s"} reported this PayPal account
         </h2>
-        <Link href="/protect" className="text-xs text-accent underline">See the network</Link>
+        <Link href="/" className="text-xs text-accent underline">See the network</Link>
       </div>
       <ul className="mt-2 space-y-1 text-sm">
         {m.reports.map((r, i) => (

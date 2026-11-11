@@ -51,23 +51,38 @@ function OrderCell({ data }: ICellRendererParams<Account>) {
 
 const COLS: ColDef<Account>[] = [
   { colId: "account", headerName: "PayPal account", flex: 1.2, minWidth: 190, cellRenderer: AccountCell, valueGetter: (p) => p.data?.name ?? p.data?.buyer_hash, filter: "agTextColumnFilter" },
-  { field: "shops", headerName: "Reported by", width: 150, cellRenderer: ShopsCell, sort: "desc", sortIndex: 1 },
+  { field: "shops", headerName: "Reported by", width: 150, cellRenderer: ShopsCell, sort: "desc", sortIndex: 1, enableCellChangeFlash: true },
   { colId: "claims", headerName: "Claims", flex: 1, minWidth: 150, valueGetter: (p) => p.data?.reasons.map((r) => REASON_LABEL[r]).join(", ") },
   { field: "evidence", headerName: "What the evidence showed", flex: 1.6, minWidth: 220, tooltipField: "evidence" },
-  { colId: "order", headerName: "Ordering from you", width: 200, cellRenderer: OrderCell, valueGetter: (p) => (p.data?.pending_order ? 0 : 1), sort: "asc", sortIndex: 0 },
+  { colId: "order", headerName: "Ordering from you", width: 200, cellRenderer: OrderCell, valueGetter: (p) => (p.data?.pending_order ? 0 : 1), sort: "asc", sortIndex: 0, enableCellChangeFlash: true },
 ];
 
 // The headline of Protect: repeat disputers reported across Countermove shops.
-export default function NetworkPanel({ mode }: { mode?: "mock" | "sandbox" }) {
+export type NetworkSummary = { ordering: number; flagged: number; reports: number; shops: number; shared: number };
+
+export default function NetworkPanel({ mode, onSummary }: { mode?: "mock" | "sandbox"; onSummary?: (s: NetworkSummary) => void }) {
   const phone = usePhone();
   const phoneCols = useMemo(() => forPhone(COLS, phone, ["shops", "claims", "evidence"], ["order"]), [phone]);
   const [data, setData] = useState<Payload | null>(null);
+  // Kept live: reloaded every 15 seconds while the tab is visible, and right after an
+  // action elsewhere (a paid order arriving, an order refunded), so new reports and new
+  // orders from reported buyers flash into the grid.
   useEffect(() => {
     if (!mode) return;
-    fetch("/api/network", { cache: "no-store" }).then((r) => r.json()).then(setData).catch(() => setData(null));
+    const load = () => fetch("/api/network", { cache: "no-store" }).then((r) => r.json()).then((j) => j?.accounts && setData(j)).catch(() => {});
+    load();
+    const t = setInterval(() => document.visibilityState === "visible" && load(), 15_000);
+    window.addEventListener("countermove:refresh", load);
+    return () => {
+      clearInterval(t);
+      window.removeEventListener("countermove:refresh", load);
+    };
   }, [mode]);
   const flagged = data?.accounts.filter((a) => a.shops > 1).length ?? 0;
   const ordering = data?.accounts.filter((a) => a.pending_order).length ?? 0;
+  useEffect(() => {
+    if (data) onSummary?.({ ordering, flagged, reports: data.reports, shops: data.shops, shared: data.shared });
+  }, [data, ordering, flagged, onSummary]);
 
   return (
     <Card

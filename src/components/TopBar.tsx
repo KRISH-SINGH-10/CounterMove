@@ -8,8 +8,8 @@ import { useCases } from "./CasesProvider";
 import { BUTTON, OPEN_SIMULATOR_EVENT } from "./ui";
 
 const TABS = [
-  { href: "/", label: "Disputes" },
-  { href: "/protect", label: "Protect" },
+  { href: "/", label: "Protect" },
+  { href: "/disputes", label: "Disputes" },
   { href: "/insights", label: "Insights" },
   { href: "/ask", label: "Ask AI" },
 ] as const;
@@ -34,7 +34,7 @@ export default function TopBar() {
   useEffect(() => {
     reload();
   }, [path, reload]);
-  const active = (href: string) => (href === "/" ? path === "/" || path.startsWith("/cases") : path.startsWith(href));
+  const active = (href: string) => (href === "/" ? path === "/" || path.startsWith("/fix") : href === "/disputes" ? path.startsWith("/disputes") || path.startsWith("/cases") : path.startsWith(href));
 
   return (
     <header className="border-b border-line bg-panel">

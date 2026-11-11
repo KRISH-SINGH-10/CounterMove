@@ -4,20 +4,20 @@ import { useEffect, useState } from "react";
 import { TOUR_EVENT } from "./TopBar";
 import { BUTTON } from "./ui";
 
-const SEEN_KEY = "rebuttal.tour.seen.v1";
+const SEEN_KEY = "rebuttal.tour.seen.v2";
 
 const STEPS = [
   {
-    title: "Your disputes, ranked",
-    body: "Every PayPal dispute lands here. The agent investigates it through PayPal's own APIs and ranks it by money at risk and days left. Click a row to see its evidence and approve a response.",
+    title: "Before: stop scammers before you ship",
+    body: "This is Protect. Sellers share proof when a buyer is caught lying (only a one-way hash of the PayPal email), and every paid PayPal order is checked against that network before it ships. One click refunds a risky order through PayPal instead of shipping it.",
   },
   {
-    title: "Small claims on autopilot",
-    body: "Under your Autopilot rules, the agent refunds small claims it can't win and alerts you about the rest. It never acts above your limit, and it retries or explains when PayPal itself fails.",
+    title: "During: settle the rest without a fight",
+    body: "On Disputes, the agent investigates each PayPal dispute through PayPal's own APIs, compares photos, writes the evidence, and negotiates partial refunds inside a ceiling the buyer never sees. Nothing reaches PayPal without your approval, except what your autopilot rules allow.",
   },
   {
-    title: "Protect and Insights",
-    body: "Protect warns you about buyers other Countermove sellers already caught (the repeat-scammer network) and checks paid orders for dispute risk before you ship. Insights shows what the agent did: money kept, hours saved, and every PayPal incident it recovered from.",
+    title: "After: what it saved, and what to fix",
+    body: "Insights shows money protected, what to keep aside for the next 30 days, the causes behind your refunds with one fix each, and every PayPal call on the API trail. Judge mode in the top bar plays the whole story in under a minute.",
   },
 ];
 

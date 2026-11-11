@@ -9,9 +9,11 @@ import { useCases } from "./CasesProvider";
 import { money, REASON_LABEL } from "./format";
 import { gridTheme } from "./grid";
 import FixRequestsPanel from "./FixRequestsPanel";
-import NetworkPanel from "./NetworkPanel";
+import Link from "next/link";
+import NetworkPanel, { type NetworkSummary } from "./NetworkPanel";
+import WelcomeTour from "./WelcomeTour";
 import ShieldPanel from "./ShieldPanel";
-import { Badge, Card, Empty } from "./ui";
+import { Badge, Card, Empty, Kpi } from "./ui";
 
 type Buyer = { email: string; name: string; disputes: number; disputed: number; open: number; claims: string; lastOutcome: string; pendingOrder: string | null };
 
@@ -35,10 +37,15 @@ export default function Protect() {
   const phoneCols = useMemo(() => forPhone(COLS, phone, ["email", "disputes", "disputed", "claims", "lastOutcome"], ["pendingOrder"]), [phone]);
   const { data } = useCases();
   const [orders, setOrders] = useState<ShieldRow[]>([]);
+  const [net, setNet] = useState<NetworkSummary | null>(null);
+  const toReview = orders.filter((o) => o.to_review).length;
 
   useEffect(() => {
-    if (data?.mode !== "mock") return;
-    fetch("/api/orders", { cache: "no-store" }).then((r) => r.json()).then((j) => setOrders(j.orders ?? [])).catch(() => {});
+    if (!data?.mode) return;
+    const load = () => fetch("/api/orders", { cache: "no-store" }).then((r) => r.json()).then((j) => setOrders(j.orders ?? [])).catch(() => {});
+    load();
+    window.addEventListener("countermove:refresh", load);
+    return () => window.removeEventListener("countermove:refresh", load);
   }, [data?.mode]);
 
   // Dispute memory: every buyer who has disputed with the shop, and whether they're ordering again.
@@ -62,12 +69,36 @@ export default function Protect() {
 
   return (
     <div className="space-y-5">
+      <WelcomeTour />
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Protect</h1>
-        <p className="text-sm text-muted">Stop disputes before they start: see buyers other sellers caught, check every paid order before you ship it, and remember every buyer who has disputed with you.</p>
+        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Stop scammers before you ship.</h1>
+        <p className="mt-1 text-sm text-muted">Countermove is the seller trust network for PayPal: sellers share proof when a buyer is caught lying, every paid order is checked against it before it ships, and the disputes that still happen are settled without a fight.</p>
       </div>
 
-      <NetworkPanel mode={data?.mode} />
+      {/* The network and the money it protected come first. */}
+      <section className="rounded-lg border p-4" style={{ borderColor: net?.ordering ? "var(--danger)" : "var(--accent)", background: net?.ordering ? "color-mix(in srgb, var(--danger) 7%, var(--panel))" : "var(--accent-soft)" }} data-testid="trust-banner">
+        <div className="grid gap-4 md:grid-cols-[1.6fr_1fr_1fr] md:items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: net?.ordering ? "var(--danger)" : "var(--accent)" }}>Seller trust network</p>
+            <p className="mt-1 text-lg font-semibold leading-snug">
+              {net === null
+                ? "Checking the network…"
+                : net.ordering
+                  ? `${net.ordering} buyer${net.ordering === 1 ? "" : "s"} other sellers caught ${net.ordering === 1 ? "is" : "are"} ordering from you right now.`
+                  : "No reported buyer is ordering from you right now."}
+            </p>
+            <p className="mt-1 text-sm text-muted">{net ? `${net.reports} proven reports from ${net.shops} shops. You shared ${net.shared}.` : " "}{toReview ? ` ${toReview} paid order${toReview === 1 ? "" : "s"} to review before shipping.` : ""}</p>
+          </div>
+          <Kpi label="Money protected" value={data?.stats ? money(data.stats.kept) : "-"} tone="good" sub={data?.stats?.rulings ? `Won ${data.stats.won} of ${data.stats.rulings} PayPal rulings` : "Kept from disputes"} />
+          <div className="rounded-lg border border-line bg-panel px-4 py-3">
+            <div className="text-xs font-medium uppercase tracking-wide text-muted">Open disputes</div>
+            <div className="mt-1 text-2xl font-semibold tabular">{data?.stats ? money(data.stats.at_risk) : "-"}</div>
+            <Link href="/disputes" className="text-xs text-accent underline">{data?.stats ? `${data.stats.open} open · settle the rest` : "Open Disputes"}</Link>
+          </div>
+        </div>
+      </section>
+
+      <NetworkPanel mode={data?.mode} onSummary={setNet} />
 
       <ShieldPanel
         key={`${data?.mode}:${data?.cases.length ? "on" : "reset"}`}

@@ -2,6 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Protect became the home page; old links to /protect still land on it.
+  async redirects() {
+    return [{ source: "/protect", destination: "/", permanent: false }];
+  },
   // Standard hardening headers. No Content-Security-Policy yet: AG Grid and AG Studio
   // need careful testing under one, and it isn't worth the risk before judging.
   async headers() {

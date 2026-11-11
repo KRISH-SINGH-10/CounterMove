@@ -150,8 +150,8 @@ const COLS: ColDef<ShieldGridRow>[] = [
   { colId: "buyer", headerName: "Buyer", valueGetter: (p) => p.data?.buyer, cellRenderer: BuyerCell, flex: 1.1, minWidth: 160 },
   { field: "ship_to", headerName: "Ships to", flex: 1.2, minWidth: 160, tooltipField: "ship_to", cellRenderer: (p: ICellRendererParams<ShieldGridRow>) => <span className="truncate text-muted">{p.value}</span> },
   { colId: "amount", headerName: "Amount", width: 110, type: "rightAligned", valueGetter: (p) => Number(p.data?.amount ?? 0), valueFormatter: (p) => money(p.value), cellClass: "tabular font-medium justify-end" },
-  { colId: "risk", headerName: "Dispute risk", width: 190, valueGetter: (p) => p.data?.verdict?.score ?? -1, cellRenderer: RiskCell, sort: "desc" },
-  { colId: "headline", headerName: "Agent's read", valueGetter: (p) => p.data?.verdict?.headline ?? "", flex: 2, minWidth: 220, tooltipValueGetter: (p) => p.value, cellRenderer: HeadlineCell },
+  { colId: "risk", headerName: "Dispute risk", width: 190, valueGetter: (p) => p.data?.verdict?.score ?? -1, cellRenderer: RiskCell, sort: "desc", enableCellChangeFlash: true },
+  { colId: "headline", headerName: "Agent's read", valueGetter: (p) => p.data?.verdict?.headline ?? "", flex: 2, minWidth: 220, tooltipValueGetter: (p) => p.value, cellRenderer: HeadlineCell, enableCellChangeFlash: true },
 ];
 
 // What the agent found and what to do before shipping, under the order's row.
@@ -234,9 +234,10 @@ export default function ShieldPanel({ viewOnly, empty = null }: { viewOnly: bool
     window.addEventListener("countermove:refresh", load);
     return () => window.removeEventListener("countermove:refresh", load);
   }, [load]);
+  // Fast while a check runs; otherwise every 15 seconds, so an order paid through the
+  // PAYMENT.CAPTURE.COMPLETED webhook appears (and flashes) without a reload.
   useEffect(() => {
-    if (!checking) return;
-    const t = setInterval(load, 1200);
+    const t = setInterval(() => (checking || document.visibilityState === "visible") && load(), checking ? 1200 : 15_000);
     return () => clearInterval(t);
   }, [checking, load]);
 

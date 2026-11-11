@@ -47,7 +47,7 @@ export default function BuyerFix({ invoice }: { invoice: string }) {
   const preview = (
     <p className="rounded-md border border-dashed border-line px-3 py-2 text-xs text-muted">
       Preview of the page your buyer sees, linked from the order email. It shows the buyer&apos;s first name, the item and the shipping status only.{" "}
-      <Link href="/protect" className="text-accent underline">Back to Protect</Link>
+      <Link href="/" className="text-accent underline">Back to Protect</Link>
     </p>
   );
 

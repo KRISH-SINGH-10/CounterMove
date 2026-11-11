@@ -237,7 +237,7 @@ export default function CaseView({ id }: { id: string }) {
 
   return (
     <div className="space-y-6">
-      <Link href="/" className="text-sm text-muted hover:text-ink">&larr; All disputes</Link>
+      <Link href="/disputes" className="text-sm text-muted hover:text-ink">&larr; All disputes</Link>
 
       <section className="flex flex-wrap items-start justify-between gap-4">
         <div>
@@ -570,7 +570,7 @@ function MissingDispute({ id, onRetry }: { id: string; onRetry: () => void }) {
   const other = data?.mode === "sandbox" ? "mock" : data?.sandboxAvailable ? "sandbox" : null;
   return (
     <div className="space-y-4">
-      <Link href="/" className="text-sm text-muted hover:text-ink">&larr; All disputes</Link>
+      <Link href="/disputes" className="text-sm text-muted hover:text-ink">&larr; All disputes</Link>
       <section className="rounded-lg border border-line bg-panel p-4 sm:p-6">
         <h1 className="text-lg font-semibold">Dispute {id} isn&apos;t in this inbox</h1>
         <p className="mt-2 max-w-prose text-sm text-muted">
@@ -578,7 +578,7 @@ function MissingDispute({ id, onRetry }: { id: string; onRetry: () => void }) {
           A link copied from someone else&apos;s Simulator, a dispute from the other mode, or a demo server that has just restarted all land here. Your own disputes are one click away.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link href="/" className={BUTTON.primary}>Open all disputes</Link>
+          <Link href="/disputes" className={BUTTON.primary}>Open all disputes</Link>
           {other ? (
             <button className={BUTTON.secondary} onClick={async () => { await switchMode(other); onRetry(); }}>
               Look in the {other === "sandbox" ? "live PayPal sandbox" : "Simulator"}

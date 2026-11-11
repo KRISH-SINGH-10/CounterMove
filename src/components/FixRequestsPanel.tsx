@@ -58,7 +58,7 @@ function AnswerCell({ data, context }: ICellRendererParams<FixRequest>) {
 const COLS: ColDef<FixRequest>[] = [
   { field: "invoice_id", headerName: "Order", width: 92, cellClass: "text-muted tabular" },
   { colId: "ask", headerName: "Buyer asked", flex: 1.4, minWidth: 220, valueGetter: (p) => `${p.data?.buyer} ${p.data?.note}`, cellRenderer: AskCell, autoHeight: true },
-  { colId: "status", headerName: "Status", width: 110, valueGetter: (p) => p.data?.status, cellRenderer: (p: ICellRendererParams<FixRequest>) => <Badge tone={p.value === "OPEN" ? "warn" : "good"}>{p.value === "OPEN" ? "Open" : "Answered"}</Badge>, sort: "desc" },
+  { colId: "status", headerName: "Status", width: 110, valueGetter: (p) => p.data?.status, cellRenderer: (p: ICellRendererParams<FixRequest>) => <Badge tone={p.value === "OPEN" ? "warn" : "good"}>{p.value === "OPEN" ? "Open" : "Answered"}</Badge>, sort: "desc", enableCellChangeFlash: true },
   { colId: "answer", headerName: "Your answer", flex: 1.6, minWidth: 260, valueGetter: (p) => p.data?.answer ?? "", cellRenderer: AnswerCell, autoHeight: true, sortable: false },
 ];
 
