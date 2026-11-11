@@ -2,7 +2,7 @@
 
 > **For judges.** Countermove is the seller trust network for PayPal: stop scammers before you ship, settle the rest without a fight.
 >
-> **[Live demo](https://countermove.onrender.com)** · Video: **[NEW VIDEO LINK]** · No login needed.
+> **[Live demo](https://countermove.onrender.com)** · Video: **[https://youtu.be/zylGsAFkME8]** · No login needed.
 >
 > **Try in 60 seconds:** open the site → click **Judge mode** → watch *before* (a reported buyer's order refunded before shipping) → *during* (the agent answers a dispute with evidence) → *after* (Insights).
 >
@@ -13,7 +13,7 @@
 
 An AI agent that protects small online sellers before, during and after a PayPal dispute.
 
-**[Live demo](https://countermove.onrender.com)** (no login; if it has been idle, the first load can take a minute) · Demo video: **[NEW VIDEO LINK]** (under 3 min) · Built for [Build What's Next with PayPal and AI](https://paypalaihackathon.devpost.com/)
+**[Live demo](https://countermove.onrender.com)** (no login; if it has been idle, the first load can take a minute) · Demo video: **[https://youtu.be/zylGsAFkME8]** (under 3 min) · Built for [Build What's Next with PayPal and AI](https://paypalaihackathon.devpost.com/)
 
 _The demo runs on Render's free tier: if nobody has used it for a while, the first load can take up to a minute._
 
@@ -372,6 +372,7 @@ src/components/ShieldPanel.tsx  Dispute shield: paid orders and their risk (AG G
 - Krish Singh
 - Harshit Tiwari
 - Sarthak Seth
+- Mandar Amte
 
 ## License
 
