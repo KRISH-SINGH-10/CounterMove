@@ -1,0 +1,105 @@
+{
+  "key": "JK-1063-d00dfdac009d",
+  "dispute_id": "PP-D-27803",
+  "saved_at": "2026-11-11T07:26:40.659Z",
+  "model": "gemini:gemini-3.5-flash-lite",
+  "recommendation": {
+    "decision": "REFUND",
+    "win_probability": 0,
+    "headline": "Accept the claim and issue a full refund since the order was shipped without tracking and cannot be proven delivered.",
+    "rationale": "Because the $28.00 sneaker care kit was shipped via USPS First-Class envelope without tracking, we have no carrier delivery scans or proof of receipt to submit to PayPal. Under PayPal rules for item-not-received disputes, sellers must provide valid online tracking showing delivery to the buyer's address to win. Fighting this dispute is certain to fail, so issuing a full refund is the most efficient course of action.",
+    "evidence": [
+      {
+        "type": "PROOF_OF_FULFILLMENT",
+        "summary": "The order was shipped via USPS First-Class envelope without online tracking or delivery confirmation.",
+        "source": "get_store_records"
+      },
+      {
+        "type": "ITEM_DESCRIPTION",
+        "summary": "The buyer filed an inquiry stating the sneaker care kit has not arrived after three weeks.",
+        "source": "get_dispute"
+      }
+    ],
+    "response_to_paypal": "We apologize that the shipment did not reach you. Because this order was sent via untracked mail, we are unable to verify delivery with the carrier. We have issued a full refund of $28.00 to resolve this matter.",
+    "tracking_carrier": "",
+    "tracking_number": "",
+    "offer_amount": 0,
+    "offer_type": "NONE",
+    "risks": [
+      "None. A full refund successfully closes the dispute."
+    ],
+    "factors": [
+      {
+        "finding": "The buyer never received the item and filed an item-not-received dispute.",
+        "favors": "BUYER",
+        "weight": "HIGH",
+        "source": "get_dispute"
+      },
+      {
+        "finding": "The order was shipped without online tracking or delivery confirmation, leaving no proof of delivery.",
+        "favors": "BUYER",
+        "weight": "HIGH",
+        "source": "get_store_records"
+      },
+      {
+        "finding": "The disputed amount is small ($28.00), making a refund more cost-effective than fighting an indefensible claim.",
+        "favors": "SELLER",
+        "weight": "MEDIUM",
+        "source": "get_dispute"
+      }
+    ]
+  },
+  "trace": [
+    {
+      "kind": "tool",
+      "tool": "get_dispute",
+      "input": {
+        "dispute_id": "PP-D-27803"
+      },
+      "summary": "Dispute PP-D-27803: merchandise or service not received, $28.00, inquiry",
+      "at": "2026-11-11T07:26:31.776Z"
+    },
+    {
+      "kind": "tool",
+      "tool": "list_transactions",
+      "input": {
+        "transaction_id": "WQS4G0JANUCSQWS8Q"
+      },
+      "summary": "1 transaction from this buyer",
+      "at": "2026-11-11T07:26:31.776Z"
+    },
+    {
+      "kind": "tool",
+      "tool": "get_store_records",
+      "input": {
+        "invoice_id": "JK-1063"
+      },
+      "summary": "Shop records: 0 customer messages; no carrier scans",
+      "at": "2026-11-11T07:26:31.776Z"
+    },
+    {
+      "kind": "tool",
+      "tool": "get_order",
+      "input": {
+        "id": "CGJSNWCJWYG4LQLW8"
+      },
+      "summary": "Order CGJSNWCJWYG4LQLW8: Sneaker care kit with spare laces, ships to Seattle, WA",
+      "at": "2026-11-11T07:26:35.229Z"
+    },
+    {
+      "kind": "tool",
+      "tool": "get_shipment_tracking",
+      "input": {
+        "transaction_id": "WQS4G0JANUCSQWS8Q",
+        "order_id": "CGJSNWCJWYG4LQLW8"
+      },
+      "summary": "No tracking on file with PayPal",
+      "at": "2026-11-11T07:26:37.843Z"
+    },
+    {
+      "kind": "note",
+      "summary": "Recommendation: REFUND",
+      "at": "2026-11-11T07:26:40.659Z"
+    }
+  ]
+}

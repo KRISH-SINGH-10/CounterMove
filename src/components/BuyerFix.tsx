@@ -121,7 +121,7 @@ export default function BuyerFix({ invoice }: { invoice: string }) {
               <div className="mt-4 space-y-3">
                 <label className="block text-sm">
                   <span className="text-muted">What went wrong?</span>
-                  <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={3} maxLength={500} placeholder="For example: one mug arrived chipped" className="mt-1 w-full rounded-md border border-line bg-bg p-2.5 text-sm" />
+                  <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={3} maxLength={500} placeholder="For example: the left toe box arrived dented" className="mt-1 w-full rounded-md border border-line bg-bg p-2.5 text-sm" />
                 </label>
                 <div className="flex flex-wrap items-center gap-2 text-sm" role="radiogroup" aria-label="What would you like?">
                   <span className="text-muted">I&apos;d like</span>

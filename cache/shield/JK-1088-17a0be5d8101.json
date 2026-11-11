@@ -1,35 +1,63 @@
 {
   "key": "JK-1088-17a0be5d8101",
-  "saved_at": "2026-10-30T17:39:01.281Z",
+  "saved_at": "2026-11-11T07:27:04.892Z",
   "verdict": {
+    "score": 100,
     "risk": "HIGH",
-    "score": 85,
-    "headline": "This high-risk order combines an unverified account, expensive overnight shipping, and a package forwarder with a mismatched recipient name.",
     "signals": [
+      {
+        "finding": "Ships to 8200 NW 25th St, Ste 104 #FWD-55821, Doral, not the buyer's PayPal address. Seller Protection generally covers only the address on the transaction.",
+        "effect": "RAISES",
+        "source": "get_order",
+        "weight": 15
+      },
+      {
+        "finding": "The parcel is addressed to R. Vance c/o ParcelBridge Forwarding, not the PayPal payer Tomas Reyes.",
+        "effect": "RAISES",
+        "source": "get_order",
+        "weight": 10
+      },
+      {
+        "finding": "The shipping address looks like a package forwarder.",
+        "effect": "RAISES",
+        "source": "get_order",
+        "weight": 15
+      },
       {
         "finding": "The buyer's PayPal account is unverified.",
         "effect": "RAISES",
-        "source": "get_order"
+        "source": "get_order",
+        "weight": 10
       },
       {
-        "finding": "The order uses overnight express shipping and costs $236.00, matching typical stolen-account fraud patterns.",
+        "finding": "The buyer paid for Overnight express.",
         "effect": "RAISES",
-        "source": "get_order"
+        "source": "get_order",
+        "weight": 10
       },
       {
-        "finding": "The shipping address is a package forwarder (ParcelBridge Forwarding) with a different recipient name (R. Vance) than the PayPal payer (Tomas Reyes).",
+        "finding": "A high-value order ($236.00).",
         "effect": "RAISES",
-        "source": "get_order"
+        "source": "get_order",
+        "weight": 5
       },
       {
-        "finding": "The buyer has no completed orders or history with the shop.",
+        "finding": "First order from this buyer.",
         "effect": "RAISES",
-        "source": "get_buyer_history"
+        "source": "get_buyer_history",
+        "weight": 10
+      },
+      {
+        "finding": "Countermove network: 2 other shops reported this PayPal account (item not received, unauthorised) after their evidence contradicted the claim.",
+        "effect": "RAISES",
+        "source": "rebuttal_network",
+        "weight": 25
       }
     ],
+    "headline": "This high-value, unverified overnight order ships to a package forwarder under a different name and is flagged by the Countermove network for prior disputed claims.",
     "actions": [
-      "Ship only to the verified PayPal address on the transaction (1450 SW 8th St, Miami, FL) or cancel and refund the order",
-      "Require signature confirmation if shipping to an approved alternate address"
+      "Cancel and fully refund the payment immediately due to unverified status, high-value overnight forwarder shipping, and Countermove network fraud alerts.",
+      "Do not ship to the package forwarder address or to a different recipient name (R. Vance) that does not match the PayPal payer."
     ]
   },
   "trace": [
@@ -40,21 +68,21 @@
         "id": "SCE0N2ECCN6E2QJ8J"
       },
       "summary": "Order SCE0N2ECCN6E2QJ8J: $236.00, Overnight express, ships to R. Vance c/o ParcelBridge Forwarding in Doral, FL",
-      "at": "2026-10-30T17:38:57.721Z"
+      "at": "2026-11-11T07:27:03.553Z"
     },
     {
       "kind": "tool",
       "tool": "get_buyer_history",
       "input": {
-        "email": "t.reyes.shop@example.com"
+        "email": "tomas.reyes.forward@example.com"
       },
       "summary": "0 completed orders, 0 past disputes",
-      "at": "2026-10-30T17:39:00.017Z"
+      "at": "2026-11-11T07:27:03.553Z"
     },
     {
       "kind": "note",
-      "summary": "Risk: HIGH (85/100)",
-      "at": "2026-10-30T17:39:01.281Z"
+      "summary": "Risk: HIGH (100/100)",
+      "at": "2026-11-11T07:27:04.892Z"
     }
   ],
   "model": "gemini:gemini-3.5-flash-lite"

@@ -134,7 +134,7 @@ export function diagnose(cases: CaseRecord[], rules?: AutopilotRules | null): Fi
       disputes: hits.length,
       lost: round2(hits.reduce((s, c) => s + lostOf(c), 0)),
       fix: `Say in the listing${item ? "" : "s"} what varies and show it in a photo, so buyers know before they pay.`,
-      action: { kind: "copy", label: "Copy listing text", text: "Made by hand: colour, glaze and finish vary from piece to piece and from these photos. Photo 2 shows the range you can expect. Small marks from making are normal and are not defects." },
+      action: { kind: "copy", label: "Copy listing text", text: "Colour in daylight: off-white and pastel colourways read warmer outdoors than in these studio photos; photo 3 shows the pair in daylight. Pre-owned pairs: every mark is photographed, and anything not shown is a defect we fix." },
     });
   }
 

@@ -1,0 +1,121 @@
+{
+  "key": "JK-1057-f504fca70e65",
+  "dispute_id": "PP-D-27801",
+  "saved_at": "2026-11-11T07:26:06.133Z",
+  "model": "gemini:gemini-3.5-flash-lite",
+  "recommendation": {
+    "decision": "OFFER",
+    "win_probability": 0.7,
+    "headline": "Offer a partial refund of $35.00 for the dented toe box, as the color complaint is covered by the listing description.",
+    "rationale": "The buyer claims the item is not as described due to a dented toe box and an unexpected cream color. While the color discrepancy is fully addressed in the listing description (which notes the 'Sail' colorway is off-white and shows outdoor photos), the dented toe box is a valid damage issue. Offering a $35.00 partial refund resolves the dispute fairly by compensating for the minor transit/item damage without accepting a full return or refund for a correctly described color.",
+    "evidence": [
+      {
+        "type": "ITEM_DESCRIPTION",
+        "summary": "Buyer reported a dented left toe box and cream color via customer messages on Nov 7, 2026.",
+        "source": "get_store_records"
+      },
+      {
+        "type": "ITEM_DESCRIPTION",
+        "summary": "Listing description explicitly stated that the 'Sail' colorway is off-white and warmer in daylight, with photo 3 showing it outdoors.",
+        "source": "get_store_records"
+      },
+      {
+        "type": "RETURN_POLICY",
+        "summary": "Shop return policy accepts returns within 30 days for unworn pairs with authentication tag attached, and buyer pays return shipping unless the item arrived damaged or not as described.",
+        "source": "get_store_records"
+      },
+      {
+        "type": "PROOF_OF_FULFILLMENT",
+        "summary": "USPS tracking confirms delivery to 77 Union Ave, Brooklyn, NY 11211 on Nov 5, 2026.",
+        "source": "get_store_records"
+      }
+    ],
+    "response_to_paypal": "Hello, we are sorry to hear about the dented toe box. Regarding the color, our listing description explicitly noted that the 'Sail' colorway is an off-white that reads warmer in daylight, and we included outdoor photos. However, to resolve the issue regarding the toe box, we are offering a $35.00 partial refund.",
+    "tracking_carrier": "USPS",
+    "tracking_number": "9400111899223847562190",
+    "offer_amount": 35,
+    "offer_type": "REFUND",
+    "risks": [
+      "Buyer might reject the partial refund and escalate to a full refund through PayPal if they insist on returning the shoes."
+    ],
+    "factors": [
+      {
+        "finding": "Buyer reported a dented left toe box upon arrival.",
+        "favors": "BUYER",
+        "weight": "HIGH",
+        "source": "get_store_records"
+      },
+      {
+        "finding": "Listing explicitly noted off-white color and showed outdoor photos, countering the color complaint.",
+        "favors": "SELLER",
+        "weight": "MEDIUM",
+        "source": "get_store_records"
+      },
+      {
+        "finding": "Item was successfully delivered to the correct shipping address.",
+        "favors": "SELLER",
+        "weight": "LOW",
+        "source": "get_store_records"
+      },
+      {
+        "finding": "Shop return policy requires items to be in original condition with tags attached for full returns.",
+        "favors": "SELLER",
+        "weight": "MEDIUM",
+        "source": "get_store_records"
+      }
+    ]
+  },
+  "trace": [
+    {
+      "kind": "tool",
+      "tool": "get_dispute",
+      "input": {
+        "dispute_id": "PP-D-27801"
+      },
+      "summary": "Dispute PP-D-27801: merchandise or service not as described, $96.00, inquiry",
+      "at": "2026-11-11T07:25:59.388Z"
+    },
+    {
+      "kind": "tool",
+      "tool": "get_store_records",
+      "input": {
+        "invoice_id": "JK-1057"
+      },
+      "summary": "Shop records: 1 customer messages; last scan \"Delivered, in/at mailbox\"",
+      "at": "2026-11-11T07:25:59.388Z"
+    },
+    {
+      "kind": "tool",
+      "tool": "list_transactions",
+      "input": {
+        "transaction_id": "8LQCCJ6UE2USWWE4U"
+      },
+      "summary": "2 transactions from this buyer",
+      "at": "2026-11-11T07:25:59.388Z"
+    },
+    {
+      "kind": "tool",
+      "tool": "get_order",
+      "input": {
+        "id": "Q8QY24QL8YWNN6N24"
+      },
+      "summary": "Order Q8QY24QL8YWNN6N24: Kestrel Low 'Sail', women's 8, lightly worn, ships to Brooklyn, NY",
+      "at": "2026-11-11T07:26:02.229Z"
+    },
+    {
+      "kind": "tool",
+      "tool": "get_shipment_tracking",
+      "input": {
+        "transaction_id": "8LQCCJ6UE2USWWE4U",
+        "order_id": "Q8QY24QL8YWNN6N24"
+      },
+      "summary": "PayPal tracker: USPS 9400111899223847562190, status DELIVERED",
+      "at": "2026-11-11T07:26:02.229Z"
+    },
+    {
+      "kind": "note",
+      "summary": "Recommendation: OFFER",
+      "at": "2026-11-11T07:26:06.133Z"
+    }
+  ]
+}

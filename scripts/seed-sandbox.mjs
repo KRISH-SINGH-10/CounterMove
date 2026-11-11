@@ -18,19 +18,19 @@ const ORDER_MAP = path.join(DIR, "sandbox-orders.json"); // read by src/lib/payp
 // Order details mirror src/lib/demo/scenarios.ts (kept here so the script runs without a TS build).
 const ORDERS = {
   "JK-1042": {
-    amount: "184.00", item: "Hand-stitched leather tote, tan", sku: "LB-TOTE-TAN", name: "Dana Whitfield",
+    amount: "184.00", item: "Strata Runner 2 'Dusk', men's 10, deadstock", sku: "STR-RUN2-DUSK-10", name: "Dana Whitfield",
     address: { address_line_1: "418 Alder St", address_line_2: "Apt 3", admin_area_2: "Denver", admin_area_1: "CO", postal_code: "80203", country_code: "US" },
     tracking: { carrier: "UPS", tracking_number: "1Z84A9E70347215522", status: "DELIVERED" },
     file_as: "Item not received",
   },
   "JK-1057": {
-    amount: "96.00", item: "Speckled stoneware mugs, set of 4", sku: "CER-MUG-SET4", name: "Priya Raman",
+    amount: "96.00", item: "Kestrel Low 'Sail', women's 8, lightly worn", sku: "KST-LOW-SAIL-W8", name: "Priya Raman",
     address: { address_line_1: "77 Union Ave", admin_area_2: "Brooklyn", admin_area_1: "NY", postal_code: "11211", country_code: "US" },
     tracking: { carrier: "USPS", tracking_number: "9400111899223847562190", status: "DELIVERED" },
-    file_as: "Item significantly not as described (one mug chipped)",
+    file_as: "Item significantly not as described (toe box dented)",
   },
   "JK-1063": {
-    amount: "28.00", item: "Risograph print 'River at Dusk', A4", sku: "PRT-RIVER-A4", name: "Marcus Lee",
+    amount: "28.00", item: "Sneaker care kit with spare laces", sku: "ACC-CARE-KIT", name: "Marcus Lee",
     address: { address_line_1: "2210 Pine St", admin_area_2: "Seattle", admin_area_1: "WA", postal_code: "98101", country_code: "US" },
     tracking: null,
     file_as: "Item not received",
@@ -78,12 +78,12 @@ async function create(keys) {
       purchase_units: [{
         reference_id: key,
         invoice_id: invoice,
-        description: `Juniper & Kiln order ${key}`,
+        description: `Laceline Resale order ${key}`,
         amount: { currency_code: "USD", value: o.amount, breakdown: { item_total: { currency_code: "USD", value: o.amount } } },
         items: [{ name: o.item, sku: o.sku, quantity: "1", category: "PHYSICAL_GOODS", unit_amount: { currency_code: "USD", value: o.amount } }],
         shipping: { name: { full_name: o.name }, address: o.address },
       }],
-      payment_source: { paypal: { experience_context: { brand_name: "Juniper & Kiln", shipping_preference: "SET_PROVIDED_ADDRESS", user_action: "PAY_NOW", return_url: "https://example.com/paid", cancel_url: "https://example.com/cancelled" } } },
+      payment_source: { paypal: { experience_context: { brand_name: "Laceline Resale", shipping_preference: "SET_PROVIDED_ADDRESS", user_action: "PAY_NOW", return_url: "https://example.com/paid", cancel_url: "https://example.com/cancelled" } } },
     });
     const approve = order.links.find((l) => l.rel === "payer-action" || l.rel === "approve")?.href;
     pending[order.id] = { key, invoice, created: new Date().toISOString() };

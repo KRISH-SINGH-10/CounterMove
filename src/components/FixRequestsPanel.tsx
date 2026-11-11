@@ -120,7 +120,7 @@ export default function FixRequestsPanel({ viewOnly }: { viewOnly: boolean }) {
     >
       <p className="mb-3 text-sm">
         Try the buyer&apos;s page:{" "}
-        {[["JK-1063", "an untracked print"], ["JK-1057", "a chipped mug"], ["JK-1090", "an order not shipped yet"]].map(([id, what], i) => (
+        {[["JK-1063", "an untracked care kit"], ["JK-1057", "a dented pair"], ["JK-1090", "an order not shipped yet"]].map(([id, what], i) => (
           <span key={id}>
             {i ? " · " : ""}
             <Link href={`/fix/${id}`} className="text-accent underline">{what} ({id})</Link>

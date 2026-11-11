@@ -54,19 +54,19 @@ describe("negotiate", () => {
   it("haggles with the buyer through PayPal offers and settles inside the ceiling", async () => {
     const c = await mugCase();
     const { model, calls } = scripted([
-      { action: "OFFER", amount: 24, message: "We can refund $24 for the chipped mug.", reasoning: "One mug of four." },
+      { action: "OFFER", amount: 24, message: "We can refund $24 for the dented toe box.", reasoning: "Damage to one shoe." },
       { action: "OFFER", amount: 50, message: "ok", reasoning: "too high" }, // rejected: above the ceiling
-      { action: "OFFER", amount: 32, message: "The listing notes glaze varies, but we can do $32.", reasoning: "Meet partway." },
+      { action: "OFFER", amount: 38, message: "The listing notes the colour reads warmer in daylight, but we can do $38.", reasoning: "Meet partway." },
     ]);
     const out = await negotiate(c.id, { maxRefund: 38.4, model });
     expect(out.negotiation?.status).toBe("SETTLED");
-    expect(out.outcome).toMatchObject({ result: "SETTLED", amount_kept: 64, amount_lost: 32 });
+    expect(out.outcome).toMatchObject({ result: "SETTLED", amount_kept: 58, amount_lost: 38 });
     expect(out.negotiation?.turns.map((t) => [t.from, t.amount])).toEqual([
-      ["AGENT", 24], ["BUYER", 48], ["AGENT", 32], ["BUYER", undefined],
+      ["AGENT", 24], ["BUYER", 48], ["AGENT", 38], ["BUYER", undefined],
     ]);
     // The ceiling violation went back to the model as an error.
     expect(JSON.stringify(calls[2].messages.at(-1))).toContain("above your ceiling");
-    expect(out.activity?.at(-1)?.text).toContain("settled with the buyer at $32.00");
+    expect(out.activity?.at(-1)?.text).toContain("settled with the buyer at $38.00");
   }, 30_000);
 
   it("falls back to rule-based moves when the model fails, still inside the ceiling", async () => {

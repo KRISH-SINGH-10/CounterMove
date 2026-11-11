@@ -12,7 +12,7 @@ Stop scammers before you ship. Settle the rest without a fight.
 
 ## Inspiration
 
-A small seller gets a PayPal dispute and has days to answer. Most refund out of fear, or send a rushed reply that leaves out the evidence that would have won. The seller who ships a $236 bag to a package forwarder never had a chance: the dispute was lost before it was opened.
+A small seller gets a PayPal dispute and has days to answer. Most refund out of fear, or send a rushed reply that leaves out the evidence that would have won. The reseller who ships a $236 pair of deadstock sneakers to a package forwarder never had a chance: the dispute was lost before it was opened.
 
 We wanted an agent that works across the whole life of a dispute: stop the bad order before it ships, answer the dispute with evidence when one arrives, and afterwards fix whatever caused it.
 
@@ -37,14 +37,18 @@ We wanted an agent that works across the whole life of a dispute: stop the bad o
 - **Dispute Doctor** finds the repeated causes behind refunds and proposes one fix for each.
 - **PayPal API trail** lists every PayPal call the agent, autopilot, the seller and the server made, with PayPal's status and debug id.
 
+- **Photo forensics:** Gemini compares the listing photo, the shop's packing photo and the buyer's photo, and reports damage in transit, not as described, or a different item, checking each part of the buyer's claim.
+
 **Judge mode** plays the whole story in the Simulator in under a minute.
+
+The demo shop is **Laceline Resale**, a two-person sneaker resale shop: high-value pairs, package forwarders and "never arrived" claims make resale one of the hardest places to sell with PayPal. Every brand and model name in the demo is made up.
 
 ## How we built it
 
-- **PayPal:** the Agent Toolkit for the agent's read tools; the Disputes API for evidence, offers, messages and accepting claims; the Orders API for tracking; the Payments API for refunding a capture before shipping; webhooks with signature verification to start autopilot.
+- **PayPal:** the Agent Toolkit for the agent's read tools; the Disputes API for evidence, offers, messages and accepting claims; the Orders API for tracking; the Payments API for refunding a capture before shipping; webhooks with signature verification for new disputes and for completed payments, which start the pre-ship check. `scripts/verify-live.mjs` checks each API against the real sandbox.
 - **AI:** Google Gemini in a function-calling loop. The model only reads and recommends. Every PayPal write is made by server code, after a person approves or inside autopilot rules checked in code after the model answers.
-- **AG Grid:** nine grids on one custom theme, plus AG Charts and AG Studio. "Ask the grid" turns a plain-English question into AG Grid filters, sort and row grouping through Gemini, validated in code against the grid's real columns.
-- **App:** Next.js and TypeScript on Render, with 130 automated tests.
+- **AG Grid:** a 1,000,000-row scale check on the server-side row model, and more grids on one custom theme, plus AG Charts and AG Studio. "Ask the grid" turns a plain-English question into AG Grid filters, sort and row grouping through Gemini, validated in code against the grid's real columns.
+- **App:** Next.js and TypeScript on Render, with 142 automated tests.
 - **Simulator:** returns the same JSON as the PayPal sandbox, so the same code, pages and agent run in both. Judges can try every action with no PayPal login, and one toggle switches to the real sandbox.
 
 ## Built with AG Grid
@@ -53,7 +57,8 @@ We wanted an agent that works across the whole life of a dispute: stop the bad o
 - **Live grids for the core story:** the dispute queue, the pre-ship check with action buttons in a full-width detail row, the scammer network, buyer requests, the PayPal API trail, Dispute Reserve and Dispute Doctor.
 - **Enterprise features on the Outcomes ledger:** row grouping with totals, pivoting, set filters, master-detail, cell selection with a status bar, integrated and cross-filter charts, and Excel export.
 - **AG Studio:** the Ask AI page builds a dashboard from a question, with Gemini driving AG Studio's agent framework.
-- **Also:** inline editing with validation for the autopilot rules, pinned totals rows, saved column layout, CSV export, and a 100,000-row scale check with timings.
+- **Scale:** 1,000,000 disputes behind the server-side row model, sorted, filtered and grouped in Postgres, with the time for each block shown.
+- **Also:** inline editing with validation for the autopilot rules, pinned totals rows, saved column layout, CSV export, and a 100,000-row client-side check.
 
 ## Challenges we ran into
 
@@ -75,8 +80,7 @@ We wanted an agent that works across the whole life of a dispute: stop the bad o
 
 ## What's next
 
-- Run the pre-ship check on live orders from PayPal's `PAYMENT.CAPTURE.COMPLETED` webhook.
-- Photo evidence: compare the buyer's photo with the listing and the packing photo.
+- Mark orders shipped from the seller's fulfilment system, so the pre-ship check list empties itself.
 - A shared scammer network across real shops, with the same hash-only privacy.
 
 ## Honest limits of this demo

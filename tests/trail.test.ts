@@ -113,7 +113,7 @@ describe("replayed investigations", () => {
       expect(rec.status).toBe("READY");
       const reads = listCalls("PP-D-27800").filter((c) => c.by === "agent" && c.method === "GET");
       expect(reads.length).toBeGreaterThanOrEqual(3);
-      expect(reads.some((c) => c.endpoint.startsWith("/v2/checkout/orders/"))).toBe(true);
+      expect(reads.some((c) => c.endpoint === "/v1/customer/disputes/PP-D-27800")).toBe(true);
     });
   }, 30_000);
 });

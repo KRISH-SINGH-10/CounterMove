@@ -1,0 +1,35 @@
+{
+  "verdict": "DAMAGED_IN_TRANSIT",
+  "confidence": 0.95,
+  "summary": "The packing photo shows the shoes left the shop intact and without the toe box dent present in the buyer photo. The colour claim is addressed by the listing text, which explicitly states the Sail colourway reads warmer in daylight.",
+  "findings": [
+    {
+      "photo": "listing",
+      "observation": "Shows two sneakers in Sail colourway with smooth, uncreased, and undamaged toe boxes."
+    },
+    {
+      "photo": "packing",
+      "observation": "Shows the sneakers packed correctly, with smooth, undamaged toe boxes prior to box sealing."
+    },
+    {
+      "photo": "buyer",
+      "observation": "Shows the left shoe with a noticeable dent on the toe box area."
+    }
+  ],
+  "claim_checks": [
+    {
+      "claim": "The left shoe arrived with the toe box dented",
+      "supported": "YES",
+      "why": "The packing photo shows the shoe intact before shipping, while the buyer photo clearly shows a dented toe box."
+    },
+    {
+      "claim": "The colour is more cream than the photos",
+      "supported": "NO",
+      "why": "The listing text explicitly notes that the Sail colourway reads warmer in daylight than under studio lights."
+    }
+  ],
+  "suggested_response": "Since the packing photo confirms the shoes left the shop undamaged, the dent occurred during transit. Please file a claim with the shipping carrier or arrange a return per policy for damaged items.",
+  "invoice": "JK-1057",
+  "model": "gemini:gemini-3.5-flash-lite",
+  "saved_at": "2026-11-11T07:27:48.863Z"
+}

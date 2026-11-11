@@ -75,7 +75,7 @@ Look carefully and report only what the pictures show:
 - If the buyer's item is not the item that was sold or packed, say DIFFERENT_ITEM.
 - If the buyer's photo matches the listing and the packing photo, say MATCHES_LISTING.
 - If the photos can't settle it, say INCONCLUSIVE.
-Check each part of the buyer's claim separately against the photos and the listing text. Differences the listing text explicitly allows for (for example, hand-applied glaze that varies) don't support a not-as-described claim.
+Check each part of the buyer's claim separately against the photos and the listing text. Differences the listing text explicitly allows for (for example, a colourway the listing says reads warmer in daylight) don't support a not-as-described claim.
 Be plain and specific. Never invent details you can't see. The seller decides what to do; suggest a fair response in one or two sentences.`;
 
 const dir = () => path.join(process.env.REBUTTAL_CACHE_DIR ?? path.join(process.cwd(), "cache", "investigations"), "..", "forensics");

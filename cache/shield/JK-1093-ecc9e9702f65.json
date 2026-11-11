@@ -1,30 +1,38 @@
 {
   "key": "JK-1093-ecc9e9702f65",
-  "saved_at": "2026-10-30T17:37:14.986Z",
+  "saved_at": "2026-11-11T07:27:28.685Z",
   "verdict": {
+    "score": 90,
     "risk": "HIGH",
-    "score": 85,
-    "headline": "This buyer has an open 'not received' dispute on a previous order, suggesting high risk for this new purchase.",
     "signals": [
       {
-        "finding": "Buyer has an open 'merchandise or service not received' dispute (PP-D-27800) for a previous order (JK-1042).",
+        "finding": "Filed a \"merchandise or service not received\" dispute on JK-1042 (open).",
         "effect": "RAISES",
-        "source": "get_buyer_history"
+        "source": "get_buyer_history",
+        "weight": 45
       },
       {
-        "finding": "Previous disputed order has delivery evidence showing signed delivery by 'WHITFIELD', yet the dispute remains open.",
+        "finding": "That parcel was signed for by WHITFIELD, which contradicts the claim.",
         "effect": "RAISES",
-        "source": "get_buyer_history"
+        "source": "get_buyer_history",
+        "weight": 15
       },
       {
-        "finding": "Shipping address matches the verified PayPal account address.",
+        "finding": "Countermove network: 1 other shop reported this PayPal account (item not received) after their evidence contradicted the claim.",
+        "effect": "RAISES",
+        "source": "rebuttal_network",
+        "weight": 20
+      },
+      {
+        "finding": "Verified PayPal account, shipping to the address on the payment.",
         "effect": "LOWERS",
-        "source": "get_order"
+        "source": "get_order",
+        "weight": 0
       }
     ],
+    "headline": "This order is high risk because the buyer has an open \"not received\" dispute with this shop despite a signed delivery, plus a similar past dispute reported by another Countermove network shop.",
     "actions": [
-      "Hold shipment and request identity confirmation or photo verification before fulfilling the order due to the active unresolved dispute on a prior transaction.",
-      "Review tracking and delivery status for the prior disputed order (JK-1042) to confirm the shop's delivery evidence."
+      "Cancel and refund the payment immediately due to active unresolved disputes and contradictory delivery evidence."
     ]
   },
   "trace": [
@@ -35,7 +43,7 @@
         "id": "6LSQC888L28S0204N"
       },
       "summary": "Order 6LSQC888L28S0204N: $148.00, Standard, tracked, ships to Dana Whitfield in Denver, CO",
-      "at": "2026-10-30T17:37:11.774Z"
+      "at": "2026-11-11T07:27:23.077Z"
     },
     {
       "kind": "tool",
@@ -43,13 +51,13 @@
       "input": {
         "email": "dana.w@example.com"
       },
-      "summary": "1 completed order, 1 past dispute (JK-1042)",
-      "at": "2026-10-30T17:37:13.224Z"
+      "summary": "1 completed order, 1 past dispute (JK-1042); reported by 1 other Countermove shop",
+      "at": "2026-11-11T07:27:25.925Z"
     },
     {
       "kind": "note",
-      "summary": "Risk: HIGH (85/100)",
-      "at": "2026-10-30T17:37:14.986Z"
+      "summary": "Risk: HIGH (90/100)",
+      "at": "2026-11-11T07:27:28.684Z"
     }
   ],
   "model": "gemini:gemini-3.5-flash-lite"

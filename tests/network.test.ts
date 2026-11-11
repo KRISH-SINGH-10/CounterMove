@@ -47,7 +47,7 @@ describe("Countermove network", () => {
     expect(reportFromCase({ ...won, recommendation: { ...signed, evidence: [] } })).toBeNull();
     expect(reportFromCase({ ...won, outcome: undefined, recommendation: signed })).toBeNull();
     const r = reportFromCase({ ...won, dispute: { ...c.dispute, reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED" }, recommendation: signed });
-    expect(r).toMatchObject({ shop: "Juniper & Kiln", simulated_shop: false, outcome: "WON" });
+    expect(r).toMatchObject({ shop: "Laceline Resale", simulated_shop: false, outcome: "WON" });
     await updateCase(c.id, { outcome: won.outcome, recommendation: signed, dispute: { ...c.dispute, reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED" } });
     expect((await listNetwork([])).shared).toBe(1);
   });
@@ -58,7 +58,7 @@ describe("shop name", () => {
     const { currentShop, describeShop } = await import("../src/lib/shop");
     const seller = { id: "s1", email: "a@b.co", paypal: null, shop_name: "Mehta Handlooms" };
     expect(currentShop({ id: "v", mode: "sandbox", seller }).name).toBe("Mehta Handlooms");
-    expect(describeShop(currentShop({ id: "v", mode: "mock" }))).toBe("Juniper & Kiln, a two-person online shop");
+    expect(describeShop(currentShop({ id: "v", mode: "mock" }))).toBe("Laceline Resale, a two-person online shop");
     expect(currentShop({ id: "v", mode: "sandbox", seller: { ...seller, shop_name: "" } }).name).toBe("the seller's shop");
   });
 });

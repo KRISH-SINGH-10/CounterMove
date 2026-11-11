@@ -107,7 +107,7 @@ function build(s: Scenario, seq: number): MockRow {
         gross_amount: amount,
         invoice_number: s.key,
         buyer: { name: s.buyer.name, email: s.buyer.email, payer_id: s.buyer.payer_id },
-        seller: { merchant_id: "JUNIPERKILN01", name: SHOP.name },
+        seller: { merchant_id: "LACELINE01", name: SHOP.name },
         items: [{ item_id: s.item.id, item_description: s.item.name, item_quantity: String(s.item.qty) }],
       },
     ],
@@ -217,7 +217,7 @@ function state(): MockState {
   g.__rebuttalMock ??= new Map();
   return lruGet(g.__rebuttalMock, visitor().id, () => {
     const st: MockState = { rows: new Map(), nextSeq: 0, filed: new Set(), refunded: new Set() };
-    // Start with three disputes in the inbox; the fourth (a $28 print) arrives live in the
+    // Start with three disputes in the inbox; the fourth (a $28 care kit) arrives live in the
     // demo through the simulated webhook, small enough for autopilot to refund on its own.
     for (const s of SCENARIOS.slice(0, 3)) addScenario(st, s);
     return st;

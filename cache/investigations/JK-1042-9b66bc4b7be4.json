@@ -1,0 +1,107 @@
+{
+  "key": "JK-1042-9b66bc4b7be4",
+  "dispute_id": "PP-D-27800",
+  "saved_at": "2026-11-11T07:28:39.134Z",
+  "model": "gemini:gemini-3.5-flash-lite",
+  "recommendation": {
+    "decision": "FIGHT",
+    "win_probability": 0.95,
+    "headline": "Fight the chargeback with robust UPS delivery and signature confirmation records matching the buyer's shipping address.",
+    "rationale": "We have complete proof of fulfillment, including carrier delivery confirmation to the correct shipping address, a direct signature ('WHITFIELD') at the recipient's location, and messaging from the buyer acknowledging the delivery day. Since this meets and exceeds PayPal's and card issuers' requirements for item-not-received disputes, our win probability is very high.",
+    "evidence": [
+      {
+        "type": "PROOF_OF_FULFILLMENT",
+        "summary": "UPS tracking shows the package was delivered on 2026-10-31 to 418 Alder St, Denver, CO 80203 and signed by WHITFIELD at the front desk.",
+        "source": "get_store_records"
+      },
+      {
+        "type": "PROOF_OF_DELIVERY_SIGNATURE",
+        "summary": "UPS delivery record indicates signature confirmation by WHITFIELD.",
+        "source": "get_store_records"
+      },
+      {
+        "type": "OTHER",
+        "summary": "Customer message history shows the buyer acknowledged delivery updates and confirmed being home/expecting delivery on 2026-10-31.",
+        "source": "get_store_records"
+      }
+    ],
+    "response_to_paypal": "The item was shipped via UPS (tracking #1Z84A9E70347215522) to the buyer's confirmed address at 418 Alder St, Apt 3, Denver, CO 80203. Carrier records confirm delivery on October 31, 2026, with signature confirmation received and signed for by 'WHITFIELD' at the front desk. Additionally, the buyer communicated with us on October 31 acknowledging that the package was out for delivery that day. We respectfully request that this chargeback be found in favor of the seller.",
+    "tracking_carrier": "UPS",
+    "tracking_number": "1Z84A9E70347215522",
+    "offer_amount": 0,
+    "offer_type": "NONE",
+    "risks": [
+      "The card issuer might still side with the buyer if they claim the front desk staff misplaced the package after signing, though signature delivery generally protects the seller."
+    ],
+    "factors": [
+      {
+        "finding": "UPS tracking confirms delivery to the exact shipping address on the PayPal order.",
+        "favors": "SELLER",
+        "weight": "HIGH",
+        "source": "get_store_records"
+      },
+      {
+        "finding": "Delivery included signature confirmation, signed by 'WHITFIELD' at the front desk.",
+        "favors": "SELLER",
+        "weight": "HIGH",
+        "source": "get_store_records"
+      },
+      {
+        "finding": "Buyer messaged on 2026-10-31 acknowledging that the package was out for delivery that day.",
+        "favors": "SELLER",
+        "weight": "MEDIUM",
+        "source": "get_store_records"
+      },
+      {
+        "finding": "Buyer claims they never received the sneakers and nothing was at their door.",
+        "favors": "BUYER",
+        "weight": "LOW",
+        "source": "get_dispute"
+      }
+    ]
+  },
+  "trace": [
+    {
+      "kind": "tool",
+      "tool": "get_dispute",
+      "input": {
+        "dispute_id": "PP-D-27800"
+      },
+      "summary": "Dispute PP-D-27800: merchandise or service not received, $184.00, chargeback",
+      "at": "2026-11-11T07:28:31.073Z"
+    },
+    {
+      "kind": "tool",
+      "tool": "list_transactions",
+      "input": {
+        "transaction_id": "SLQSLJJWWLCUY2NSE"
+      },
+      "summary": "1 transaction from this buyer",
+      "at": "2026-11-11T07:28:31.074Z"
+    },
+    {
+      "kind": "tool",
+      "tool": "get_store_records",
+      "input": {
+        "invoice_id": "JK-1042"
+      },
+      "summary": "Shop records: 3 customer messages; last scan \"Delivered, signed by WHITFIELD, front desk\"",
+      "at": "2026-11-11T07:28:31.074Z"
+    },
+    {
+      "kind": "tool",
+      "tool": "get_shipment_tracking",
+      "input": {
+        "order_id": "44AAS022S4CJGL8EL",
+        "transaction_id": "SLQSLJJWWLCUY2NSE"
+      },
+      "summary": "PayPal tracker: UPS 1Z84A9E70347215522, status DELIVERED",
+      "at": "2026-11-11T07:28:34.224Z"
+    },
+    {
+      "kind": "note",
+      "summary": "Recommendation: FIGHT",
+      "at": "2026-11-11T07:28:39.134Z"
+    }
+  ]
+}

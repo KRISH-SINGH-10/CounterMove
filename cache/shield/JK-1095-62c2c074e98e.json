@@ -1,0 +1,60 @@
+{
+  "key": "JK-1095-62c2c074e98e",
+  "saved_at": "2026-11-11T07:27:39.076Z",
+  "verdict": {
+    "score": 50,
+    "risk": "MEDIUM",
+    "signals": [
+      {
+        "finding": "The buyer paid for Express, 2-day.",
+        "effect": "RAISES",
+        "source": "get_order",
+        "weight": 10
+      },
+      {
+        "finding": "A high-value order ($318.00).",
+        "effect": "RAISES",
+        "source": "get_order",
+        "weight": 5
+      },
+      {
+        "finding": "Countermove network: 2 other shops reported this PayPal account (item not received) after their evidence contradicted the claim.",
+        "effect": "RAISES",
+        "source": "rebuttal_network",
+        "weight": 25
+      }
+    ],
+    "headline": "This order is medium risk because it is a high-value express shipment and two other Countermove network shops reported this PayPal account for item-not-received claims where their evidence contradicted the buyer.",
+    "actions": [
+      "Ship only to the confirmed PayPal address on the transaction (77 Birch Ln, Columbus, OH).",
+      "Require signature confirmation upon delivery due to the order value and shipping method.",
+      "Take a packing photo before dispatching."
+    ]
+  },
+  "trace": [
+    {
+      "kind": "tool",
+      "tool": "get_order",
+      "input": {
+        "id": "4GC08QQAL8A4N4S68"
+      },
+      "summary": "Order 4GC08QQAL8A4N4S68: $318.00, Express, 2-day, ships to Corey Haldane in Columbus, OH",
+      "at": "2026-11-11T07:27:35.650Z"
+    },
+    {
+      "kind": "tool",
+      "tool": "get_buyer_history",
+      "input": {
+        "email": "buyer@example.com"
+      },
+      "summary": "0 completed orders, 0 past disputes",
+      "at": "2026-11-11T07:27:35.651Z"
+    },
+    {
+      "kind": "note",
+      "summary": "Risk: MEDIUM (50/100)",
+      "at": "2026-11-11T07:27:39.075Z"
+    }
+  ],
+  "model": "gemini:gemini-3.5-flash-lite"
+}

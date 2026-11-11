@@ -42,17 +42,17 @@ const DAY = 86_400_000;
 // shop would send them; the plain emails here exist only to build the demo.
 const OTHER_SHOPS: Array<{ email: string; shop: string; reason: DisputeReason; evidence: string; outcome: "WON" | "LOST"; days_ago: number }> = [
   // The forwarder order on Protect (JK-1088): two shops already caught this account.
-  { email: "t.reyes.shop@example.com", shop: "Northbeam Leather", reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED", evidence: "Delivered to a package forwarder, signed for by the forwarder", outcome: "WON", days_ago: 21 },
-  { email: "t.reyes.shop@example.com", shop: "Copper & Pine Goods", reason: "UNAUTHORISED", evidence: "Paid from a newly opened, unverified PayPal account; shipped overnight to a forwarder", outcome: "LOST", days_ago: 47 },
-  // Dana Whitfield: the open "never arrived" dispute on the signed-for tote, and her new order.
-  { email: "dana.w@example.com", shop: "Fernhill Ceramics", reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED", evidence: "UPS shows delivered, signed for by WHITFIELD", outcome: "WON", days_ago: 64 },
+  { email: "t.reyes.shop@example.com", shop: "Heatcheck Resale", reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED", evidence: "Delivered to a package forwarder, signed for by the forwarder", outcome: "WON", days_ago: 21 },
+  { email: "t.reyes.shop@example.com", shop: "Kickback Vault", reason: "UNAUTHORISED", evidence: "Paid from a newly opened, unverified PayPal account; shipped overnight to a forwarder", outcome: "LOST", days_ago: 47 },
+  // Dana Whitfield: the open "never arrived" dispute on the signed-for pair, and her new order.
+  { email: "dana.w@example.com", shop: "Solebound Exchange", reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED", evidence: "UPS shows delivered, signed for by WHITFIELD", outcome: "WON", days_ago: 64 },
   // A repeat disputer from this shop's own history, also reported elsewhere.
-  { email: "c.haldane@example.com", shop: "Saltmarsh Prints", reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED", evidence: "USPS shows delivered to the buyer's address", outcome: "WON", days_ago: 33 },
-  { email: "c.haldane@example.com", shop: "Northbeam Leather", reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED", evidence: "UPS shows delivered, signed for by HALDANE", outcome: "WON", days_ago: 95 },
+  { email: "c.haldane@example.com", shop: "Lacelock Supply", reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED", evidence: "USPS shows delivered to the buyer's address", outcome: "WON", days_ago: 33 },
+  { email: "c.haldane@example.com", shop: "Heatcheck Resale", reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED", evidence: "UPS shows delivered, signed for by HALDANE", outcome: "WON", days_ago: 95 },
   // Accounts no one at this shop has met (yet).
-  { email: "quick.buyer.77@example.com", shop: "Copper & Pine Goods", reason: "UNAUTHORISED", evidence: "Same device and address as the account's earlier purchases", outcome: "WON", days_ago: 12 },
-  { email: "quick.buyer.77@example.com", shop: "Fernhill Ceramics", reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED", evidence: "Delivered, signed for", outcome: "WON", days_ago: 40 },
-  { email: "mel.ortega.shop@example.com", shop: "Saltmarsh Prints", reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED", evidence: "Delivered to the address on the transaction", outcome: "WON", days_ago: 18 },
+  { email: "quick.buyer.77@example.com", shop: "Kickback Vault", reason: "UNAUTHORISED", evidence: "Same device and address as the account's earlier purchases", outcome: "WON", days_ago: 12 },
+  { email: "quick.buyer.77@example.com", shop: "Solebound Exchange", reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED", evidence: "Delivered, signed for", outcome: "WON", days_ago: 40 },
+  { email: "mel.ortega.shop@example.com", shop: "Lacelock Supply", reason: "MERCHANDISE_OR_SERVICE_NOT_RECEIVED", evidence: "Delivered to the address on the transaction", outcome: "WON", days_ago: 18 },
 ];
 
 const PROVEN = /DELIVERY_SIGNATURE|FULFILLMENT/;

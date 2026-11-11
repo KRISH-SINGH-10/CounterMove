@@ -18,5 +18,5 @@ export function currentShop(v: Visitor = visitor()): Shop {
   return name ? { name, about: "an online shop" } : { name: "the seller's shop", about: "an online shop" };
 }
 
-// "Juniper & Kiln, a two-person online shop" for use inside a prompt.
+// "Laceline Resale, a two-person online shop" for use inside a prompt.
 export const describeShop = (s: Shop) => `${s.name}, ${s.about}`;

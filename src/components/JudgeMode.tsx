@@ -16,9 +16,9 @@ const FIGHT_CASE = "PP-D-27800";
 type Step = { title: string; text: string };
 const STEPS: Step[] = [
   { title: "Getting a fresh demo shop", text: "Resetting your private Simulator so the story starts clean." },
-  { title: "Before: a risky order is caught", text: "On Protect, the pre-ship check reads each paid PayPal order. A $236 bag going to a package forwarder under another name is flagged HIGH." },
+  { title: "Before: a risky order is caught", text: "On Protect, the pre-ship check reads each paid PayPal order. A $236 pair of deadstock sneakers going to a package forwarder under another name is flagged HIGH." },
   { title: "Before: refunded before it ships", text: "One action: Countermove refunds the payment through PayPal's Payments API, so there is nothing to dispute later." },
-  { title: "Before: a buyer gets help first", text: "A buyer asks where their print is on the fix-it-first page and gets the answer at once, with no PayPal dispute." },
+  { title: "Before: a buyer gets help first", text: "A buyer asks where their care kit is on the fix-it-first page and gets the answer at once, with no PayPal dispute." },
   { title: "During: a dispute arrives", text: "A buyer opens a $28 claim. PayPal's webhook reaches the agent, it investigates, and autopilot refunds within your $30 rule." },
   { title: "During: the agent investigates", text: "A $184 “never arrived” chargeback. The agent reads the PayPal dispute, order, tracking and the buyer's history, and finds the delivery signature." },
   { title: "During: you approve the fight", text: "The evidence goes to PayPal's Disputes API with your approval. PayPal's side then plays out in the Simulator." },

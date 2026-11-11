@@ -1,29 +1,26 @@
 {
   "key": "JK-1090-dc5b6cabe13f",
-  "saved_at": "2026-10-30T17:37:10.193Z",
+  "saved_at": "2026-11-11T07:27:15.900Z",
   "verdict": {
-    "risk": "LOW",
     "score": 5,
-    "headline": "This low-risk order is from a repeat customer with three completed orders and no previous disputes.",
+    "risk": "LOW",
     "signals": [
       {
-        "finding": "Buyer has three completed past orders with no dispute history.",
+        "finding": "Repeat buyer: 3 completed orders and no disputes.",
         "effect": "LOWERS",
-        "source": "get_buyer_history"
+        "source": "get_buyer_history",
+        "weight": -5
       },
       {
-        "finding": "PayPal account is verified and shipping address matches the payer address exactly.",
+        "finding": "Verified PayPal account, shipping to the address on the payment.",
         "effect": "LOWERS",
-        "source": "get_order"
-      },
-      {
-        "finding": "Standard tracked shipping selected for a modest order value ($58.00).",
-        "effect": "LOWERS",
-        "source": "get_order"
+        "source": "get_order",
+        "weight": 0
       }
     ],
+    "headline": "This order is low risk because the buyer is a repeat customer with multiple completed orders and no past disputes.",
     "actions": [
-      "Ship the order normally using standard tracked shipping to the verified PayPal address."
+      "Ship the order as normal to the address on the PayPal transaction."
     ]
   },
   "trace": [
@@ -34,7 +31,7 @@
         "id": "Q80SJ0S442W6YQEAL"
       },
       "summary": "Order Q80SJ0S442W6YQEAL: $58.00, Standard, tracked, ships to Hannah Cole in Madison, WI",
-      "at": "2026-10-30T17:37:03.485Z"
+      "at": "2026-11-11T07:27:12.558Z"
     },
     {
       "kind": "tool",
@@ -43,12 +40,12 @@
         "email": "hannah.cole@example.com"
       },
       "summary": "3 completed orders, 0 past disputes",
-      "at": "2026-10-30T17:37:06.166Z"
+      "at": "2026-11-11T07:27:13.847Z"
     },
     {
       "kind": "note",
       "summary": "Risk: LOW (5/100)",
-      "at": "2026-10-30T17:37:10.193Z"
+      "at": "2026-11-11T07:27:15.899Z"
     }
   ],
   "model": "gemini:gemini-3.5-flash-lite"
