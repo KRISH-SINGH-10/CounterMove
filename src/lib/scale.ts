@@ -285,6 +285,34 @@ export function sqlWhere(where: Cond[][], params: unknown[]): string {
 
 let ready: Promise<void> | null = null;
 
+// The insert that fills scale_disputes. Every random draw is a column of the innermost
+// select over generate_series, so Postgres draws it once per row. (Uncorrelated
+// "cross join lateral (select random())" subqueries were evaluated once for the whole
+// table, which gave a million identical rows.)
+export function seedSql(): string {
+  const r = Array.from({ length: 10 }, (_, k) => `random() as r${k + 1}`).join(", ");
+  return `insert into scale_disputes
+    select i, buyer, claim, amount, decision, by_,
+      case decision when 'Fight' then case when won then 'Won' else 'Lost' end when 'Partial refund' then 'Settled' else 'Refunded' end,
+      kept, amount - kept, closed
+    from (
+      select i, buyer, claim, amount, decision, by_, won, closed,
+        case when decision = 'Fight' then case when won then amount else 0 end
+             when decision = 'Partial refund' then round(amount * (0.5 + r6 * 0.3)::numeric, 2) else 0 end as kept
+      from (
+        select i, r6,
+          (array[${CLAIMS.map((c) => `'${c}'`).join(",")}])[1 + floor(r1 * r2 * ${CLAIMS.length})::int] as claim,
+          (array[${BUYERS.map((b) => `'${b.replace(/'/g, "''")}'`).join(",")}])[1 + floor(r3 * ${BUYERS.length})::int] as buyer,
+          case when r4 < 0.45 then 'Fight' when r4 < 0.7 then 'Partial refund' else 'Refund' end as decision,
+          case when r5 < 0.4 then 'Autopilot' else 'Seller' end as by_,
+          round((8 + r7 * r8 * 600)::numeric, 2) as amount,
+          r9 < 0.72 as won,
+          date '2025-01-01' + floor(r10 * 670)::int as closed
+        from (select i, ${r} from generate_series(1, ${SCALE_ROWS}) i) g
+      ) a
+    ) b`;
+}
+
 // Creates and fills the table once (about 1M rows, generated inside Postgres), then
 // keeps it. Until it is ready, requests are answered from memory.
 function ensureTable(): Promise<void> {
@@ -294,21 +322,13 @@ function ensureTable(): Promise<void> {
       decision text not null, "by" text not null, result text not null, kept numeric(10,2) not null,
       refunded numeric(10,2) not null, closed date not null)`);
     const [{ n }] = await query<{ n: string }>("select count(*)::text as n from scale_disputes");
-    if (Number(n) >= SCALE_ROWS) return;
+    // A table filled by the old seed has the same values in every row; rebuild it.
+    const [{ claims }] = await query<{ claims: number }>("select count(distinct claim)::int as claims from (select claim from scale_disputes limit 20000) s");
+    if (Number(n) >= SCALE_ROWS && claims > 1) return;
     await query("truncate scale_disputes");
     // Same distributions as the in-memory store, from Postgres's own seeded random().
     await query(`select setseed(0.42)`);
-    await query(`insert into scale_disputes
-      select i, b.buyer, c.claim, x.amount, d.decision, case when random() < 0.4 then 'Autopilot' else 'Seller' end,
-        case d.decision when 'Fight' then case when x.won then 'Won' else 'Lost' end when 'Partial refund' then 'Settled' else 'Refunded' end,
-        x.kept, x.amount - x.kept, date '2025-01-01' + floor(random() * 670)::int
-      from generate_series(1, ${SCALE_ROWS}) i
-      cross join lateral (select (array[${CLAIMS.map((c) => `'${c}'`).join(",")}])[1 + floor(random() * random() * ${CLAIMS.length})::int] as claim) c
-      cross join lateral (select (array[${BUYERS.map((b) => `'${b}'`).join(",")}])[1 + floor(random() * ${BUYERS.length})::int] as buyer) b
-      cross join lateral (select r, case when r < 0.45 then 'Fight' when r < 0.7 then 'Partial refund' else 'Refund' end as decision from (select random() as r) q) d
-      cross join lateral (select a as amount, w as won,
-          case when d.r < 0.45 then case when w then a else 0 end when d.r < 0.7 then round(a * (0.5 + random() * 0.3)::numeric, 2) else 0 end as kept
-        from (select round((8 + random() * random() * 600)::numeric, 2) as a, random() < 0.72 as w) v) x`);
+    await query(seedSql());
     for (const col of ["claim", "decision", "result", "amount", "closed"]) await query(`create index if not exists scale_disputes_${col} on scale_disputes (${col})`);
     await query("analyze scale_disputes");
   })().catch((e) => {

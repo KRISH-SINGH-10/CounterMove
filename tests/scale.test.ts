@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { plan, scaleRows, SCALE_ROWS, sqlWhere } from "../src/lib/scale";
+import { plan, scaleRows, SCALE_ROWS, seedSql, sqlWhere } from "../src/lib/scale";
 
 delete process.env.DATABASE_URL;
 
@@ -42,5 +42,14 @@ describe("1,000,000-row scale check (server-side row model)", () => {
     const sql = sqlWhere(p.where, params);
     expect(sql).toBe("where (lower(buyer) like $1)");
     expect(params).toEqual([String.raw`%o'brien\%%`]);
+  });
+
+  it("seeds Postgres with a fresh random draw per row, not one shared draw", () => {
+    const sql = seedSql();
+    // The old seed used uncorrelated lateral subqueries, which Postgres ran once: every row was the same.
+    expect(sql).not.toMatch(/lateral/i);
+    // All draws are columns of the select over generate_series, one set per row.
+    expect(sql).toMatch(/select i, random\(\) as r1, .*random\(\) as r10 from generate_series\(1, 1000000\) i/);
+    for (const c of ["Not received", "Not as described", "Unauthorized", "Credit not processed", "Duplicate"]) expect(sql).toContain(`'${c}'`);
   });
 });

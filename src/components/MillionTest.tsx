@@ -20,7 +20,7 @@ const NUM = { filter: "agNumberColumnFilter", filterParams: { maxNumConditions: 
 const COLS: ColDef<Row>[] = [
   { field: "id", headerName: "#", width: 110, ...NUM },
   { field: "buyer", headerName: "Buyer", flex: 1, minWidth: 140, ...TEXT },
-  { field: "claim", headerName: "Claim", flex: 1, minWidth: 150, enableRowGroup: true, rowGroup: true, hide: true, ...TEXT },
+  { field: "claim", headerName: "Claim", flex: 1, minWidth: 150, enableRowGroup: true, initialRowGroup: true, initialHide: true, ...TEXT },
   { field: "amount", headerName: "Amount", width: 140, type: "rightAligned", aggFunc: "sum", valueFormatter: (p) => (p.value == null ? "" : money(p.value)), ...NUM },
   { field: "decision", headerName: "Decision", width: 140, enableRowGroup: true, ...TEXT },
   { field: "by", headerName: "Answered by", width: 130, enableRowGroup: true, ...TEXT },
@@ -29,6 +29,12 @@ const COLS: ColDef<Row>[] = [
   { field: "refunded", headerName: "Refunded", width: 130, type: "rightAligned", aggFunc: "sum", valueFormatter: (p) => (p.value == null ? "" : money(p.value)), ...NUM },
   { field: "closed", headerName: "Closed", width: 130, filter: "agDateColumnFilter", filterParams: { maxNumConditions: 1, buttons: ["reset"] } },
 ];
+
+// Stable objects: the grid re-reads them when their identity changes, so inline literals
+// re-applied the default Claim grouping after each block loaded.
+const AUTO_GROUP = { headerName: "Group", minWidth: 220, sortable: true };
+const DEFAULT_COL = { sortable: true, resizable: true, cellStyle: { display: "flex", alignItems: "center" } };
+const childCount = (d: { childCount?: number }) => d?.childCount ?? 0;
 
 export default function MillionTest() {
   const [open, setOpen] = useState(false);
@@ -78,10 +84,10 @@ export default function MillionTest() {
               cacheBlockSize={100}
               maxBlocksInCache={20}
               rowGroupPanelShow="always"
-              autoGroupColumnDef={{ headerName: "Group", minWidth: 220, sortable: true }}
+              autoGroupColumnDef={AUTO_GROUP}
               suppressAggFuncInHeader
-              getChildCount={(d: { childCount?: number }) => d?.childCount ?? 0}
-              defaultColDef={{ sortable: true, resizable: true, cellStyle: { display: "flex", alignItems: "center" } }}
+              getChildCount={childCount}
+              defaultColDef={DEFAULT_COL}
               suppressCellFocus
             />
           </div>
