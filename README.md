@@ -4,7 +4,7 @@
 
 An AI agent that protects small online sellers before, during and after a PayPal dispute.
 
-**[Live demo](https://rebuttal-6j9a.onrender.com)** (no login; if it has been idle, the first load can take a minute) · **[Demo video](https://youtu.be/GnCHcMgndKA)** (under 3 min) · Built for [Build What's Next with PayPal and AI](https://paypalaihackathon.devpost.com/)
+**[Live demo](https://countermove.onrender.com)** (no login; if it has been idle, the first load can take a minute) · **[Demo video](https://youtu.be/GnCHcMgndKA)** (under 3 min) · Built for [Build What's Next with PayPal and AI](https://paypalaihackathon.devpost.com/)
 
 _The demo runs on Render's free tier: if nobody has used it for a while, the first load can take up to a minute._
 
