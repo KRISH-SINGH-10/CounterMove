@@ -1,0 +1,23 @@
+{
+ "key": "04f40d02e97c18a7196e229b",
+ "saved_at": "2026-11-11T08:36:28.083Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv7fw3_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_11479391810435520434~EuIKCt8KAWkUfRNAUMAOTKa4c22UmvcSDGp1oQaxfiKFIznRDVzbj/e6Xy4iSfII7t4RL9c4GUx4LzmsAIDdCeWBRpP6atZAjowIdAA/MWYnvtvSwKS6HhJJ4XqNFdzMhTIuZVaN9PtJ0d2EvdDgUOYNo2t5e6eWxabNt7axB371juMGPRZlYAPnF3tZctz3/VCKbBNxx6+/skyMsB1UE/c67H3ISzj76B3epG1c4kevkVjJPjw6NnxQuPuDciAB1t2cxvr+wJqiCc17aplqqn9rQRpsNns+/nbhZbd4egEJTIPuDZNFCvlPC6JCjb9NmSv8E2yBDZ3E2ZL0eejvIKzvvmMlONRIUcgVNhDTXtKnjOn2YZnYSjDnMKAFaOBU0OCMpA/GkH80C3MiY1KWJ/rFtpiA5NbsufiS2EG1LsObHuLMi15ToFpI8Cqw3B6AEG3Uj0H4SiniP6jIcwGBPzCvmxhbh4rcPBVR3CR/nC1jq6qsZmgFYFbKSLAhT1rf9sRmUF6AelWnVlUcIfO9sCdTOvrYI9bNeLiRemKwIHunFcSJ0tokloljE+g5CvAyKlGXaekJCUXIJUs6U6VbAB6jGxM8Vk10Mvlgxhgk7cpZ1btUsIEJzWvrqu6zl7mAFcw+TVtGBb60KUe9yItJaxhhzvLjtEJdTW55s1KIgxcC/qWJ5PYwRkK0samcgqTmih2Neal9eH1Bz2Rxpd44fOKR4g95hxdBGexCBv3Fp6RcBpdsvIdXmZHfRWWUaUcLSuFdruQE/2JdoACZCYM2OwIbRBfiLlOU/nK92uam79F/V3QG0C27Lb6TV1Ip/XosDYROKiZUko1qcLKvjoJ90nHh9dT2j/PQQ6SH5+7/RnNcX8Cst/JGakg8VFLpQhOLg9vuTagIgT5GWQWhrZHYLwNmW9mvqSPFNrruhPDBv0E4jAQgPU0vqswZ2LSTb2V8KFGDHhDmlNN41YIaPnFF3zOn5fetfSkcCiIHZKKNRzFD2cpLw2iXD69uughAZRReeKMfdyooZ2bEsyHKo51c40jA0/9tPVxVJP/HNLpI7VV9OAqBOvclj3zhEpcqELMmGPbTlXCpB4cq9TUCJ/FM2VZ7axDENURD+/uyjqX1xcce9UZrQ1d8a0DzBO0IAZWMG5Nt6M2rRFy7awGpR2IjHQ5uAPrOyluL/a1VvVeLUX3nbym0pweo/G9EKyecZtrBhsAo9zaL6pdkWDYvS6jddXVNvd/EPV7D80XTcoXU6X3e+2K7yEjrQoUPOPd3O+Ou3eI/IRiG9pS566rQ3FRvDXJFyEml+ffDn1xZAywMMJur8jvYCUf6YCjELcQovxD68N7g544AFrWQnnpdggz1uqmJ/H7Bv6nDl8AJ1r0+L1x0du6bUGMwqvt40Rhk53U6vNvaGO9yx7npv9urGTx+0QeBfkDX7LpHEY+8NVLXZ6uo7CS9h/aB60xrdSIVwtDjfTdZ3/fJydkl8Hel1XtgGzHjIuzCiIjq/lWiKUb+C/yFfwxcXJvWTcC0x+ycFmqZ4dJ9hsNKIcSFMDZOaK8+Nw6tS6luPOs/z8C4DA76K6F6ExulbmN1y7tk3JKpMRLKo6L4D0ntLQMObL/aBPaMvVNqeyAbFjtkwvm5V+mG3cl31YwmN84tbCp9EyQqO9cbwmgN1Pjgj1JCM9IBGj+iUqc3avpJcDbDDZsoa5X90BHwskkhCddIaHTWgFA0ytOrYyO85t2fPoEEIWVgu4z19YJr3Zg7vdDJS3/7ddVcyVdvTdRyy5JFhaH/Ttitzopo6atDrRcB9filwaOKWj2r7DWy79EQYR40kkhdDZGFhcxZP6x01g==",
+    "name": "configure_widget",
+    "arguments": "{\"value\":{\"dataMapping\":{\"categoryKey\":[{\"id\":\"disputes.closed\",\"aggregation\":\"month\"}],\"valueKey\":[{\"aggregation\":\"sum\",\"id\":\"disputes.kept\"},{\"aggregation\":\"sum\",\"id\":\"disputes.refunded\"}]}},\"widgetId\":\"line_chart_kept_refunded\",\"op\":\"patch\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 17786,
+   "outputTokens": 90,
+   "totalTokens": 18256
+  }
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "key": "3ec44091bebc3764430b1833",
+ "saved_at": "2026-11-11T08:26:56.859Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbuv74q_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_7660088577159955663~EqMKCqAKAWkUfRNemt7QB1eRhk070hMXVCkgNhIy7pSjymrfVh6xE/ubkIlh/19W9pqshTkIZZwD5VgUTHkrq1dN/vLmkQbPeuf3HYY85ABSIANK/gJSfy0bCGYTFEUGmSU2xVsl/rpn+7k1HHckhU44QvlbLvPELjVUp/MmTzyJt++En0zljnKU6Epvr7xgVzWTCz3DUA9bfHR/2PlZ33X6TCR3Uxc1s1YyNvGdXZ/xK78zgFygQ9rcMYCnkRA0wCBDqiYaNjOBcFyufL09mFxwpGJ5CWPHY+ZW8JBTXipFC3wiKSiETxwikbo4d2p0wBDDTkiHdwWLm4eLioJjXCpVUNOzfK4ytYxHPT8TfDXR2iOeW8/BjC7rSMDfWwfwBN/9FBebBP/tKD5bCBMIo+8WhdBsF0omWEDr7fo0579oq7dUw5T51S4OvwdbI0IHjixn2DZBL3LpyMIiEyphes5U2zTm1W5RdsAu0BJL1mH4EQawc1MVFBwtTtBOmt8LrVztOUyozi8nj+F0p+Ph4JsoetvXjsUORhBWelduOfKNDhB6N0t9CSks4F0A/TlRl3/9gaNWYQTFj2ljnzTdPU4WAdfeFQ0DYR0dAWfzkyU+HftQISx/j+k3wVH6cSqun6XOV0fmDl6yWEigTyo4o1Oumrp0kgpkLNjjCLhv35onIY64XNP2t4XaSmDD/uC36FKezahag18t5bLcIMbZp0mcHmZLGa/qsdjy0pYmKRZMN2bGJdpTVbKahucRO1ss6aP/T1YyGNH0ArdIvVUAcoKq5+7dzxzzkuQyMfTYD9V0HUWP9RuBCMvT5z7Q2y32gZEUQm4fYu72mOD95p2ZHP+91EwH3Gk9WrtSorg9KO0130mpPB8ItItt/b+YwCk/Ru30bXy03Pe0PcM8ETZpP+Yin2Gh6PL8ZrscVY4Nn8vdIEbWQ98eWi0LQ1Exs/4dK7vMIga97MoCCDPvX2dfqB5OocyiOhfYcW96UKI1GJUgl1AMOnfi9huZ7/AvKElRLiJyr1aICOIeEFD4+bp72wtcse/Jb1I+k4zo/GUa87VLRRPuL2zxeXOfXfzmut7jIkc4rOw/ER6I0B7omKFExsl3devcyR9w07eon/i1Y/pZECve1TLz+GuSP5p7ka8Kh7tnMS9arUoKIaXbjaQGkt8BY5rxyg+bSzMGBsECPQHwjshi9ugxeGn1lEP2mxCe6WZ1Hmv7jVo43gr3VphfwWYzvubhMDYLvMmF8dc4YpQOZBCTcNf49NKUFRRW6XiB1iVRsOhQOD8w55/iPTOpRMlM3NmaN3u/BDMb8sUId16JEi7Ay81mxkmm1D8kPlb7rUPVwbNx1P/Fh9sTLkKYHM3u71jcoCQsW34uqHHpGt34IFRzxXqD+dnugTtVbLlYS7progk9O3J2sScWFcatHhH54ZwlQajhu8x5BXDYRBvN9LCR6wbMvFw3Tun0tGFONh6JU8h1kM8jtuUQxtj3lkjlg/rTa6FWWUY7/df+jFYRlJ2JJzbZetJzTwpg4JC/3sv5m9KN39ARMQucRWiotWxTDQvi0sQiSGDYPvot9/aWIdQIL+hz8nLfPUUaauLddDooVosBIWREzaSQhTSGypyxoi5yQAzvkI6J4K1I4dbz8XE/GmQVDDt7mnN0Wk4qXEHUCKjB0b43jpMMZ2lgJq/DzjjPhmChXkDhXomcPVSlSSiUDoDP4tRURwYyz7RpKbIQJmQuSOqxnzBrZdl7za4P/5JzAA==",
+    "name": "configure_widget",
+    "arguments": "{\"widgetId\":\"column_chart_answered_by\",\"value\":{\"type\":\"column-chart-stacked\",\"dataMapping\":{\"categoryKey\":[{\"id\":\"disputes.answered_by\"}],\"valueKey\":[{\"id\":\"disputes.kept\",\"aggregation\":\"sum\"},{\"aggregation\":\"sum\",\"id\":\"disputes.refunded\"}]}},\"op\":\"patch\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 19330,
+   "outputTokens": 94,
+   "totalTokens": 19811
+  }
+ }
+}

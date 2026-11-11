@@ -1,0 +1,23 @@
+{
+ "key": "53ff685ada9a6e00cf25ddfa",
+ "saved_at": "2026-11-11T08:19:47.992Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbum07r_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_17166934554029879772~EmAKXgFpFH0Ts+4cV8T7S5Ihh3miZhte9b4YicLvfUQ14rZYYho+RFne2eXreN+YTaaZ/UM448Bh1l1iHSMr9En1S/lkhq5DwPXk3py6wD5855f3Mn9V6eF6mAZap35eK2U=",
+    "name": "delegate_to",
+    "arguments": "{\"type\":{\"widgetType\":\"bar-chart-grouped\",\"id\":\"widget\",\"widgetId\":\"horizontal_bar_chart\",\"pageId\":\"page-1\"},\"instructions\":\"This is a modify. Reconfigure the horizontal bar chart (@widget[horizontal_bar_claim]) to ensure claim is mapped to the category/Y axis and sum of refunded is mapped as the metric value, sorted in descending order.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 7170,
+   "outputTokens": 101,
+   "totalTokens": 7271
+  }
+ }
+}

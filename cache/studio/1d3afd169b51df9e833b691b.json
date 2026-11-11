@@ -1,0 +1,23 @@
+{
+ "key": "1d3afd169b51df9e833b691b",
+ "saved_at": "2026-11-11T08:29:23.964Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbuycn0_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_10947750025901563731~EmAKXgFpFH0ThATx/GbI4ksAAvtsZLneRrQJY40JPge0RXd+zN64ByMPhcfVAchp/8dLmDO3XABBmxvrdnR/HOKzhTmVZKV3AKKIrxrOj/I/NQUZWqgB6qdZ5XuWc5ll0JQ=",
+    "name": "rename_thread",
+    "arguments": "{\"name\":\"AI Decision Kept vs Refunded\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 5645,
+   "outputTokens": 22,
+   "totalTokens": 5667
+  }
+ }
+}

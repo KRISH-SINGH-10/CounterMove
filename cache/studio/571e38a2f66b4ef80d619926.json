@@ -1,0 +1,23 @@
+{
+ "key": "571e38a2f66b4ef80d619926",
+ "saved_at": "2026-11-11T08:36:00.071Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv6u9z_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_4254162739087727380~EmAKXgFpFH0Tai+Kaf6R7JEqCrSV1o1Niua1cjfHmQcu48DBDTNVqP34Mhx8BU8qbsCwCowMFD47We+fvoJ8/R2LGpqMDfWdxoOpDIPE1sWlcV7T88wRjMt9w04Yr6Ba2Bs=",
+    "name": "delegate_to",
+    "arguments": "{\"type\":{\"widgetType\":\"line-chart\",\"pageId\":\"page-1\",\"id\":\"widget\",\"widgetId\":\"line_chart_kept_refunded\"},\"instructions\":\"This is a modify. Reconfigure @widget[line_chart_kept_refunded] by passing the exact field objects `{\\\"id\\\": \\\"disputes.closed\\\", \\\"aggregation\\\": \\\"month\\\"}` for the X axis, and `[{\\\"id\\\": \\\"disputes.kept\\\", \\\"aggregation\\\": \\\"sum\\\"}, {\\\"id\\\": \\\"disputes.refunded\\\", \\\"aggregation\\\": \\\"sum\\\"}]` for the Y axis metrics.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 8780,
+   "outputTokens": 144,
+   "totalTokens": 8924
+  }
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "key": "6b3e3fe6c24bff1499dc91cd",
+ "saved_at": "2026-11-11T08:46:40.716Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbvkkln_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_4193782968871592608~EmAKXgFpFH0TwjvAYG02rCn64KnWx8G7z5IDDmj+d2hI3u2VgtCrauXqMYEvdQy6wN+kgs4nPTJ1KflgavXfjGn/RuU7GDVuTthYe4zQndHVTKvmteuf35EOX/mYx3e6c+0=",
+    "name": "complete_task",
+    "arguments": "{\"artifacts\":[{\"id\":\"line_chart_kept_refunded\",\"type\":\"widget\",\"description\":\"Reconfigured line chart to show kept and refunded amounts grouped by closed date.\"}],\"summary\":\"Successfully reconfigured the line chart widget to display kept and refunded metrics grouped by closed date.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 19028,
+   "outputTokens": 75,
+   "totalTokens": 19103
+  }
+ }
+}

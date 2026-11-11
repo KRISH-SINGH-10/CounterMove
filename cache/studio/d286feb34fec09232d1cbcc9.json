@@ -1,0 +1,23 @@
+{
+ "key": "d286feb34fec09232d1cbcc9",
+ "saved_at": "2026-11-11T08:37:58.825Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv9dwp_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_11062884274012078616~EswBCskBAWkUfRONUclBnRtgRpSXlcUcq5qjY9dUv2LyUivi1VYRHaq0lQnMiC9nnqd5QaG0q9Jxn0eBWJ9sMJQtW6W/85AR9WtwvqQKPZUlhgVnQOzEGRyy/8pYB65zp7vE5ZA/NYJ0DT0oJ7kGYnWwMEFeRDRGgmQc78zCGE5wXgX3ZpYVwBQKG3UR9ikfyIY0+I2vqhl4Ca5GYyoFa7KEhpDj5XCQXO1TlunQMOC4J/RCJjVOppC/y3ZvguAT/bqEyknwUpBr+tCtk10S",
+    "name": "complete_task",
+    "arguments": "{\"summary\":\"Successfully reconfigured line_chart_kept_refunded with disputes.closed::month on the category axis and sum of kept and refunded on the value axis.\",\"artifacts\":[{\"type\":\"widget\",\"description\":\"Reconfigured line chart showing kept and refunded amounts over time by closed month.\",\"id\":\"line_chart_kept_refunded\"}]}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 26592,
+   "outputTokens": 89,
+   "totalTokens": 26702
+  }
+ }
+}

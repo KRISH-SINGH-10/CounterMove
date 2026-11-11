@@ -1,0 +1,23 @@
+{
+ "key": "7526a42cc24847dbe3debdc5",
+ "saved_at": "2026-11-11T08:37:08.665Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv8b7d_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_18073062786740806143~EoYECoMEAWkUfRNiPHQplyaJfUlbw348ZPmd730cZkdLI9RSRJOmxREEgWYhDvl1sbx3fi7acYq1yfAsbaxGPMmWD7jD00sPRe1oLjjc+JQcVsSR8Q+EBCelA451UelhkhGDF51osYokS4HvgxVnv7+4eFnv3gk8L4p6fj9GEcFtM20dI3jmMwJCRdazjkROb2geAQeuM9lkttDwDNza9g28LTeWEgrBebISwKmeIhutBcAQmvw10lRik96LsI7ImROlIvigdGE0Ng/eqRnJ+NJF+eS0sD5wxY+UtRySivw08AMkhBYVSUvpImR8xGB6edYZTZdvT9CyZ2GvhZFvHMXFmoQB0WB3dHtEA2W3LZWH5qWcwFDXV0CgFn++hbZr6w8hXKDkr3NrNd3JAQf/fJQPWc07nz3tmtDLHiwwlT2oIWIFM6wYgbKXzLrCqEwTcM+0lcYJ2i3cIuFi/+q/JTjTxQIxAFC75xR3Dg/D/T0d4zlJSRUCdtX1WwK9KXS5sB57Mmr5Gvrc3vlBawY5LBSMHBe0oa0gQWuLylYrZ4cNJCsr11LVuJYwCQxqZjzdwvm2Z/7iqufWl/LAhzBinwtGR+bwie8kgahli9V7cyneUQ3gk8UKaPxUsUft1jeRoiLnWDgg4dJdBaXiXx6t0UlJh3AcKzbSyY/JVkBq3ROP88i/76VEwXo=",
+    "name": "configure_widget",
+    "arguments": "{\"value\":{\"format\":{\"caption\":{\"enabled\":true,\"text\":\"Kept and Refunded Over Time\"},\"title\":{\"text\":\"Kept and Refunded Over Time\",\"enabled\":true}},\"dataMapping\":{\"valueKey\":[{\"aggregation\":\"sum\",\"id\":\"disputes.kept\"},{\"id\":\"disputes.refunded\",\"aggregation\":\"sum\"}],\"categoryKey\":[{\"id\":\"disputes.closed::month\"}]}},\"widgetId\":\"line_chart_kept_refunded\",\"op\":\"patch\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 20152,
+   "outputTokens": 123,
+   "totalTokens": 20402
+  }
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "key": "04132d8f984f70fa39f4e4e7",
+ "saved_at": "2026-11-11T08:34:48.802Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv5baa_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_17797973093042805255~EoIDCv8CAWkUfRMTaeXGPpyPfoF8jiIzbFP6d4X6IVDXwSLOIoimOjahX6QvjB1qak5VMPKL5GbbvX0C29TRe59ms1nmuWzrGB3PpDRJc4tOp1650Rh9fETDRCORakQjbUyk99b3Yw9yJVjevTKtDZnIgGGu/nTfxlpceAe28YW6DUdBKx6WYoymEIkIYXpY8cVBLg0XSD3IMnTXms4Xjx8JXng/mS3PaMaQkN9MQoz7o372fBTAdFDoLOwn6cgeF3RpQGFyj/J8quo/5Sf8WIHMesH333vw9hTW8JHLAC0CyULGDY6zYikssCTlvAnfdG3xxECeeSxErFeC4BtXcEApjEArXuPWNpsTXKN4K7h8iTkxEd6TKjRdoT2TuyJhAXLaJE8eIUCOopkjViwxPLZjXsPCfE3Nm1vgKtHgW3AOVU7JEjfZ2N++OeWs0Sdt5wKywMYmr5RyHzA/VjozdQKISAfVQWLIsWPs3s1360AHfTFQ4p7FaQQlMJOh15MWOxoZ9uY=",
+    "name": "configure_widget",
+    "arguments": "{\"widgetId\":\"line_chart_kept_refunded\",\"value\":{\"dataMapping\":{\"valueKey\":[{\"id\":\"disputes.kept\",\"aggregation\":\"sum\"},{\"aggregation\":\"sum\",\"id\":\"disputes.refunded\"}],\"categoryKey\":[{\"id\":\"disputes.closed\"}]},\"format\":{\"caption\":{\"enabled\":true,\"text\":\"Kept and Refunded Over Time\"}},\"type\":\"line-chart\"},\"op\":\"patch\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 22749,
+   "outputTokens": 111,
+   "totalTokens": 22945
+  }
+ }
+}

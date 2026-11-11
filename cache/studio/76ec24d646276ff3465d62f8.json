@@ -1,0 +1,23 @@
+{
+ "key": "76ec24d646276ff3465d62f8",
+ "saved_at": "2026-11-11T08:41:55.400Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbvegg8_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_1979597029215947346~EmAKXgFpFH0TbUs2zcu+FLOghgmznpuFjoAL2LFVFiOlVg01Czzy6h6QuukcD5I0MjhCaQMKr7WA7hHCLC3uL42KfXWvTQVpNKQYt5HjXgYKQ/HFBn7e/HNoLBu1jc+NzVY=",
+    "name": "delegate_to",
+    "arguments": "{\"instructions\":\"This is a modify. Reconfigure @widget[line_chart_kept_refunded] with dataMapping: { \\\"xAxis\\\": { \\\"field\\\": \\\"disputes.closed\\\", \\\"aggregation\\\": \\\"month\\\" }, \\\"metrics\\\": [ { \\\"field\\\": \\\"disputes.kept\\\", \\\"aggregation\\\": \\\"sum\\\" }, { \\\"field\\\": \\\"disputes.refunded\\\", \\\"aggregation\\\": \\\"sum\\\" } ] }.\",\"type\":{\"widgetId\":\"line_chart_kept_refunded\",\"pageId\":\"page-1\",\"id\":\"widget\",\"widgetType\":\"line-chart\"}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 15445,
+   "outputTokens": 140,
+   "totalTokens": 15585
+  }
+ }
+}

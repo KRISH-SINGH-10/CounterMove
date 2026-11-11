@@ -1,0 +1,23 @@
+{
+ "key": "403d74299ea8be0103967aca",
+ "saved_at": "2026-11-11T08:25:09.436Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbusw8r_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_11810098670917551382~EmAKXgFpFH0T41GvewXHu0FhlmvjypQeLlq7CW0inW2XiiKs68L7+2FN21qF2rNJ2v+LKeYRAtcMtD/AcW9sOjrk3mCbbTpALDWhIeCtoig12+W1T/fuY3DctzrHKygWb4Y=",
+    "name": "delegate_to",
+    "arguments": "{\"instructions\":\"Configure @widget[column_chart_answered_by] to compare kept and refunded amounts by who answered the dispute. Map answered_by to the X axis, and the sum of kept and sum of refunded as the series values. Set an appropriate title like 'Disputes Answered: Kept vs Refunded by Answered By'.\",\"type\":{\"pageId\":\"page-1\",\"id\":\"widget\",\"widgetType\":\"column-chart-stacked\",\"widgetId\":\"column_chart_answered_by\"}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 4851,
+   "outputTokens": 124,
+   "totalTokens": 4975
+  }
+ }
+}

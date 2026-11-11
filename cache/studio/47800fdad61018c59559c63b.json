@@ -1,0 +1,23 @@
+{
+ "key": "47800fdad61018c59559c63b",
+ "saved_at": "2026-11-11T08:27:25.493Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbuvt85_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_17480452823550813268~EmAKXgFpFH0TnZI5kpLZJ1D0BzU5koebJLnNnTw2+zCplzvF2A1F2G50v5mNFD8CrPJZY7mQc8lOXmM0WA83jTyfQa4BeQqLoHNZdpcU1Nq1DuTtPqdrRp5e59ExhdrKOoE=",
+    "name": "delegate_to",
+    "arguments": "{\"type\":{\"widgetId\":\"column_chart_answered_by\",\"widgetType\":\"column-chart-stacked\",\"id\":\"widget\",\"pageId\":\"page-1\"},\"instructions\":\"This is a modify. Set the data mapping explicitly with X-axis as @field[disputes.answered_by] and series as the sum of @field[disputes.kept] and sum of @field[disputes.refunded].\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 7497,
+   "outputTokens": 107,
+   "totalTokens": 7604
+  }
+ }
+}

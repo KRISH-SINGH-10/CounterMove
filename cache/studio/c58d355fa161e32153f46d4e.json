@@ -1,0 +1,23 @@
+{
+ "key": "c58d355fa161e32153f46d4e",
+ "saved_at": "2026-11-11T08:27:50.892Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbuwcto_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_18109827175031501962~EmAKXgFpFH0TL8273p+AmfWbiIrD1LB7/qyqU5J4ZPNJb7tSlFJygXdfPoetLCTxT57HdDU+2YOCTrp35lHQk4Yif7EGvfvJvCbOomvoTUmPWVLGp0w2F6Iz3yn2TQSOh7A=",
+    "name": "complete_task",
+    "arguments": "{\"artifacts\":[{\"type\":\"widget\",\"id\":\"column_chart_answered_by\",\"description\":\"Configured stacked column chart showing kept and refunded amounts by answered by\"}],\"summary\":\"Configured the stacked column chart with @field[disputes.answered_by] on the X-axis and the sum of @field[disputes.kept] and @field[disputes.refunded] as the series values.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 17893,
+   "outputTokens": 103,
+   "totalTokens": 17996
+  }
+ }
+}

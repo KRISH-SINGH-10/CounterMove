@@ -1,0 +1,23 @@
+{
+ "key": "59492756d4ba12d646c39b73",
+ "saved_at": "2026-11-11T08:44:51.164Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbvi82k_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_9215080673007395185~EmAKXgFpFH0T9JIzSrhLhK4Afg9c1jgCxSLMO0M+iX+ASh6DqkUESrOViAagV4Of3+fiHz07cg2Vs/eOPymmNiSRD0eTuZijeQDSf9vY9/dH+p2ghUxZ+w7MQezkLdftxmE=",
+    "name": "complete_task",
+    "arguments": "{\"artifacts\":[{\"type\":\"widget\",\"description\":\"Configured line chart for kept and refunded amounts over time\",\"id\":\"line_chart_kept_refunded\"}],\"summary\":\"Reconfigured line_chart_kept_refunded with disputes.closed as the x-axis category and sum of disputes.kept and disputes.refunded as metrics.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 19567,
+   "outputTokens": 87,
+   "totalTokens": 19654
+  }
+ }
+}

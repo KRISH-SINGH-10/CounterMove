@@ -1,0 +1,23 @@
+{
+ "key": "306afafaf7add8daa6589a5d",
+ "saved_at": "2026-11-11T08:35:10.991Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv5sen_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_12134490525242751750~EmAKXgFpFH0T5X9Tcyy65m64vuyPduv1JZCG9kEpmCHbiKeceEHi/2Z/iXEip24Pcb1sRjYAgIk57uh4BjSdmr1vu7PoXEW8sCmxQz5D3oS5Yku3I8IthlRaxcGbEH2hk9E=",
+    "name": "delegate_to",
+    "arguments": "{\"instructions\":\"This is a modify. Reconfigure @widget[line_chart_kept_refunded] using the exact field IDs and proper aggregations for closed date (month) on the X axis, and the sum of kept and sum of refunded as metric series.\",\"type\":{\"id\":\"widget\",\"widgetId\":\"line_chart_kept_refunded\",\"pageId\":\"page-1\",\"widgetType\":\"line-chart\"}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 7448,
+   "outputTokens": 107,
+   "totalTokens": 7555
+  }
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "key": "1bd19915097ad5d5be2b68fc",
+ "saved_at": "2026-11-11T08:38:49.395Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbvagxe_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_7633846276421877845~EmAKXgFpFH0TdYuvcHroiVZIW+W5Mt/qjzZcSN+3GIaxssytkAqX85OgLwiLWFHh3C5LOfA1o85ww6ehkU07Ig+WsFzNGK5Pwyb/rCWqdoss8V6KnmBfhtwI+wL+c8uXmXQ=",
+    "name": "complete_task",
+    "arguments": "{\"artifacts\":[{\"description\":\"Updated line chart configuration for kept and refunded amounts over time.\",\"id\":\"line_chart_kept_refunded\",\"type\":\"widget\"}],\"summary\":\"Updated the line chart widget data mapping to use disputes.closed::month as the category and disputes.kept and disputes.refunded as metrics.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 18422,
+   "outputTokens": 83,
+   "totalTokens": 18505
+  }
+ }
+}

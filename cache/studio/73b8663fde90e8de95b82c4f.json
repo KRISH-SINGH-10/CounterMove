@@ -1,0 +1,23 @@
+{
+ "key": "73b8663fde90e8de95b82c4f",
+ "saved_at": "2026-11-11T08:33:04.895Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv333y_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_6997230551163360034~EmAKXgFpFH0Ty4JvlQaR3+dJsNFmGTw1JDXvuXUNXUKmPtUF9dl9/Vv4grHQzkMzxqJ7HNdp6iiFVWpx7QMjg6ndcs59pEKc6IQJNBez49aF+G9EW654XhLTCPg7IVXhexg=",
+    "name": "delegate_to",
+    "arguments": "{\"instructions\":\"This is a modify. Reconfigure @widget[line_chart_kept_refunded] to correctly map the monthly closed date on the X axis and the sum of kept and sum of refunded as metrics.\",\"type\":{\"widgetType\":\"line-chart\",\"id\":\"widget\",\"widgetId\":\"line_chart_kept_refunded\",\"pageId\":\"page-1\"}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 6156,
+   "outputTokens": 97,
+   "totalTokens": 6253
+  }
+ }
+}

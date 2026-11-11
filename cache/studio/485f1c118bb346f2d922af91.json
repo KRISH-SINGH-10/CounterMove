@@ -1,0 +1,23 @@
+{
+ "key": "485f1c118bb346f2d922af91",
+ "saved_at": "2026-11-11T08:26:48.140Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbuv0ek_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_13344545567764954025~EqgGCqUGAWkUfROIq+wggu7S7HX+gAv+uvupBP+ofSYILL1E3sveCj2XMfXybXPx0KGqA9oYGeXuU8PrJBNMb6+L+CELVaSAbYKj1V24aSUUbfyMK6/otcqYcc4WhgxIo+4PizYIH+55t4sS66kNDBVLV78Rk+Fkvcg87IpkHGYy8xe6L2091eCKZPqcOfgmhtdprwQfC1j28OWLEFaM4aKtsYTzEG2OhZo9sBRDpZcchlwy7aP6WfQ8rsA1lleTuSX9J5yhQ4z2WVutZlu56rP7TX4VFtt2ASVkygXiH/TV++xDvEVofdFAme4S+ud5rgXdYhuFxzp7ErcW2Xduv04tXoC6o5efWlYlbdlY9q0/NnpYUr1Kd2wgYnEH2sLsog170qD09lQTFBV8Vfmn7yZ/hHJRgDA2GxVdrrqcN+JbGmVbxiFcP8J7Z1HQXmHVCZTvuOTptnHRLECVTzVfT+YJVWpU+9c2LAPQktHOlc8Mr73B9wxxBCe7ZSMBVUcMXf5GGOnRYxA7CZ2M4a+u8tSzVEXlIEJYseXtUlvFKJygr8qQhFEQ3cwnmaWxgBgiT+WTwiHrXvdjVOlNCTtjLfM6GZEZ7+2CXo0tx7YswgVTyuOGG8n7VQ0nLYMZyEKc/1D0PAyFV3H08KL1Yf1C/yOERNYf+SJW64SPlajgmEvEuYVZf5lq3JqjCuuFRghZQbJL2AcqorNtKBHEp7h2BNcZ9Jyz+52z6zfEktmr9eReIpZ1rTgnk2N4elgkQPWd0+Wr+6Ro2lWImztJfjqAYs7azkm+hYoXpiQ2wmsCGgW1w9Mc4KexAvo0mFHqw8HTtsMcCMQvhkCnS3YLxzVJswbm0cSpoulW5t6k+0lTZNSa1acJLxQ6r8j6K1MMLK4kSiuBA20DiFtL1gIH9KRMGYuCyB3DgWVu9q7ExyKvYodCDTClF4qmgJ16srq5jxZAFru6R9/1IBJz0ITT8ckedJxvD5VaZd6l0rOCR7xs8yjHgV05lcuyT/uSScx0J2/ELCIRvEy4nFPjaCM5q14HooIb6kWVP/uJFbX6EJ4BbeXFTQHmiqptT9C78A==",
+    "name": "configure_widget",
+    "arguments": "{\"value\":{\"type\":\"column-chart-stacked\",\"format\":{\"caption\":{\"enabled\":true,\"text\":\"Disputes Answered: Kept vs Refunded by Answered By\"}},\"dataMapping\":{\"valueKey\":[{\"aggregation\":\"sum\",\"id\":\"disputes.kept\"},{\"id\":\"disputes.refunded\",\"aggregation\":\"sum\"}],\"categoryKey\":[{\"id\":\"disputes.answered_by\"}]}},\"op\":\"patch\",\"widgetId\":\"column_chart_answered_by\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 18744,
+   "outputTokens": 121,
+   "totalTokens": 19081
+  }
+ }
+}

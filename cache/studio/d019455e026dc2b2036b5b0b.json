@@ -1,0 +1,23 @@
+{
+ "key": "d019455e026dc2b2036b5b0b",
+ "saved_at": "2026-11-11T08:32:25.908Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv2910_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_15934322562930989815~EmAKXgFpFH0Tx+WkOjlUYXNsVve5WuNtVaVLD6eChrvVDLWFzKpvUj+d2zuW4kw83OmoAY7adAmJOYKG5RTE7LyjMla/1FYsjhzfNBqnPFHbKjD1UUD23lu2FIv/SoUHdsA=",
+    "name": "delegate_to",
+    "arguments": "{\"type\":{\"widgetType\":\"line-chart\",\"widgetId\":\"line_chart_kept_refunded\",\"pageId\":\"page-1\",\"id\":\"widget\"},\"instructions\":\"Configure @widget[line_chart_kept_refunded] to show a line chart of the sum of kept and sum of refunded over time, grouped by month of the closed date.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 4843,
+   "outputTokens": 93,
+   "totalTokens": 4936
+  }
+ }
+}

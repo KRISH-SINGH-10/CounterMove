@@ -1,0 +1,23 @@
+{
+ "key": "9d03886153f6b808e9b1286e",
+ "saved_at": "2026-11-11T08:24:22.638Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwburw4u_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_4914240925718814584~EmAKXgFpFH0T8bH5adGJUbE8/scr81nD1p+T9f33HmlKMe1XsQrEPnHv6V9mKd08hcuvTJzA6uQglyTS2fIoa6E5t5J1ZH9syFFLYSW1cs6QmlM0C1NTkXUSGMd/WfA87ko=",
+    "name": "rename_thread",
+    "arguments": "{\"name\":\"Disputes Answered Comparison\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 4607,
+   "outputTokens": 20,
+   "totalTokens": 4627
+  }
+ }
+}

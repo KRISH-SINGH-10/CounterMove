@@ -1,0 +1,23 @@
+{
+ "key": "10bc9d6989fc2149d1c39533",
+ "saved_at": "2026-11-11T08:19:11.586Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbul84h_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_12190512870940090415~EmAKXgFpFH0TjfCfYIBHM7GIREpq0qFTgKWqzunJdhie5/bOMgSAivIwVpbYghTjq0fOwlCk2TJcUeso43Mof+84/b/0HkYYw2KjIfzOOIAa6d89N8bPL6CY+EABrm4PEEY=",
+    "name": "delegate_to",
+    "arguments": "{\"instructions\":\"Configure the horizontal bar chart to show the sum of refunded grouped by claim, sorted highest first. Title the chart 'Refunds by Claim Type'.\",\"type\":{\"widgetId\":\"horizontal_bar_chart\",\"widgetType\":\"bar-chart-grouped\",\"id\":\"widget\",\"pageId\":\"page-1\"}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 5878,
+   "outputTokens": 83,
+   "totalTokens": 5961
+  }
+ }
+}

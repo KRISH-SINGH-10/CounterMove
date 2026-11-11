@@ -1,0 +1,28 @@
+{
+ "key": "a2c75d95e86f731c41614e30",
+ "saved_at": "2026-11-11T08:28:02.068Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbuwlg4_1",
+    "kind": "output",
+    "type": "message",
+    "role": "assistant",
+    "status": "completed",
+    "content": [
+     {
+      "type": "text",
+      "text": "I have added a new stacked column chart comparing disputes answered by autopilot vs. self, displaying the sum of kept and refunded amounts by who answered the dispute. All existing widgets have been kept in place.\n\n### Dashboard Summary (Disputes Answered Comparison)\n- **KPI Amount** (@widget[kpi_amount]): Displays the total dispute amount.\n- **KPI Kept** (@widget[kpi_kept]): Displays the total money kept.\n- **KPI Refunded** (@widget[kpi_refunded]): Displays the total money refunded.\n- **Stacked Column Chart** (@widget[stacked_column_chart]): Existing category breakdown.\n- **Disputes Answered: Kept vs Refunded** (@widget[column_chart_answered_by]): Compares sum of kept and sum of refunded amounts grouped by who answered each dispute (`answered_by`).",
+      "annotations": []
+     }
+    ]
+   }
+  ],
+  "usage": {
+   "inputTokens": 8821,
+   "outputTokens": 180,
+   "totalTokens": 9001
+  }
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "key": "496bc0ea3cefeefaf685925d",
+ "saved_at": "2026-11-11T08:43:16.895Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbvg7bz_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_12848505954174598913~EmAKXgFpFH0TOjhyGXCrVwPtsYldvsJhQ9+bZKgNbYoi53mOHkn1R36//oZ1lClWefK1zjZs5JU206qUfZvtdrnYl8NmAe5aDLFiB05Pv7sB+EMeyDdej+mUDQXX11CDoBk=",
+    "name": "configure_widget",
+    "arguments": "{\"op\":\"patch\",\"widgetId\":\"line_chart_kept_refunded\",\"value\":{\"type\":\"line-chart\",\"dataMapping\":{\"categoryKey\":[{\"id\":\"disputes.closed\"}],\"valueKey\":[{\"id\":\"disputes.kept\",\"aggregation\":\"sum\"},{\"aggregation\":\"sum\",\"id\":\"disputes.refunded\"}]}}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 18320,
+   "outputTokens": 91,
+   "totalTokens": 18411
+  }
+ }
+}

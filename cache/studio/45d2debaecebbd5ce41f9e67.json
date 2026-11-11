@@ -1,0 +1,23 @@
+{
+ "key": "45d2debaecebbd5ce41f9e67",
+ "saved_at": "2026-11-11T08:36:55.957Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv81ed_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_2870903561527570217~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",
+    "name": "configure_widget",
+    "arguments": "{\"op\":\"patch\",\"widgetId\":\"line_chart_kept_refunded\",\"value\":{\"dataMapping\":{\"categoryKey\":[{\"id\":\"disputes.closed\"}],\"valueKey\":[{\"aggregation\":\"sum\",\"id\":\"disputes.kept\"},{\"aggregation\":\"sum\",\"id\":\"disputes.refunded\"}]}}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 19049,
+   "outputTokens": 84,
+   "totalTokens": 19549
+  }
+ }
+}

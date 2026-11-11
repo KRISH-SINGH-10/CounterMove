@@ -1,0 +1,23 @@
+{
+ "key": "5d0900e6b6c1c70d7e97c0f8",
+ "saved_at": "2026-11-11T08:21:05.714Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbuno6q_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_6379668916442610501~EmAKXgFpFH0T2jF3ba+IAKF5jMxMLaiIGtjfVnqR8wll2wOcwHaFJANSw5h8uwGuNnU9J7eo26WG8Od4VtuubWSrPG/ZBWdnZM4L+DPLxxk9E/ZBnnMUhSBFOVpBdMzAcpc=",
+    "name": "delegate_to",
+    "arguments": "{\"instructions\":\"This is a modify. Explicitly map category to 'claim' and metric to sum of 'refunded' on widget @widget[horizontal_bar_chart].\",\"type\":{\"id\":\"widget\",\"pageId\":\"page-1\",\"widgetType\":\"bar-chart-grouped\",\"widgetId\":\"horizontal_bar_chart\"}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 9768,
+   "outputTokens": 87,
+   "totalTokens": 9855
+  }
+ }
+}

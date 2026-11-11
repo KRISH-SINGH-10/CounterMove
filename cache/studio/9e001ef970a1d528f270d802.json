@@ -1,0 +1,23 @@
+{
+ "key": "9e001ef970a1d528f270d802",
+ "saved_at": "2026-11-11T08:25:32.461Z",
+ "response": {
+  "model": "gemini-flash-lite-latest",
+  "output": [
+   {
+    "id": "st_mwbute0c_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_4641762045172215481~EmAKXgFpFH0TI41JWedFab1E/lXIUPtjHglo4rmeuZdJb49faCQ6fsEl7bvB4eChLu4dLnJDMjKKwjbmd8n4l98OlyOEnlWLB+l6QyCxgVbRgADFsn/Qs9jVtXAHySgQGAY=",
+    "name": "configure_widget",
+    "arguments": "{\"widgetId\":\"column_chart_answered_by\",\"value\":{\"type\":\"column-chart-stacked\",\"dataMapping\":{\"categoryKey\":[{\"id\":\"disputes.answered_by\"}],\"valueKey\":[{\"aggregation\":\"sum\",\"id\":\"disputes.kept\"},{\"aggregation\":\"sum\",\"id\":\"disputes.refunded\"}]},\"format\":{\"caption\":{\"enabled\":true,\"text\":\"Disputes Answered: Kept vs Refunded by Answered By\"}}},\"op\":\"patch\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 17220,
+   "outputTokens": 121,
+   "totalTokens": 17341
+  }
+ }
+}

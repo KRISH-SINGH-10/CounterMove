@@ -1,0 +1,23 @@
+{
+ "key": "4842a180844f45919e415d68",
+ "saved_at": "2026-11-11T08:38:12.922Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv9osa_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_10181273794202139159~EmAKXgFpFH0TySJFqKCpwKbmgY7yG0QPkpD9ngZSB1NBD7mcZ6PEPtovp82C2uK+PWEbiE/MPK3+vdHNpau21vSslOGghPV4emFS/GtXYstMNyaUc+k9TojNNbalZ3OzMdU=",
+    "name": "delegate_to",
+    "arguments": "{\"instructions\":\"This is a modify. Update @widget[line_chart_kept_refunded] dataMapping by passing valid field ID strings: `category: \\\"disputes.closed\\\"` and `metrics: [\\\"disputes.kept\\\", \\\"disputes.refunded\\\"]`.\",\"type\":{\"widgetType\":\"line-chart\",\"pageId\":\"page-1\",\"id\":\"widget\",\"widgetId\":\"line_chart_kept_refunded\"}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 10124,
+   "outputTokens": 109,
+   "totalTokens": 10233
+  }
+ }
+}

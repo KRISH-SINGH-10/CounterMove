@@ -1,0 +1,23 @@
+{
+ "key": "484ffbdcdc080a423bc1d306",
+ "saved_at": "2026-11-11T08:36:41.763Z",
+ "response": {
+  "model": "gemini-flash-lite-latest",
+  "output": [
+   {
+    "id": "st_mwbv7qg2_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_4907072662354801290~Eq4CCqsCAWkUfRONsGt4mLe1qGxk1+4tqxD1cdmnwfMFRP2bfQFDgmcuybtOSwrduwQHtgPd5nhtwO3AjpX/vqvBnr/NX3yh0MNLbJkb+ss+yY3EJqZN3YA/16gR7RK+J5Sn+QLcqKCvAnf+YQwoTamJsXbrzVMhKsQK6i307gBcMZvHgH2U7+OhjtNxJtjIU9cnajuwavcidx4f85BtSAsotva2w7qPDyk02ys9wH3SEUE2KzLuWVCpWbmUWbtIPXqfaDn2wsq55rIvVpsY1qOmfPx4rVCQXK87Z5AcEqLrtLi1ALFITaFDO9urOsYteP+sZ7417KZ1bEYhFlxc0yS8EEa63IlDdcXjvQUWbwmxMOueDfaFYzp7PgJFd2Vjtoq99F2cNIWEELr/Lt5cm+k=",
+    "name": "configure_widget",
+    "arguments": "{\"op\":\"patch\",\"value\":{\"dataMapping\":{\"categoryKey\":[{\"id\":\"disputes.closed::month\"}],\"valueKey\":[{\"aggregation\":\"sum\",\"id\":\"disputes.kept\"},{\"aggregation\":\"sum\",\"id\":\"disputes.refunded\"}]}},\"widgetId\":\"line_chart_kept_refunded\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 18370,
+   "outputTokens": 86,
+   "totalTokens": 18509
+  }
+ }
+}

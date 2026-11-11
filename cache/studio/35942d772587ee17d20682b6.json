@@ -1,0 +1,23 @@
+{
+ "key": "35942d772587ee17d20682b6",
+ "saved_at": "2026-11-11T08:20:53.205Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbunej8_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_13038875257407588814~EmAKXgFpFH0TEt9fX1RQoazIPWQu0I4inY1CqdgrBGanuGOKScGHMZBg1p1TyHRYceAAhWtpNwXbATWf0ZZ6mCitJYMm7zkYKFecb6dbBEtek4rQ06mYlOVmejgZ2hlDC9c=",
+    "name": "complete_task",
+    "arguments": "{\"artifacts\":[{\"description\":\"Configured horizontal bar chart showing total refunded amount grouped by claim type.\",\"id\":\"horizontal_bar_chart\",\"type\":\"widget\"}],\"summary\":\"Updated the horizontal bar chart to display total refunded amount by claim type.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 17960,
+   "outputTokens": 67,
+   "totalTokens": 18027
+  }
+ }
+}

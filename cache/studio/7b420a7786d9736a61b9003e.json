@@ -1,0 +1,23 @@
+{
+ "key": "7b420a7786d9736a61b9003e",
+ "saved_at": "2026-11-11T08:39:49.895Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbvbrlz_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_11438847160692241294~EmAKXgFpFH0TBZ0I8D/Fl7NnHTZw3aBQwpKdZrTBrDg9m/k1ymkzOrc2po/NqbHNONJiuOGogFN4SyuuNQyjuE5Az9tjU6hsJLs9dN0sx/F/d6WxHaAYzyxlp0Wqr1oUxRU=",
+    "name": "delegate_to",
+    "arguments": "{\"instructions\":\"This is a modify. Reconfigure @widget[line_chart_kept_refunded] setting title to \\\"Kept and Refunded Over Time\\\", and dataMapping to use dimension: \\\"disputes.closed\\\", and metrics: [\\\"disputes.kept\\\", \\\"disputes.refunded\\\"].\",\"type\":{\"pageId\":\"page-1\",\"id\":\"widget\",\"widgetId\":\"line_chart_kept_refunded\",\"widgetType\":\"line-chart\"}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 12784,
+   "outputTokens": 115,
+   "totalTokens": 12899
+  }
+ }
+}

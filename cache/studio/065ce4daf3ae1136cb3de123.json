@@ -1,0 +1,23 @@
+{
+ "key": "065ce4daf3ae1136cb3de123",
+ "saved_at": "2026-11-11T08:37:52.838Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv99ae_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_16448447906603567014~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",
+    "name": "configure_widget",
+    "arguments": "{\"widgetId\":\"line_chart_kept_refunded\",\"op\":\"patch\",\"value\":{\"dataMapping\":{\"valueKey\":[{\"aggregation\":\"sum\",\"id\":\"disputes.kept\"},{\"aggregation\":\"sum\",\"id\":\"disputes.refunded\"}],\"categoryKey\":[{\"id\":\"disputes.closed::month\"}]},\"format\":{\"caption\":{\"enabled\":true,\"text\":\"Kept and Refunded Over Time\"},\"title\":{\"enabled\":true,\"text\":\"Kept and Refunded Over Time\"}}}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 25722,
+   "outputTokens": 123,
+   "totalTokens": 26331
+  }
+ }
+}

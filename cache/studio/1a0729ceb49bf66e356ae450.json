@@ -1,0 +1,23 @@
+{
+ "key": "1a0729ceb49bf66e356ae450",
+ "saved_at": "2026-11-11T08:24:50.203Z",
+ "response": {
+  "model": "gemini-3.5-flash",
+  "output": [
+   {
+    "id": "st_mwbushei_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_380713246398761213~Eu0ICuoIAWkUfRO+B36Xu4E293Uz/ff5SJ8mOTQycuJthkP5sovxME82oBt6SkS2sPg2Lke5+ebeIbrs5pPqbmbVfDlkdo/8rB9PEelNR0/jT/8QT7TR78Rn2++3/JdecKZMGgPvfidS2DrnTojslyMC4uhmT50WQchQDovT8OmkVmIFNTruW1ETv9Y4ZpFGEXJGtELC2lVmreUEBClqO5wXzWbAlxSKU2glhQJlA3DyI+3QY/v9qFYyHybIDw/SjbqqpdCMhuSO6Z9NvWW4dB7LzUDXYnev9kKHILi3my0s0p3qgvatQKIKs3fdXbMYrLXAQek9D7N6I85iVyVO9f8EbBzinU+9qHupzF6DckK1EQ9gtWjFVOa5tvqDCCIradLzBzGEqRnAd6FgzG3zFDSUm8pvS2pmdjaiDR4S3Q6WAEfAG//1slhyCPv+5bL5wlMjrHX62GyXCAkp7XT/Ey2yCwIBqtMS719tpsaNz0sMDgssxx7OAd+e2OlXoCcLrgFQLevmzEPG90IvQ0YYAs7mE+IB8Tvw0E5sYdxyzt/GvAgY+sTSqravymn1iv2H4SV4nHIRQCtink0RwhXIeDY/ovoAbH3OsnmlliOj3q79S6ly9tgeTCPg1deY9uKh6BB8XfMaPlYtPOQoapTtSB4iq+IwGH9L+p91DchsXu+WmlEMtabiw0V5qBx/vbAzwmggSubZ72kl4Y9T8GH8pOHBefOiaqs7bFrsmvwNM9zYQMU8V8Rv6iFyR+oCOJmqkR/b1MfBZ3InXCzxK7ivb73bALWprcgQDJh45/7cjS0W0Zk3wM+o0tQQ/rY0xX9vnkPWsL3kOdx/9zG+HO1rKq6FapddlNliahQMMb4gFIXWL6pmWZP1hwjI6m4Q5S4X3dP4OPT7r0gt+DUQMvnCBZ6+JF5V1W8nz/5JXgmVYZP8E/pO+Hcrw2GVrSujn7ziG2FTzhdUijePT0d4ZeXj0LjDuwiBs7AZ6jM1SqeBaoJv3diXkOdLqSn4kPsko6CR0G2Uq70plzMEPWMpIkJ1je6XPCnTzNkXlwR1i5rOnefU4ENwbSx3mIn/68eJx+qzEVXaagwT1W8EzzfmtAFZjXBNRiRuWfN6pdEH90PAjnaFCSUue4TggBRCxhkhVoEhCsDiOK4iJkjLyfhMSCZw9xEAtYalynUS5cHX5ocD5dkTaKg1ZubB9tgTbljal5IeQmiaOm/AJ91afhq6+OWAepTmoo7mNxSzNrg9pHSw9aCLVd0vcyzce+FRHy+H26tzJk0n/slrA4IW69cq7fXMIfTWcUuhdTs0QS31frsYYJqBfTlBCjz8zLyI1cjcxUnvnw0vni9lmgXusPEcPbjN9UGBHxSpSVTXzXTM+aMO8bsT4bQFR/Av/fHrTipoDgFF2OgMfVu7Kr9EMaOnkU8vIZgD0dC6t/jvejVhhiDz+UA1Z5BYgeRLf6N2HtdUUISdFz2DKnmfy46Yfnun6D7p5tyO0CaXzOOC44Gu8PDcwYA=",
+    "name": "add_widget",
+    "arguments": "{\"xTrack\":0,\"widgetId\":\"column_chart_answered_by\",\"yTrack\":24,\"ySpan\":18,\"type\":\"column-chart-stacked\",\"xSpan\":24}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 12092,
+   "outputTokens": 56,
+   "totalTokens": 12510
+  }
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "key": "e253bf243abfe46f8393c514",
+ "saved_at": "2026-11-11T08:25:47.115Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbutpbf_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_5051067479509076097~EmAKXgFpFH0TgsHZ9HEgF4PJzkGFeOq3iNV6N//5XrDYXrT8dre0/hNb1Y5uMw6FYyd0q+bt0hFUivimeiLfVLCKX5v+baQ5mDJnqyfugka03DxGtz8amxKmDjBpRwtDJ7A=",
+    "name": "complete_task",
+    "arguments": "{\"artifacts\":[{\"type\":\"widget\",\"description\":\"Configured stacked column chart showing kept and refunded amounts by answered_by\",\"id\":\"column_chart_answered_by\"}],\"summary\":\"Configured @widget[column_chart_answered_by] to display the sum of kept and refunded amounts categorized by answered_by, with an appropriate title.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 17857,
+   "outputTokens": 88,
+   "totalTokens": 17945
+  }
+ }
+}

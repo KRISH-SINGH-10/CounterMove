@@ -1,0 +1,23 @@
+{
+ "key": "1635182b9478a95e61b33f08",
+ "saved_at": "2026-11-11T08:34:13.111Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv4jqu_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_18388617183922888266~ErICCq8CAWkUfRM7/sQfgRUQz7AYTQ2/MQTSFoPqyKNRfY0ciUwy+z0Ggg0WAQqTjcCl43kUmaA/n+an2KermZQ/3QKZJhODcNFfJ0Q2bRcNGf7d6QzMQf+6lEKKi33+EOLBf4xfdFvB7ZH1LPPCzq7poMpAPV7GDkfJov4edpvt+dpZ3MeTlNJASGFdY0xojwx2mljd9BAV/1Dss4rQSybeLuZa07V++WyLxo7Qmr0DtGRB+af+IMAqGj80iB1Ef8HRL8juQ/F1RUVXLLAAnsyndq0pfURcgAVWoS2KFMbsvLFzxnYzDdHUJowyPYYkXBVob3bX7Qvb3tPM+gb0ExkujLgMl0Yvsjb+9Pqb68Lmxu2f73JcAM7BnGgyfcKwGUgrVADuTnIBupDz4USXjqU+y22+",
+    "name": "view_widget",
+    "arguments": "{\"widgetId\":\"line_chart_kept_refunded\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 20140,
+   "outputTokens": 24,
+   "totalTokens": 20213
+  }
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "key": "1bc7b01b03615aeb86bd0c02",
+ "saved_at": "2026-11-11T08:20:11.414Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbumiac_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_7023597842592876490~EmAKXgFpFH0TIf6KLvvDKmBHE4HrGbesMunA9WWG0gY6BfTGJwv5U18XbxL2GPeUjsQgY+Pjb7/YFltpTSwBLMypsTCQjIr8mEwDAW4dYTRX2vD9u1DapA/AjhMhUW7oD3E=",
+    "name": "complete_task",
+    "arguments": "{\"summary\":\"Reconfigured the horizontal bar chart (@widget[horizontal_bar_chart]) to map @field[disputes.claim] to the category axis and sum of @field[disputes.refunded] to the metric value, sorted in descending order.\",\"artifacts\":[{\"type\":\"widget\",\"id\":\"horizontal_bar_chart\",\"description\":\"Reconfigured horizontal bar chart with claim on the category axis and sum of refunded as the metric value, sorted descending.\"}]}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 17939,
+   "outputTokens": 113,
+   "totalTokens": 18052
+  }
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "key": "e857fe8b926e93688331d629",
+ "saved_at": "2026-11-11T08:29:31.318Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbuyib9_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_4521188681335181050~EmAKXgFpFH0TlAw8QhdVphlhZWvai+dgkAejmL2JtlUgIyorXLB3QwbPlf+H1qPpGQ8YhvuIzuKm2umw+UdAF/TN/tope9MmUduJUJs2cp03aGkMI4eHl3Dn2oPSsplI5QE=",
+    "name": "delegate_to",
+    "arguments": "{\"instructions\":\"Place a stacked column chart below the existing widgets (at yTrack 6, height 18, full width 24).\",\"type\":{\"id\":\"page\",\"pageId\":\"page-1\"}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 5751,
+   "outputTokens": 59,
+   "totalTokens": 5810
+  }
+ }
+}

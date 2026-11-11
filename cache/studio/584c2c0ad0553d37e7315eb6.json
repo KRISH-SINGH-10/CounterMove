@@ -1,0 +1,23 @@
+{
+ "key": "584c2c0ad0553d37e7315eb6",
+ "saved_at": "2026-11-11T08:34:04.308Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv4cyb_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_18445970048024126284~Es8JCswJAWkUfRNYTB7o3zv127iJ9SJeKkjrmhmaO/LEpeC9Z6stEOAQyiRQMYbZMAxdhiuV8VO2xtyjvbBkYTBFis3c+6ypnpO1h9WCOyTYBitzueTwcFjVEsCAybEVo5XkH89CKh50cLFIYQGxYCeja95HMtnkYqdTaOKJi2veHmDjuXC95/ALNH3SwZUpNMJp2NXv5ipw6V58FDdNk+I5O2AEN+UmJ6WWsgXfc3hTEj33sefBBqkyR3fwu8lD7J81/GVuUKzplVDMpOMC6bEW8LefKA6c3mO3yrNee8aQQ4VkafhSTG1QHlhH3k0RPtNmTVyuxyzpEsmkHYAvk2im/oU0Tq0RDY19EX4JWGkI6kmI+gvE6j3cng820kMolOWGEeGVBQEkjlqf82jbNoIm9idgFP9LRohACK0yjkPwGKf8N63zci5uMhWVcibA9cekoIohu/6Ax0bQQp/u4X+EuPvSVc3pdqSv0K9hHnGAd/jxjGT3kvQgR5vYimavFLAa757juLU/LN43Qv35xuE908jM7wYGvvlVLV7kDhhCuSGupSWkWW8hJHc+nyNiNnMQWKuUXaaQKTVIP5gUULCTkCuWcIf3ty461w2ovfroKfM6cAlfvByzbU7IO3FXl5Tt/GrIilasFp8uH2ueuU1wF2xox/CoczztgAqAVWf2sl+WcWP2Od3yyga+JQTbjn0DqR8uTnTvSWtDyrnu/PC6NTS/1gtyta1hDDdaOZQb5TmaUlFrqPJudPlx0Vo8EJRVt8xyVzf5i4SOqrBHMbPZp+8KfnSsBptjpfY/r13gTA2s3kmwvcbSqufnLyZ/mE1AXCVxHj+S0ggmXEIHQocJ37QaUYM5AVSWz2Kj5+OKG1ugWJhsT2+WmD2Xjyy/rCvA8wSKB3oSgN1ZzODn8PjHuXJm/ReJRILOUo7UQfa67qtTmep2pZ5i5J9u/6RuU/hDB7L5MomrwJFX534LYBKhab0Ou7aajIAtaU9TgNBl8PrijaOXnN1zVcEvVLBJMMy1/2EJHhqNiGbCo8WRYWU7lRrUUpnyMVStifRtKue6X8j22jmTpKdrHg6Z2dzzIuZkqNeWqe+Z1IoHXJQO1tdCeBhcS9YMPk2jzZ7XlzpYD5r7lSYWSX2B4YJ3p7Ms3O+8/sux8PnKVr8w6ZIzpLOS2qs9ld4S0LTXL8mvf6TWf1RuYzRZfgG5xq5YWePwVJhdeyJwg1dSPaGTSHkOlt1jRMnxetT/w+casmIQqstdXtm+shBcjP/PYcA6y4QkiQcEli0luNn4iA5z37cxgxJbWN5Rx6p0oAboYF8s+sx949yo2bzwxujHeT4QTpISzHPmS/nA5mvfBcgCQ5j1ijE0WkqbwYU+eSw8rIwb3NbuYWxSnNyXZTfNksmStczOGqaMragtYeF8iIY33A5e6+QBs6/zQLYHlCYYam7AI1NP5PqyvxQritjbjlW2iyTf0/75WobWPrw85lXYDWv+1RTx/hvcXjHx8ryo1Jl5ya+GxxpQKKdGEK/kpObbPB3jWDwCIOZEGJObRi8QNBahlStNnNr/+H+naB6nTbyoQpXzu+GppB2chRvb/ZIiGh4j4CQgfitOThGs6DK1hS/Z69693BNrbv19FksnU0smud3ZOA==",
+    "name": "configure_widget",
+    "arguments": "{\"value\":{\"type\":\"line-chart\",\"dataMapping\":{\"valueKey\":[{\"aggregation\":\"sum\",\"id\":\"disputes.kept\"},{\"id\":\"disputes.refunded\",\"aggregation\":\"sum\"}],\"categoryKey\":[{\"id\":\"disputes.closed::month\"}]},\"format\":{\"caption\":{\"text\":\"Kept and Refunded Over Time\",\"enabled\":true}}},\"op\":\"patch\",\"widgetId\":\"line_chart_kept_refunded\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 19437,
+   "outputTokens": 113,
+   "totalTokens": 19897
+  }
+ }
+}

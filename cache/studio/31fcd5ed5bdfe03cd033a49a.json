@@ -1,0 +1,23 @@
+{
+ "key": "31fcd5ed5bdfe03cd033a49a",
+ "saved_at": "2026-11-11T08:24:30.353Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbus235_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_13546139837165818858~EmAKXgFpFH0To4NeKzEfR0TKoD5L9u70/A7p8kgH60MI8TS0Ki1INExErvNlztX6I1UBHwCIRqN+u/KQNTw/NLDtJY2EbKoMFWlQ9XTVLYpvARkDDy621qpNF+6LLyq2PdY=",
+    "name": "delegate_to",
+    "arguments": "{\"type\":{\"id\":\"page\"},\"instructions\":\"Place a new column-chart-grouped or column-chart-stacked below the existing widgets to compare disputes answered by autopilot vs self, with answered_by on the X axis and the sum of kept and sum of refunded as values. Keep all existing widgets.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 4710,
+   "outputTokens": 75,
+   "totalTokens": 4785
+  }
+ }
+}

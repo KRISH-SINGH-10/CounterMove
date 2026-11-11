@@ -1,0 +1,23 @@
+{
+ "key": "f0bd4fd2ef0fd913fab0494b",
+ "saved_at": "2026-11-11T08:29:45.842Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbuytip_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_4173565640981637232~EmAKXgFpFH0ThwFT1YODqMahsLz4xAcd0L+GortGf37EPw3FHhJc6PLNIkVX0K/XmUZiGe5o75VYTPD7rZPI61rcU2ldn1sbGvfq3G/09F6XmcivS1xd1OnIawUG/au2aHo=",
+    "name": "delegate_to",
+    "arguments": "{\"type\":{\"widgetId\":\"stacked_column_chart\",\"pageId\":\"page-1\",\"widgetType\":\"column-chart-stacked\",\"id\":\"widget\"},\"instructions\":\"Configure this as a stacked column chart showing kept and refunded amounts by AI decision. Map ai_decision to the X axis (category), and the sum of kept and sum of refunded as the two values. Set a clear title like \\\"Kept vs Refunded Amount by AI Decision\\\" and enable the legend.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 5874,
+   "outputTokens": 116,
+   "totalTokens": 5990
+  }
+ }
+}

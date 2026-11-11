@@ -1,0 +1,23 @@
+{
+ "key": "b48fd488d31d0bf66e794982",
+ "saved_at": "2026-11-11T08:44:35.900Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbvhwak_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_11955480015149845354~EmAKXgFpFH0TUOv2MLD5uOjQsOfsLtB9nPNr+HblVU5go6nu38cqbMJXiDzPukWM2+jS7D+g+2tT/lGTnsAw5+x+BULrrvUH+3avbEYeMOPvXDjQ74R5rHDgE8lS67fIbR0=",
+    "name": "configure_widget",
+    "arguments": "{\"value\":{\"dataMapping\":{\"categoryKey\":[{\"id\":\"disputes.closed\"}],\"valueKey\":[{\"aggregation\":\"sum\",\"id\":\"disputes.kept\"},{\"id\":\"disputes.refunded\",\"aggregation\":\"sum\"}]},\"format\":{\"title\":{\"text\":\"Kept and Refunded Over Time\",\"enabled\":true}},\"type\":\"line-chart\"},\"op\":\"patch\",\"widgetId\":\"line_chart_kept_refunded\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 18959,
+   "outputTokens": 111,
+   "totalTokens": 19070
+  }
+ }
+}

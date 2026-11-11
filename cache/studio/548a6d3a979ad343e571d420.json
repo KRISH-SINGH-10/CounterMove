@@ -1,0 +1,23 @@
+{
+ "key": "548a6d3a979ad343e571d420",
+ "saved_at": "2026-11-11T08:20:25.834Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbumtey_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_2505416193479046709~EmAKXgFpFH0TwlNnj7yOur2rso9oGgPNJtQ+WbtrtAnqmeRNcNmO2yd/0OL8/qy3t5qo0r9iGJUGZJ6zU3tWitGJzolzVpWZ+mnPM3fHg37uCEPcaKuuh02EQyO8LG8PH04=",
+    "name": "delegate_to",
+    "arguments": "{\"type\":{\"widgetId\":\"horizontal_bar_chart\",\"pageId\":\"page-1\",\"id\":\"widget\",\"widgetType\":\"bar-chart-grouped\"},\"instructions\":\"This is a modify. Update the horizontal bar chart (@widget[horizontal_bar_chart]) using field ID 'disputes.claim' for the category axis and 'disputes.refunded' (aggregated as sum) for the metric value.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 8486,
+   "outputTokens": 104,
+   "totalTokens": 8590
+  }
+ }
+}

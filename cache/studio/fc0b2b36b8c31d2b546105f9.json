@@ -1,0 +1,23 @@
+{
+ "key": "fc0b2b36b8c31d2b546105f9",
+ "saved_at": "2026-11-11T08:42:41.137Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbvffqo_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_15633849486633239573~EmAKXgFpFH0TexkKd+qKE8/TE36hjctJbaKyfD1m0PFizKw7nn+waiwebZ5ct3xUIBOQ2EleHRLDNyg2JW+rhpGF4B5mYKYbyhRTXJ2PvYPsfl3Dge2TOdrGin4TkmH8Nr8=",
+    "name": "delegate_to",
+    "arguments": "{\"type\":{\"pageId\":\"page-1\",\"widgetId\":\"line_chart_kept_refunded\",\"widgetType\":\"line-chart\",\"id\":\"widget\"},\"instructions\":\"This is a modify. Reconfigure @widget[line_chart_kept_refunded] with dataMapping: { \\\"dimension\\\": \\\"disputes.closed\\\", \\\"metrics\\\": [\\\"disputes.kept\\\", \\\"disputes.refunded\\\"] }.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 16806,
+   "outputTokens": 105,
+   "totalTokens": 16911
+  }
+ }
+}

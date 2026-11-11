@@ -1,0 +1,28 @@
+{
+ "key": "de7057dcf5c0a4a3f37cca4f",
+ "saved_at": "2026-11-11T08:46:54.741Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbvkvf9_1",
+    "kind": "output",
+    "type": "message",
+    "role": "assistant",
+    "status": "completed",
+    "content": [
+     {
+      "type": "text",
+      "text": "I have successfully added a new line chart showing the sum of kept and refunded amounts over time (grouped by closed month) below your existing widgets, while keeping all existing widgets intact.",
+      "annotations": []
+     }
+    ]
+   }
+  ],
+  "usage": {
+   "inputTokens": 22049,
+   "outputTokens": 36,
+   "totalTokens": 22085
+  }
+ }
+}

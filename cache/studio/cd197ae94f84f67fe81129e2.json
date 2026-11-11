@@ -1,0 +1,23 @@
+{
+ "key": "cd197ae94f84f67fe81129e2",
+ "saved_at": "2026-11-11T08:25:59.572Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbutyxg_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_16998118720309978920~EmAKXgFpFH0TvLQFQKxOv864NEWmN48SI16Bo8bTofH8mi4YAEks1W2ot8YZ+HdwWCGtt+7ExoBo16U9lyiGPw2VuO+yFkpC1q9wlqsE7bi8I+9f2qeddaE6X5G9X/z4oBg=",
+    "name": "delegate_to",
+    "arguments": "{\"instructions\":\"Ensure @widget[column_chart_answered_by] has its dataMapping fully mapped with answered_by on the X axis, and the sum of kept and sum of refunded as series values.\",\"type\":{\"widgetId\":\"column_chart_answered_by\",\"id\":\"widget\",\"widgetType\":\"column-chart-stacked\",\"pageId\":\"page-1\"}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 6176,
+   "outputTokens": 96,
+   "totalTokens": 6272
+  }
+ }
+}

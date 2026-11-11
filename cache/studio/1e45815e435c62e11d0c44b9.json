@@ -1,0 +1,23 @@
+{
+ "key": "1e45815e435c62e11d0c44b9",
+ "saved_at": "2026-11-11T08:32:19.994Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv24gp_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_1151687604321570893~EmAKXgFpFH0TUh/UR6aVF7n2kI2anX56j6wPenlXya7axWn6NODrHtXk3uzHMK931AindTMThHZHOK+NXzdN/tn+fy94rUd2MNHyB1x78OZwnC+qY/1+uljoNidAla/lV5s=",
+    "name": "complete_task",
+    "arguments": "{\"summary\":\"Successfully added a new line-chart widget (@widget[line_chart_kept_refunded]) below the existing widgets on page-1, spanning the full width (24 columns) at yTrack 24 with a height of 20 rows.\",\"artifacts\":[{\"type\":\"widget\",\"id\":\"line_chart_kept_refunded\",\"description\":\"Added line chart widget for money kept and refunded over time\"}]}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 13378,
+   "outputTokens": 106,
+   "totalTokens": 13484
+  }
+ }
+}

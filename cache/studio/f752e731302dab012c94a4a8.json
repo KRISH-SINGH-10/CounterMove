@@ -1,0 +1,23 @@
+{
+ "key": "f752e731302dab012c94a4a8",
+ "saved_at": "2026-11-11T08:29:59.542Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbuz439_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_8000301953498477671~EmAKXgFpFH0Tke2SxVuvNH60vSHFVq7MDeaA4ZIKN38M5i1DBwn/SmlrgIWpffLtHmrSR0GGGdQMLRAvLPyyMEIb+1+7dtnHfGJxMkhkYtaaiCKW8CKAXFHOoGT52C0J/0Q=",
+    "name": "configure_widget",
+    "arguments": "{\"op\":\"patch\",\"value\":{\"dataMapping\":{\"categoryKey\":[{\"id\":\"disputes.ai_decision\"}],\"valueKey\":[{\"aggregation\":\"sum\",\"id\":\"disputes.kept\"},{\"id\":\"disputes.refunded\",\"aggregation\":\"sum\"}]},\"style\":{\"common\":{\"legend\":{\"enabled\":true}}},\"format\":{\"caption\":{\"enabled\":false},\"title\":{\"text\":\"Kept vs Refunded Amount by AI Decision\",\"enabled\":true}},\"type\":\"column-chart-stacked\"},\"widgetId\":\"stacked_column_chart\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 17450,
+   "outputTokens": 130,
+   "totalTokens": 17580
+  }
+ }
+}

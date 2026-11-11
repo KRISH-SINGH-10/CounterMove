@@ -1,0 +1,28 @@
+{
+ "key": "74e9e9db8c1967e36bd92efe",
+ "saved_at": "2026-11-11T08:21:53.395Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbuooz6_1",
+    "kind": "output",
+    "type": "message",
+    "role": "assistant",
+    "status": "completed",
+    "content": [
+     {
+      "type": "text",
+      "text": "I have added a horizontal bar chart below your existing widgets titled **\"Refunds by Claim Type\"**, showing the sum of refunded amounts broken down by claim type and sorted highest first. All existing KPIs and charts remain in place.",
+      "annotations": []
+     }
+    ]
+   }
+  ],
+  "usage": {
+   "inputTokens": 11055,
+   "outputTokens": 46,
+   "totalTokens": 11101
+  }
+ }
+}

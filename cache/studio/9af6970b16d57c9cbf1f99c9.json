@@ -1,0 +1,28 @@
+{
+ "key": "9af6970b16d57c9cbf1f99c9",
+ "saved_at": "2026-11-11T08:30:42.036Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbv00vo_1",
+    "kind": "output",
+    "type": "message",
+    "role": "assistant",
+    "status": "completed",
+    "content": [
+     {
+      "type": "text",
+      "text": "I have added the stacked column chart below your existing widgets. \n\n### Dashboard Summary: **AI Decision Kept vs Refunded**\n- **Existing KPIs**: Total dispute amount, total kept, and total refunded metrics across the top.\n- **@widget[stacked_column_chart] (Kept vs Refunded Amount by AI Decision)**: A stacked column chart displaying the breakdown of kept and refunded amounts grouped by each AI decision (`ai_decision`) on the X-axis, complete with a legend and titles.",
+      "annotations": []
+     }
+    ]
+   }
+  ],
+  "usage": {
+   "inputTokens": 7102,
+   "outputTokens": 107,
+   "totalTokens": 7209
+  }
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "key": "c63504087a451f59a4c7486a",
+ "saved_at": "2026-11-11T08:18:45.570Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbuko1t_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_5271879105747492922~EmAKXgFpFH0TCC2epPvVrGLYh6zTcv3QDd4m6HV9NFZgeBjMl8IWUvjENTl55DntsbcuPXhQ2qnhFHmpgd/hQ8qZ+Qsm0UWnQr+Nvq6eq109Kx8Y86Q9pesdoXYZVLumC+8=",
+    "name": "delegate_to",
+    "arguments": "{\"instructions\":\"Place a new horizontal bar chart below the existing widgets (at yTrack 24, height 18, full width 24).\",\"type\":{\"pageId\":\"page-1\",\"id\":\"page\"}}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 5739,
+   "outputTokens": 61,
+   "totalTokens": 5800
+  }
+ }
+}

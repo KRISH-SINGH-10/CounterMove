@@ -1,0 +1,23 @@
+{
+ "key": "8d4bc5cd8a0066c554211cde",
+ "saved_at": "2026-11-11T08:30:27.312Z",
+ "response": {
+  "model": "gemini-3.5-flash-lite",
+  "output": [
+   {
+    "id": "st_mwbuzpio_1",
+    "kind": "output",
+    "type": "function_call",
+    "callId": "call_8913511723475727795~EmAKXgFpFH0TlG2BjOHGowd4KyijIWC1K6/0NUhv/XbSpWSnzDFFi5BqlTiPoRYEK05pA/hPv+yJR29mt8OgSJbWTJf8K97FxVN7+0ikVj6orHsqAwkhqR35TB7XQOunnmc=",
+    "name": "complete_task",
+    "arguments": "{\"artifacts\":[{\"description\":\"Configured stacked column chart showing kept and refunded amounts by AI decision with legend enabled and title set.\",\"type\":\"widget\",\"id\":\"stacked_column_chart\"}],\"summary\":\"Configured the stacked column chart with @field[disputes.ai_decision] on the X-axis and the sum of @field[disputes.kept] and sum of @field[disputes.refunded] as value series. Enabled the legend and set a clear title.\"}",
+    "status": "completed"
+   }
+  ],
+  "usage": {
+   "inputTokens": 19888,
+   "outputTokens": 118,
+   "totalTokens": 20006
+  }
+ }
+}
