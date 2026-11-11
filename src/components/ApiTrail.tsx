@@ -24,6 +24,19 @@ type Call = {
   uid?: string;
 };
 
+// Which PayPal API a call belongs to, from its path.
+const API_NAMES: Array<[RegExp, string]> = [
+  [/^\/v1\/customer\/disputes/, "Disputes API"],
+  [/^\/v2\/checkout\/orders/, "Orders API"],
+  [/^\/v2\/payments/, "Payments API"],
+  [/^\/v1\/shipping\/trackers/, "Shipment Tracking API"],
+  [/^\/v1\/reporting\/transactions/, "Transaction Search API"],
+  [/^\/v1\/oauth2/, "OAuth (sign-in)"],
+  [/^\/v1\/notifications/, "Webhooks API"],
+  [/^shop\//, "Shop rule (no PayPal call)"],
+];
+export const apiName = (endpoint: string) => API_NAMES.find(([re]) => re.test(endpoint))?.[1] ?? "PayPal API";
+
 const BY_LABEL: Record<Call["by"], string> = { agent: "AI agent", seller: "You", autopilot: "Autopilot", system: "Server" };
 const VIA_LABEL: Record<Call["via"], string> = { simulator: "Simulator", rest: "PayPal REST API", agent_toolkit: "PayPal Agent Toolkit" };
 
@@ -64,6 +77,7 @@ const clock = (iso: string) => new Date(iso).toLocaleTimeString("en-GB", { hour:
 
 const COLS: ColDef<Call>[] = [
   { field: "at", headerName: "Time", width: 96, valueFormatter: (p) => (p.value ? clock(p.value) : ""), cellClass: "tabular text-muted", sort: "desc" },
+  { colId: "api", headerName: "API", width: 170, valueGetter: (p) => (p.data ? apiName(p.data.endpoint) : ""), cellClass: "font-medium", filter: "agTextColumnFilter" },
   { colId: "call", headerName: "PayPal call", flex: 2.4, minWidth: 220, valueGetter: (p) => `${p.data?.method} ${p.data?.endpoint}`, cellRenderer: CallCell, filter: "agTextColumnFilter" },
   { field: "status", headerName: "Status", width: 92, cellRenderer: StatusCell, filter: "agNumberColumnFilter" },
   { field: "debug_id", headerName: "PayPal-Debug-Id", width: 150, cellClass: "font-mono text-xs text-muted", valueFormatter: (p) => p.value ?? "" },
@@ -74,7 +88,7 @@ const COLS: ColDef<Call>[] = [
 export default function ApiTrail({ caseId, refreshKey, pageSize = 8 }: { caseId?: string; refreshKey?: string | number; pageSize?: number }) {
   const [calls, setCalls] = useState<Call[] | null>(null);
   const phone = usePhone();
-  const cols = useMemo(() => forPhone(COLS, phone, ["at", "debug_id", "by", "via"], ["status"]), [phone]);
+  const cols = useMemo(() => forPhone(COLS, phone, ["at", "api", "debug_id", "by", "via"], ["status"]), [phone]);
 
   const load = useCallback(async () => {
     try {

@@ -8,6 +8,7 @@ import type { ShieldRow } from "@/lib/shield";
 import { useCases } from "./CasesProvider";
 import { money, REASON_LABEL } from "./format";
 import { gridTheme } from "./grid";
+import ApiTrail from "./ApiTrail";
 import FixRequestsPanel from "./FixRequestsPanel";
 import Link from "next/link";
 import NetworkPanel, { type NetworkSummary } from "./NetworkPanel";
@@ -111,6 +112,10 @@ export default function Protect() {
       />
 
       {data?.mode === "mock" ? <FixRequestsPanel viewOnly={Boolean(data.viewOnly)} /> : null}
+
+      <Card title="PayPal API trail" subtitle="Every PayPal call made this session (order checks, refunds before shipping, dispute reads and answers), with the API, method, PayPal's status and its debug id.">
+        <ApiTrail refreshKey={orders.map((o) => `${o.order_id}:${o.decision?.action ?? ""}:${o.status}`).join("|")} pageSize={5} />
+      </Card>
 
       <Card title="Dispute memory" subtitle="Buyers who have disputed with you. The shield and the investigator both read this history.">
         {buyers.length ? (
