@@ -2,7 +2,7 @@
 
 > **For judges.** Countermove is the seller trust network for PayPal: stop scammers before you ship, settle the rest without a fight.
 >
-> **[Live demo](https://countermove.onrender.com)** · Video: **[https://youtu.be/zylGsAFkME8]** · No login needed.
+> **[Live demo](https://countermove.onrender.com)** · **[Video](https://youtu.be/zylGsAFkME8)** · No login needed.
 >
 > **Try in 60 seconds:** open the site → click **Judge mode** → watch *before* (a reported buyer's order refunded before shipping) → *during* (the agent answers a dispute with evidence) → *after* (Insights).
 >
