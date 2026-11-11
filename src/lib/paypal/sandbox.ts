@@ -12,6 +12,7 @@ import type { EvidenceSubmission, PayPalGateway } from "./gateway";
 import { evidencePdf } from "./evidence-pdf";
 import { makeToolkit, toolkitDefs, type PayPalEnv } from "./toolkit";
 import { recordCall, toolEndpoint, traced, type TrailMethod } from "../trail";
+import { paidOrders } from "../paid-orders";
 
 const ORDER_MAP = path.join(process.cwd(), "data", "sandbox-orders.json");
 
@@ -106,10 +107,10 @@ export function sandboxGateway(clientId: string, clientSecret: string, opts: { e
       }
     },
 
-    // The shield runs on the simulator's orders. A live install would collect these from
-    // PAYMENT.CAPTURE.COMPLETED webhooks and the shop's fulfillment system.
+    // Paid orders PayPal reported through PAYMENT.CAPTURE.COMPLETED webhooks (see
+    // paid-orders.ts). A full install would also drop the ones the shop has shipped.
     async ordersAwaitingShipment() {
-      return [];
+      return paidOrders().map((o) => ({ order_id: o.order_id, invoice_id: o.invoice_id }));
     },
 
     listDisputes() {

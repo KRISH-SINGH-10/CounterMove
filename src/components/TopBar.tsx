@@ -172,6 +172,16 @@ function SimulatorMenu({ onDone, onError }: { onDone: () => void; onError: (e: s
             </button>
             <p className="mt-1 text-xs text-muted">A buyer files a dispute and PayPal&apos;s webhook reaches the agent. Watch the alerts on Disputes.</p>
           </div>
+          <div>
+            <button
+              onClick={() => run(() => fetch("/api/demo/order", { method: "POST" })).then((j) => j && (setOpen(false), window.dispatchEvent(new Event("countermove:refresh"))))}
+              disabled={busy}
+              className={`${BUTTON.secondary} w-full`}
+            >
+              Simulate a paid order
+            </button>
+            <p className="mt-1 text-xs text-muted">A buyer pays and PayPal&apos;s PAYMENT.CAPTURE.COMPLETED webhook arrives. The pre-ship check runs on Protect before you ship.</p>
+          </div>
           <div className="border-t border-line pt-3">
             <p className="text-xs font-medium">Test self-healing</p>
             <select value={fault} onChange={(e) => setFault(e.target.value as Fault)} aria-label="PayPal fault to inject" className="mt-1 w-full rounded-md border border-line bg-panel px-2 py-1.5 text-sm">

@@ -69,13 +69,15 @@ export default function Protect() {
 
       <NetworkPanel mode={data?.mode} />
 
-      {data?.mode === "mock" ? (
-        <ShieldPanel key={data.cases.length ? "on" : "reset"} viewOnly={Boolean(data.viewOnly)} />
-      ) : (
-        <Card title="Dispute shield" subtitle="Checks paid orders for dispute risk before you ship.">
-          <Empty title="No paid orders to check here">The shield runs on the Simulator&apos;s paid orders. A live install would check each order as PayPal&apos;s PAYMENT.CAPTURE.COMPLETED webhook arrives.</Empty>
-        </Card>
-      )}
+      <ShieldPanel
+        key={`${data?.mode}:${data?.cases.length ? "on" : "reset"}`}
+        viewOnly={Boolean(data?.viewOnly)}
+        empty={
+          <Card title="Dispute shield" subtitle="Checks paid orders for dispute risk before you ship.">
+            <Empty title="No paid orders waiting to ship">Each order is checked as PayPal&apos;s PAYMENT.CAPTURE.COMPLETED webhook arrives. Pay for a sandbox order to see it land here.</Empty>
+          </Card>
+        }
+      />
 
       {data?.mode === "mock" ? <FixRequestsPanel viewOnly={Boolean(data.viewOnly)} /> : null}
 

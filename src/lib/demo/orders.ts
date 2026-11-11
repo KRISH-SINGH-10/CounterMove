@@ -12,6 +12,9 @@ export type PendingOrder = {
   item: { id: string; name: string; qty: number };
   shipping: { id: string; label: string; amount: string };
   prior_purchases: number;
+  // Not paid yet when the Simulator starts: it arrives through the PAYMENT.CAPTURE.COMPLETED
+  // webhook when the seller clicks "Simulate a paid order".
+  arrives_by_webhook?: true;
 };
 
 export const PENDING_ORDERS: PendingOrder[] = [
@@ -47,5 +50,19 @@ export const PENDING_ORDERS: PendingOrder[] = [
     prior_purchases: 1,
   },
 ];
+
+// A buyer three shops (this one included) have already caught, ordering again. Paid by
+// webhook in the demo, so the seller watches the check happen.
+PENDING_ORDERS.push({
+  key: "JK-1095",
+  amount: "318.00",
+  paid_hours_ago: 0,
+  buyer: { name: "Corey Haldane", email: "c.haldane@example.com", payer_id: "QX7BUYER1095", account_status: "VERIFIED", address: "77 Birch Ln, Columbus, OH 43215" },
+  ship_to: { name: "Corey Haldane", address: "77 Birch Ln, Columbus, OH 43215" },
+  item: { id: "LB-MSG-COG", name: "Leather messenger bag, cognac", qty: 1 },
+  shipping: { id: "EXPRESS", label: "Express, 2-day", amount: "24.00" },
+  prior_purchases: 3,
+  arrives_by_webhook: true,
+});
 
 export const pendingOrderByKey = (key: string) => PENDING_ORDERS.find((o) => o.key === key);

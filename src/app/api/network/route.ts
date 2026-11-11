@@ -22,7 +22,8 @@ export const GET = withVisitor(async (req: Request) => {
     if (b?.email) known.set(b.email.toLowerCase(), { email: b.email.toLowerCase(), name: b.name ?? b.email });
   }
   // Paid orders waiting to ship (simulator only for now).
-  const orders = paypal().mode === "mock" ? PENDING_ORDERS : [];
+  const awaiting = new Set((await paypal().ordersAwaitingShipment()).map((o) => o.invoice_id));
+  const orders = PENDING_ORDERS.filter((o) => awaiting.has(o.key));
   for (const o of orders) known.set(o.buyer.email, { email: o.buyer.email, name: o.buyer.name });
   const net = await listNetwork([...known.values()]);
   const ordering = new Map(orders.map((o) => [buyerHash(o.buyer.email), o.key]));

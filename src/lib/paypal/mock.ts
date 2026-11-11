@@ -10,6 +10,7 @@ import type { EvidenceSubmission, PayPalGateway } from "./gateway";
 import { sharedToolDefs } from "./toolkit";
 import { lruGet, visitor } from "../visitor";
 import { fakeDebugId, toolEndpoint, traced } from "../trail";
+import { paidOrders } from "../paid-orders";
 
 type MockRow = {
   scenario: Scenario;
@@ -186,6 +187,32 @@ function pendingOrder(o: PendingOrder, i: number) {
 }
 const PENDING = PENDING_ORDERS.map(pendingOrder);
 
+// The PAYMENT.CAPTURE.COMPLETED event PayPal would send for the next demo order that
+// arrives by webhook, or null when every one is already paid. Same shape as PayPal's
+// capture resource, so it goes through the same webhook code as a live one.
+export function simulatedPaymentEvent() {
+  const paid = new Set(paidOrders().map((o) => o.order_id));
+  const i = PENDING_ORDERS.findIndex((o, n) => o.arrives_by_webhook && !paid.has(PENDING[n].id));
+  if (i < 0) return null;
+  const o = PENDING[i];
+  const capture = o.purchase_units[0].payments.captures[0];
+  return {
+    id: `WH-SIM-PAY-${o.id.slice(-6)}`,
+    event_type: "PAYMENT.CAPTURE.COMPLETED",
+    resource_type: "capture",
+    summary: `Payment completed for $ ${capture.amount.value} USD`,
+    resource: {
+      id: capture.id,
+      status: "COMPLETED",
+      amount: capture.amount,
+      invoice_id: o.purchase_units[0].invoice_id,
+      final_capture: true,
+      create_time: new Date().toISOString(),
+      supplementary_data: { related_ids: { order_id: o.id } },
+    },
+  };
+}
+
 function state(): MockState {
   g.__rebuttalMock ??= new Map();
   return lruGet(g.__rebuttalMock, visitor().id, () => {
@@ -338,7 +365,9 @@ const simulator: PayPalGateway = {
   },
 
   async ordersAwaitingShipment() {
-    return PENDING.map((o) => ({ order_id: o.id, invoice_id: o.purchase_units[0].invoice_id }));
+    // An order that arrives by webhook shows once its PAYMENT.CAPTURE.COMPLETED is in.
+    const paid = new Set(paidOrders().map((o) => o.order_id));
+    return PENDING.filter((o, i) => !PENDING_ORDERS[i].arrives_by_webhook || paid.has(o.id)).map((o) => ({ order_id: o.id, invoice_id: o.purchase_units[0].invoice_id }));
   },
 
   async listDisputes() {

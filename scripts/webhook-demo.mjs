@@ -13,7 +13,7 @@
 // API; "resend" replays a real event if you need to show it again.
 
 const BASE = "https://api-m.sandbox.paypal.com";
-const EVENTS = ["CUSTOMER.DISPUTE.CREATED", "CUSTOMER.DISPUTE.UPDATED", "CUSTOMER.DISPUTE.RESOLVED"];
+const EVENTS = ["CUSTOMER.DISPUTE.CREATED", "CUSTOMER.DISPUTE.UPDATED", "CUSTOMER.DISPUTE.RESOLVED", "PAYMENT.CAPTURE.COMPLETED"];
 
 async function api(method, path, body) {
   const id = process.env.PAYPAL_CLIENT_ID;

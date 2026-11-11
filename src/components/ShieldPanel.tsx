@@ -199,7 +199,7 @@ function ShieldDetail({ data, context }: ICellRendererParams<ShieldGridRow>) {
 
 // Dispute shield: paid orders waiting to ship, each checked by the agent for dispute
 // risk before the seller ships it, using the buyer's dispute history with the shop.
-export default function ShieldPanel({ viewOnly }: { viewOnly: boolean }) {
+export default function ShieldPanel({ viewOnly, empty = null }: { viewOnly: boolean; empty?: React.ReactNode }) {
   const phone = usePhone();
   const phoneCols = useMemo(() => forPhone(COLS, phone, ["invoice_id", "ship_to", "amount", "headline"], ["risk"]), [phone]);
   const [orders, setOrders] = useState<ShieldRow[] | null>(null);
@@ -229,7 +229,8 @@ export default function ShieldPanel({ viewOnly }: { viewOnly: boolean }) {
   const checking = orders?.some((o) => o.status === "CHECKING") ?? true;
   useEffect(() => {
     load();
-    // Another panel acted on an order (a buyer request refunded it, or Judge mode).
+    // Another panel acted on an order (a buyer request refunded it, Judge mode, or a
+    // simulated payment arrived).
     window.addEventListener("countermove:refresh", load);
     return () => window.removeEventListener("countermove:refresh", load);
   }, [load]);
@@ -261,7 +262,8 @@ export default function ShieldPanel({ viewOnly }: { viewOnly: boolean }) {
     }
   }
 
-  if (!orders?.length) return null;
+  if (!orders) return null;
+  if (!orders.length) return <>{empty}</>;
   // Flagged MEDIUM or HIGH and not acted on yet.
   const flagged = orders.filter((o) => o.to_review ?? (o.verdict && o.verdict.risk !== "LOW" && !o.decision));
   const held = flagged.reduce((n, o) => n + Number(o.amount), 0);

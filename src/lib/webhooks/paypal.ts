@@ -8,9 +8,22 @@ import { after } from "next/server";
 import { ingestDisputeEvent, runAutopilot } from "../autopilot";
 import { getCase } from "../cases";
 import { negotiate } from "../negotiation";
+import { paidOrderFromEvent, recordPaidOrder } from "../paid-orders";
+import { runShield } from "../shield";
 import { paypal } from "../paypal";
 import { storeFor } from "../store";
 import { runAs, tenant, type Visitor } from "../visitor";
+
+// A buyer paid: record the order and check it for dispute risk in the background, so the
+// verdict is waiting on Protect before anyone ships it. Called after the signature check
+// (live) or directly by the Simulator's "Simulate a paid order".
+export async function ingestPayment(event: { id?: unknown; resource?: Record<string, any> }, as: Visitor): Promise<Response> {
+  const order = paidOrderFromEvent(event);
+  if (!order) return Response.json({ received: true, checked: false }, { status: 202 });
+  if (!recordPaidOrder(order)) return Response.json({ duplicate: true });
+  after(() => runAs(as, () => runShield(order.order_id).catch((e) => console.error(`pre-ship check ${order.invoice_id} failed:`, e))));
+  return Response.json({ received: true, order_id: order.order_id, invoice_id: order.invoice_id });
+}
 
 export async function handlePayPalWebhook(req: Request, as: Visitor): Promise<Response> {
   return runAs(as, () => handle(req, as));
@@ -21,7 +34,8 @@ async function handle(req: Request, as: Visitor): Promise<Response> {
   if (!event?.event_type) return Response.json({ error: "Bad payload" }, { status: 400 });
   // Ignore other event types before verifying, so an app subscribed to more events
   // (or a missing PAYPAL_WEBHOOK_ID) never makes PayPal retry events we don't use.
-  if (!String(event.event_type).startsWith("CUSTOMER.DISPUTE.")) return Response.json({ ignored: true });
+  const payment = event.event_type === "PAYMENT.CAPTURE.COMPLETED";
+  if (!payment && !String(event.event_type).startsWith("CUSTOMER.DISPUTE.")) return Response.json({ ignored: true });
   const gw = paypal();
   try {
     if (!(await gw.verifyWebhook(req.headers, event))) return Response.json({ error: "Signature check failed" }, { status: 401 });
@@ -30,6 +44,7 @@ async function handle(req: Request, as: Visitor): Promise<Response> {
     console.error("webhook signature check could not run:", e instanceof Error ? e.message : e);
     return Response.json({ error: "Could not verify the event" }, { status: 500 });
   }
+  if (payment) return ingestPayment(event, as);
   if (!event.resource?.dispute_id) return Response.json({ error: "No dispute_id" }, { status: 400 });
 
   const store = storeFor(tenant());
