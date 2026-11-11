@@ -161,7 +161,7 @@ export default function Insights() {
         sideBar: { toolPanels: ["columns", "filters"] },
         // Integrated charts use the app's colors: kept in green, refunded in red.
         customChartThemes: {
-          rebuttal: {
+          countermove: {
             baseTheme: "ag-default" as const,
             // Cross-filter charts take every other color (the in-between one shades the
             // filtered-out part), so each color is listed twice.
@@ -169,7 +169,7 @@ export default function Insights() {
             overrides: { common: { background: { fill: cssVar("--panel", "#ffffff") } } },
           },
         },
-        chartThemes: ["rebuttal", "ag-default", "ag-default-dark"],
+        chartThemes: ["countermove", "ag-default", "ag-default-dark"],
         statusBar: {
           statusPanels: [
             { statusPanel: "agTotalAndFilteredRowCountComponent", align: "left" as const },
@@ -235,7 +235,7 @@ export default function Insights() {
           common: { title: { enabled: true, text: "Kept vs refunded by claim type (click a bar to filter)" } },
           bar: { series: { fillOpacity: 0.9 } },
         },
-        chartThemeName: "rebuttal",
+        chartThemeName: "countermove",
       }),
     );
   }

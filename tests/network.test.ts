@@ -37,7 +37,7 @@ describe("Countermove network", () => {
     const withNet = scoreOrder(order, history);
     const without = scoreOrder(order, { ...history, network: undefined });
     expect(withNet.score - without.score).toBe(20);
-    expect(withNet.signals.find((s) => s.source === "rebuttal_network")?.finding).toContain("1 other shop");
+    expect(withNet.signals.find((s) => s.source === "countermove_network")?.finding).toContain("1 other shop");
   });
 
   it("shares this shop's own wins only when the evidence contradicted the claim", async () => {

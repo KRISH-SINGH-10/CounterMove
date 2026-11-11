@@ -20,7 +20,7 @@
       {
         "finding": "Countermove network: 1 other shop reported this PayPal account (item not received) after their evidence contradicted the claim.",
         "effect": "RAISES",
-        "source": "rebuttal_network",
+        "source": "countermove_network",
         "weight": 20
       },
       {

@@ -1,4 +1,4 @@
-// Checks the live services Rebuttal needs, without printing any secret:
+// Checks the live services Countermove needs, without printing any secret:
 //   node scripts/live-check.mjs
 // 1. Gemini: lists the flash models this key sees, then sends a one-line prompt to
 //    GEMINI_MODEL (default gemini-3.5-flash-lite), because a listed model can still be

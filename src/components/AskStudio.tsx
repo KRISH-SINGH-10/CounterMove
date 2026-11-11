@@ -106,7 +106,7 @@ const FIELDS = [
   day("opened", "Opened", "Date the buyer opened the dispute"),
   day("closed", "Closed", "Date PayPal closed the dispute; blank while open"),
   text("status", "Status", "Where the dispute is now"),
-  text("ai_decision", "AI decision", "What Rebuttal's AI agent recommended: Fight, Partial refund or Refund"),
+  text("ai_decision", "AI decision", "What Countermove's AI agent recommended: Fight, Partial refund or Refund"),
   { id: "ai_win_chance", name: "AI win chance %", description: "The AI agent's estimated chance, 0 to 100, of winning if the seller fights", format: "integerFormat" as const },
   text("answered_by", "Answered by", "Who sent the response to PayPal: Autopilot, Seller, or Not answered"),
   text("result", "Result", "How PayPal closed it: Won, Settled, Refunded, Lost, or Open"),
@@ -127,9 +127,13 @@ const PROMPTS = [
 type Loaded = { Studio: ComponentType<AgStudioProperties & { modules?: unknown[]; style?: React.CSSProperties }>; modules: unknown[]; theme: AgStudioProperties["theme"]; createAiHarness: typeof import("ag-studio").createAiHarness };
 
 // AG Studio is a large bundle, so it loads only on this page, after the data is in.
-let loading: Promise<Loaded> | null = null;
-function loadStudio(): Promise<Loaded> {
-  loading ??= Promise.all([import("ag-studio"), import("ag-studio-react"), fetch("/api/grid-config", { cache: "no-store" }).then((r) => r.json()).catch(() => ({}))]).then(([core, react, cfg]) => {
+let loading: Promise<Loaded | null> | null = null;
+// Resolves to null when the server has no AG_STUDIO_LICENSE_KEY (and no AG_STUDIO_TRIAL=1):
+// AG Studio is then never downloaded, so it can't print licence errors.
+function loadStudio(): Promise<Loaded | null> {
+  loading ??= fetch("/api/grid-config", { cache: "no-store" }).then((r) => r.json()).catch(() => ({})).then(async (cfg: { studioKey?: string; studioTrial?: boolean }) => {
+    if (!cfg.studioKey && !cfg.studioTrial) return null;
+    const [core, react] = await Promise.all([import("ag-studio"), import("ag-studio-react")]);
     if (cfg.studioKey) core.AgStudioLicenseManager.setLicenseKey(cfg.studioKey);
     const css = (name: string, fallback: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
     const theme = core.studioTheme.withParams({
@@ -160,10 +164,10 @@ function loadStudio(): Promise<Loaded> {
 // change charts, KPIs and grids from a plain-English question.
 export default function AskStudio() {
   const { data } = useCases();
-  const [lib, setLib] = useState<Loaded | null>(null);
+  const [lib, setLib] = useState<Loaded | null | "unlicensed">(null);
   const [failed, setFailed] = useState<string | null>(null);
   useEffect(() => {
-    loadStudio().then(setLib, (e) => setFailed(e instanceof Error ? e.message : String(e)));
+    loadStudio().then((l) => setLib(l ?? "unlicensed"), (e) => setFailed(e instanceof Error ? e.message : String(e)));
   }, []);
   // The data snapshot is taken once per mode, so polling doesn't reset the dashboard.
   const mode = data?.mode;
@@ -172,13 +176,13 @@ export default function AskStudio() {
   const studioData = useMemo(
     () =>
       rows && {
-        description: "PayPal disputes handled by Rebuttal for one small online shop. Money is in US dollars.",
+        description: "PayPal disputes handled by Countermove for one small online shop. Money is in US dollars.",
         sources: [
           {
             id: "disputes",
             name: "Disputes",
             description:
-              "One row per PayPal dispute. claim = the buyer's reason; amount = money disputed; ai_decision = what Rebuttal's AI agent recommended; ai_win_chance = its estimated chance (0-100) of winning a fight; answered_by = who sent the response to PayPal; result = how PayPal closed it; kept = money the seller kept; refunded = money given back. Open disputes have result Open and no closed date.",
+              "One row per PayPal dispute. claim = the buyer's reason; amount = money disputed; ai_decision = what Countermove's AI agent recommended; ai_win_chance = its estimated chance (0-100) of winning a fight; answered_by = who sent the response to PayPal; result = how PayPal closed it; kept = money the seller kept; refunded = money given back. Open disputes have result Open and no closed date.",
             primaryKeyField: "dispute_id",
             data: rows,
             fields: FIELDS,
@@ -189,7 +193,7 @@ export default function AskStudio() {
   );
 
   const ai = useMemo<AgStudioProperties["ai"]>(
-    () => (lib ? (params) => lib.createAiHarness(params.api as Parameters<Loaded["createAiHarness"]>[0], { adapter: geminiAdapter, primary: "lead", promptStarters: PROMPTS }) : undefined),
+    () => (lib && lib !== "unlicensed" ? (params) => lib.createAiHarness(params.api as Parameters<Loaded["createAiHarness"]>[0], { adapter: geminiAdapter, primary: "lead", promptStarters: PROMPTS }) : undefined),
     [lib],
   );
 
@@ -207,6 +211,14 @@ export default function AskStudio() {
       <div className="relative left-1/2 w-[calc(100vw-1.5rem)] max-w-[1800px] -translate-x-1/2 overflow-x-auto overflow-y-hidden rounded-xl border border-line bg-panel sm:w-[calc(100vw-3rem)] sm:overflow-hidden">
         {failed ? (
           <p className="p-4 text-sm text-danger">The dashboard couldn&apos;t load: {failed}</p>
+        ) : lib === "unlicensed" ? (
+          <div className="space-y-2 p-4 text-sm" data-testid="studio-unlicensed">
+            <p className="font-medium">Ask AI needs an AG Studio licence key on this server.</p>
+            <p className="text-muted">
+              Set <code>AG_STUDIO_LICENSE_KEY</code> (a free trial key from AG Grid) to switch it on. Until then the rest of Countermove works as normal, and{" "}
+              <a href="/insights" className="text-accent underline">Ask the grid on Insights</a> answers plain-English questions with AG Grid filters and grouping.
+            </p>
+          </div>
         ) : !lib || !studioData ? (
           <p className="p-4 text-sm text-muted">Loading the dashboard…</p>
         ) : (
@@ -222,8 +234,8 @@ export default function AskStudio() {
               panels={{ edit: { left: ["ai"], right: ["edit"] }, view: { right: ["filters"] } }}
               ai={ai}
               onApiReady={(e) => {
-                // Handy for saving a dashboard from the browser console: copy(JSON.stringify(window.rebuttalStudio.getState()))
-                (window as unknown as { rebuttalStudio: unknown }).rebuttalStudio = e.api;
+                // Handy for saving a dashboard from the browser console: copy(JSON.stringify(window.countermoveStudio.getState()))
+                (window as unknown as { countermoveStudio: unknown }).countermoveStudio = e.api;
               }}
               style={{ height: "100%", width: "100%" }}
             />

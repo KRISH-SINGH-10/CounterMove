@@ -8,5 +8,8 @@ export async function GET() {
   await connection();
   const key = process.env.AG_GRID_LICENSE_KEY?.trim();
   const studioKey = process.env.AG_STUDIO_LICENSE_KEY?.trim();
-  return Response.json({ ...(key ? { enterprise: true, key } : { enterprise: false }), ...(studioKey ? { studioKey } : {}) }, { headers: { "Cache-Control": "no-store" } });
+  // AG_STUDIO_TRIAL=1 loads AG Studio without a key (it shows a trial watermark); for
+  // development and for recording saved Ask AI runs.
+  const studioTrial = !studioKey && process.env.AG_STUDIO_TRIAL === "1";
+  return Response.json({ ...(key ? { enterprise: true, key } : { enterprise: false }), ...(studioKey ? { studioKey } : {}), ...(studioTrial ? { studioTrial } : {}) }, { headers: { "Cache-Control": "no-store" } });
 }

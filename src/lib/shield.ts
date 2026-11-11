@@ -158,7 +158,7 @@ export function scoreOrder(order: any, history: Pick<BuyerHistory, "completed_or
   const net = history.network;
   if (net?.other_shops) {
     const claims = [...new Set(net.reports.map((x) => String(x.claim).toLowerCase().replaceAll("_", " ").replace("merchandise or service ", "item ")))].join(", ");
-    add(W.networkFirst + W.networkMore * (net.other_shops - 1), `Countermove network: ${net.other_shops} other shop${net.other_shops === 1 ? "" : "s"} reported this PayPal account (${claims}) after their evidence contradicted the claim.`, "rebuttal_network");
+    add(W.networkFirst + W.networkMore * (net.other_shops - 1), `Countermove network: ${net.other_shops} other shop${net.other_shops === 1 ? "" : "s"} reported this PayPal account (${claims}) after their evidence contradicted the claim.`, "countermove_network");
   }
   if (!disputes.length && !net?.other_shops && history.completed_orders > 0) {
     const n = history.completed_orders;
@@ -207,7 +207,7 @@ export async function getBuyerHistory(email: string) {
           shop_evidence: f
             ? { carrier: f.carrier, last_scan: f.carrier_events.at(-1)?.status ?? null, signature_required: f.signature_required, signed_by: f.signed_by }
             : null,
-          rebuttal_assessment: c.recommendation ? { decision: c.recommendation.decision, headline: c.recommendation.headline } : null,
+          countermove_assessment: c.recommendation ? { decision: c.recommendation.decision, headline: c.recommendation.headline } : null,
           outcome: c.outcome ? c.outcome.result : "OPEN",
         };
       }),
