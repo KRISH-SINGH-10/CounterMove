@@ -48,7 +48,7 @@ The demo shop is **Laceline Resale**, a two-person sneaker resale shop: high-val
 - **PayPal:** the Agent Toolkit for the agent's read tools; the Disputes API for evidence, offers, messages and accepting claims; the Orders API for tracking; the Payments API for refunding a capture before shipping; webhooks with signature verification for new disputes and for completed payments, which start the pre-ship check. `scripts/verify-live.mjs` checks each API against the real sandbox.
 - **AI:** Google Gemini in a function-calling loop. The model only reads and recommends. Every PayPal write is made by server code, after a person approves or inside autopilot rules checked in code after the model answers.
 - **AG Grid:** a 1,000,000-row scale check on the server-side row model, and more grids on one custom theme, plus AG Charts and AG Studio. "Ask the grid" turns a plain-English question into AG Grid filters, sort and row grouping through Gemini, validated in code against the grid's real columns.
-- **App:** Next.js and TypeScript on Render, with 142 automated tests.
+- **App:** Next.js and TypeScript on Render, with 143 automated tests.
 - **Simulator:** returns the same JSON as the PayPal sandbox, so the same code, pages and agent run in both. Judges can try every action with no PayPal login, and one toggle switches to the real sandbox.
 
 ## Built with AG Grid
