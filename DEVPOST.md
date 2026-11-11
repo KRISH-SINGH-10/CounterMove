@@ -12,11 +12,20 @@ Stop scammers before you ship. Settle the rest without a fight.
 
 ## Inspiration
 
+> "I don't have that money to loss, I am having very bad time and thus is killing me, I can't sleep i can't eat"
+>
+> — a seller on r/paypal, after losing a $950 pen to an "empty box" chargeback. They had tracking, a photo of the pen with the postage label, and the courier's photo of the parcel at the door. [source](https://www.reddit.com/r/paypal/s/3s84HwjKmb)
+
+That post is two months old, and it isn't rare. On the same subreddit:
+
+- A seller shipped a watch overnight with UPS signature. Two weeks later the buyer filed an "unauthorized" chargeback and deleted his accounts. The seller asked: *"As soon as a buyer wants to scam someone, the seller is just burned no matter what?"* [source](https://www.reddit.com/r/paypal/s/hAZfUv6ArC)
+- A seller lost a $750 iPad Pro to a chargeback a month after signed delivery, then found out *"this same person has scammed 5+ people on the subreddit."* [source](https://www.reddit.com/r/paypal/s/KTKrcHiCkh)
+
+That last line is why Countermove starts with a trust network: if the first seller's proof had reached the next five, the next five would have been warned before they shipped.
+
 A small seller gets a PayPal dispute and has days to answer. Most refund out of fear, or send a rushed reply that leaves out the evidence that would have won. The reseller who ships a $236 pair of deadstock sneakers to a package forwarder never had a chance: the dispute was lost before it was opened.
 
 We wanted an agent that works across the whole life of a dispute: stop the bad order before it ships, answer the dispute with evidence when one arrives, and afterwards fix whatever caused it.
-
-**[fill in: one or two sentences from a real seller you spoke to, with their permission.]**
 
 ## What it does
 
