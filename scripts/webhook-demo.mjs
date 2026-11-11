@@ -38,7 +38,7 @@ async function api(method, path, body) {
 const [cmd, arg] = process.argv.slice(2);
 try {
   if (cmd === "setup") {
-    if (!arg?.startsWith("https://")) throw new Error("Pass your public https host, e.g. https://rebuttal-6j9a.onrender.com");
+    if (!arg?.startsWith("https://")) throw new Error("Pass your public https host, e.g. https://countermove.onrender.com");
     const url = `${arg.replace(/\/$/, "")}/api/webhooks/paypal`;
     const { webhooks = [] } = await api("GET", "/v1/notifications/webhooks");
     const found = webhooks.find((w) => w.url === url) ?? (await api("POST", "/v1/notifications/webhooks", { url, event_types: EVENTS.map((name) => ({ name })) }));

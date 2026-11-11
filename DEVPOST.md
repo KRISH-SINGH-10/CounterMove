@@ -118,6 +118,6 @@ Without `AG_GRID_LICENSE_KEY` every grid runs on AG Grid Community with no water
 
 ## Links
 
-- Live demo: https://rebuttal-6j9a.onrender.com
-- Code: https://github.com/KRISH-SINGH-10/Rebuttal
+- Live demo: https://countermove.onrender.com
+- Code: https://github.com/KRISH-SINGH-10/CounterMove
 - Video: **[fill in the final YouTube link]**

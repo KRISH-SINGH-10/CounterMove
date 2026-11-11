@@ -210,8 +210,8 @@ Finished investigations are saved (`cache/investigations/`) and replayed step by
 Requires Node 22+ and npm. No PayPal account is needed for the simulator.
 
 ```bash
-git clone https://github.com/KRISH-SINGH-10/Rebuttal.git
-cd Rebuttal
+git clone https://github.com/KRISH-SINGH-10/CounterMove.git
+cd CounterMove
 npm install
 cp .env.example .env.local   # add GEMINI_API_KEY (free at aistudio.google.com)
 npm run dev                  # http://localhost:3000
@@ -293,7 +293,7 @@ The demo itself needs none of them: the Simulator, Judge mode and every saved AI
 
 ### Avoiding the cold start
 
-Render's free instance sleeps after 15 minutes idle, and the first visit then takes about a minute. During judging, keep it awake with a free uptime monitor (for example UptimeRobot or Better Stack) that opens `https://rebuttal-6j9a.onrender.com/api/health` every 5 minutes, or move the service to a paid instance. The health check makes no PayPal or Gemini call, so the pings cost nothing.
+Render's free instance sleeps after 15 minutes idle, and the first visit then takes about a minute. During judging, keep it awake with a free uptime monitor (for example UptimeRobot or Better Stack) that opens `https://countermove.onrender.com/api/health` every 5 minutes, or move the service to a paid instance. The health check makes no PayPal or Gemini call, so the pings cost nothing.
 
 ## Deploy
 
