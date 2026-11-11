@@ -569,10 +569,10 @@ export default function Inbox() {
       {error ? <p className="rounded-md border border-danger px-3 py-2 text-sm text-danger">{error}</p> : null}
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4" data-tour="kpis">
-        <Kpi label="Money at risk" value={s ? money(s.at_risk) : "-"} sub={s ? `${s.open} open dispute${s.open === 1 ? "" : "s"}` : undefined} />
-        <Kpi label="Due within 3 days" value={s ? String(s.due_soon) : "-"} sub={s?.due_soon ? `${money(s.due_soon_amount)} at stake` : "Nothing urgent"} tone={s?.due_soon ? "bad" : undefined} />
-        <Kpi label="Money protected" value={s ? money(s.kept) : "-"} tone="good" sub={s?.rulings ? `Won ${s.won} of ${s.rulings} PayPal ruling${s.rulings === 1 ? "" : "s"}` : "No PayPal rulings yet"} />
-        <Kpi label="Autopilot" value={rules ? (auto ? "On" : "Off") : "-"} tone={auto ? "good" : "neutral"} sub={s ? `Handled ${s.autopilot} of ${s.answered} responses` : undefined} />
+        <Kpi label="Money at risk" value={s ? money(s.at_risk) : null} sub={s ? `${s.open} open dispute${s.open === 1 ? "" : "s"}` : undefined} />
+        <Kpi label="Due within 3 days" value={s ? String(s.due_soon) : null} sub={s?.due_soon ? `${money(s.due_soon_amount)} at stake` : "Nothing urgent"} tone={s?.due_soon ? "bad" : undefined} />
+        <Kpi label="Money protected" value={s ? money(s.kept) : null} tone="good" sub={s?.rulings ? `Won ${s.won} of ${s.rulings} PayPal ruling${s.rulings === 1 ? "" : "s"}` : "No PayPal rulings yet"} />
+        <Kpi label="Autopilot" value={rules ? (auto ? "On" : "Off") : null} tone={auto ? "good" : "neutral"} sub={s ? `Handled ${s.autopilot} of ${s.answered} responses` : undefined} />
       </div>
 
       <Card title="Latest alerts" subtitle="PayPal webhooks and what autopilot did with them." right={<Link href="/insights" className="text-xs text-accent underline">Full history</Link>}>

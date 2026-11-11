@@ -95,10 +95,10 @@ export default function NetworkPanel({ mode, onSummary }: { mode?: "mock" | "san
       }
     >
       <div className="mb-3 grid grid-cols-2 gap-3 md:grid-cols-4">
-        <Kpi label="Ordering from you now" value={data ? String(ordering) : "-"} tone={ordering ? "bad" : undefined} sub="Reported accounts with a paid order" />
-        <Kpi label="Seen at 2+ shops" value={data ? String(flagged) : "-"} sub="Accounts reported more than once" />
-        <Kpi label="Reports in the network" value={data ? String(data.reports) : "-"} sub={data ? `From ${data.shops} shops` : undefined} />
-        <Kpi label="You shared" value={data ? String(data.shared) : "-"} tone="good" sub="Disputes you won with proof" />
+        <Kpi label="Ordering from you now" value={data ? String(ordering) : null} tone={ordering ? "bad" : undefined} sub="Reported accounts with a paid order" />
+        <Kpi label="Seen at 2+ shops" value={data ? String(flagged) : null} sub="Accounts reported more than once" />
+        <Kpi label="Reports in the network" value={data ? String(data.reports) : null} sub={data ? `From ${data.shops} shops` : undefined} />
+        <Kpi label="You shared" value={data ? String(data.shared) : null} tone="good" sub="Disputes you won with proof" />
       </div>
       <AgGridReact<Account>
         theme={gridTheme}

@@ -256,10 +256,10 @@ export default function Insights() {
       </div>
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-        <Kpi label="Money protected" value={s ? money(s.kept) : "-"} tone="good" sub={s?.rulings ? `Won ${s.won} of ${s.rulings} PayPal ruling${s.rulings === 1 ? "" : "s"}` : "No PayPal rulings yet"} />
-        <Kpi label="Hours saved" value={s ? `${s.hours_saved}h` : "-"} sub="Est. 45 min of manual work per dispute" />
-        <Kpi label="Handled by autopilot" value={s ? `${s.autopilot} of ${s.answered}` : "-"} sub="Responses sent without you" />
-        <Kpi label="Disputes" value={s ? String(data?.cases.length ?? 0) : "-"} sub={s ? `${s.open} still open` : undefined} />
+        <Kpi label="Money protected" value={s ? money(s.kept) : null} tone="good" sub={s?.rulings ? `Won ${s.won} of ${s.rulings} PayPal ruling${s.rulings === 1 ? "" : "s"}` : "No PayPal rulings yet"} />
+        <Kpi label="Hours saved" value={s ? `${s.hours_saved}h` : null} sub="Est. 45 min of manual work per dispute" />
+        <Kpi label="Handled by autopilot" value={s ? `${s.autopilot} of ${s.answered}` : null} sub="Responses sent without you" />
+        <Kpi label="Disputes" value={s ? String(data?.cases.length ?? 0) : null} sub={s ? `${s.open} still open` : undefined} />
       </div>
 
       <ReservePanel cases={data?.cases ?? []} />

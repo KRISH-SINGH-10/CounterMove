@@ -109,8 +109,13 @@ export default function ApiTrail({ caseId, refreshKey, pageSize = 8 }: { caseId?
   // while the tab is visible.
   useEffect(() => {
     load();
+    // The first visit's demo calls land a moment after the page loads; look again soon.
+    const soon = setTimeout(load, 1200);
     const t = setInterval(() => document.visibilityState === "visible" && load(), 5000);
-    return () => clearInterval(t);
+    return () => {
+      clearTimeout(soon);
+      clearInterval(t);
+    };
   }, [load, refreshKey]);
 
   if (!calls) return <p className="text-sm text-muted">Loading the trail…</p>;

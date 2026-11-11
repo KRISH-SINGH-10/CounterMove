@@ -88,12 +88,12 @@ export default function Protect() {
                   ? `${net.ordering} buyer${net.ordering === 1 ? "" : "s"} other sellers caught ${net.ordering === 1 ? "is" : "are"} ordering from you right now.`
                   : "No reported buyer is ordering from you right now."}
             </p>
-            <p className="mt-1 text-sm text-muted">{net ? `${net.reports} proven reports from ${net.shops} shops. You shared ${net.shared}.` : " "}{toReview ? ` ${toReview} paid order${toReview === 1 ? "" : "s"} to review before shipping.` : ""}</p>
+            <p className="mt-1 text-sm text-muted">{net ? `${net.reports} proven reports from ${net.shops} shops. You shared ${net.shared}.` : "Reading reports from other shops."}{toReview ? ` ${toReview} paid order${toReview === 1 ? "" : "s"} to review before shipping.` : ""}</p>
           </div>
-          <Kpi label="Money protected" value={data?.stats ? money(data.stats.kept) : "-"} tone="good" sub={data?.stats?.rulings ? `Won ${data.stats.won} of ${data.stats.rulings} PayPal rulings` : "Kept from disputes"} />
+          <Kpi label="Money protected" value={data?.stats ? money(data.stats.kept) : null} tone="good" sub={data?.stats?.rulings ? `Won ${data.stats.won} of ${data.stats.rulings} PayPal rulings` : "Kept from disputes"} />
           <div className="rounded-lg border border-line bg-panel px-4 py-3">
             <div className="text-xs font-medium uppercase tracking-wide text-muted">Open disputes</div>
-            <div className="mt-1 text-2xl font-semibold tabular">{data?.stats ? money(data.stats.at_risk) : "-"}</div>
+            {data?.stats ? <div className="mt-1 text-2xl font-semibold tabular">{money(data.stats.at_risk)}</div> : <div className="mt-2 mb-1 h-6 w-20 animate-pulse rounded bg-line" aria-label="Loading" />}
             <Link href="/disputes" className="text-xs text-accent underline">{data?.stats ? `${data.stats.open} open · settle the rest` : "Open Disputes"}</Link>
           </div>
         </div>
@@ -132,6 +132,8 @@ export default function Protect() {
             defaultColDef={{ cellStyle: { display: "flex", alignItems: "center" }, sortable: true }}
             suppressCellFocus
           />
+        ) : !data ? (
+          <p className="text-sm text-muted">Loading buyers…</p>
         ) : (
           <Empty title="No buyers to remember yet">Every buyer who disputes with you will be listed here, so the shield and the investigator can read their history.</Empty>
         )}
