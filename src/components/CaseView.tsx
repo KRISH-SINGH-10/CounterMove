@@ -7,6 +7,7 @@ import ApiTrail from "./ApiTrail";
 import EvidenceGrid from "./EvidenceGrid";
 import NegotiationPanel from "./NegotiationPanel";
 import NetworkBanner from "./NetworkBanner";
+import PhotoForensics from "./PhotoForensics";
 import WhyPanel from "./WhyPanel";
 import { useCases } from "./CasesProvider";
 import { BUTTON } from "./ui";
@@ -281,6 +282,8 @@ export default function CaseView({ id }: { id: string }) {
               <blockquote key={i} className="border-l-2 border-line pl-3 text-sm">&ldquo;{m.content}&rdquo;</blockquote>
             ))}
           </Panel>
+
+          {c.history ? null : <PhotoForensics caseId={c.id} />}
 
           <Panel
             title="Agent investigation"

@@ -164,7 +164,8 @@ export const SCENARIOS: Scenario[] = [
           { at: daysAgo(10, 16), status: "Accepted", location: "Portland, OR" },
           { at: daysAgo(6, 12), status: "Delivered, in/at mailbox", location: "Brooklyn, NY 11211" },
         ],
-        packing_photo: false,
+        // The shop photographed the four mugs before sealing the box (see photo forensics).
+        packing_photo: true,
       },
       policies: { returns: SHOP.returns, shipping: SHOP.shipping },
     },
