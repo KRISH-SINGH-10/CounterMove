@@ -146,6 +146,21 @@ Why both: buyer disputes can only be filed by hand in the sandbox and take minut
 | PayPal API trail | Every PayPal call the agent, autopilot, the seller and the server made, newest first: method, endpoint, HTTP status, `PayPal-Debug-Id`, Agent Toolkit or REST, who made it and for which dispute (`GET /api/trail`, `?case=` for one dispute; [`src/lib/trail.ts`](src/lib/trail.ts)). The live sandbox records PayPal's own status and debug id, including failed calls, access-token requests and webhook-signature checks; the simulator records the same shape with a stable fake debug id, including the failures it injects. Kept in memory per visitor, 500 calls each; the same background read within 30 seconds (the inbox polls) is shown once. |
 | Webhooks: `CUSTOMER.DISPUTE.*` + `verify-webhook-signature` | Starts autopilot: a new dispute is investigated in the background and the seller's rules applied, so PayPal either already has an answer or an approval is waiting. The simulator sends the same event through the same code. |
 
+### Verified live against the PayPal sandbox (11 Nov 2026)
+
+`node --env-file=.env.local scripts/verify-live.mjs` calls each API against `api-m.sandbox.paypal.com` and prints PayPal's status and debug id (never a secret).
+
+| API | Call | PayPal answered |
+|---|---|---|
+| OAuth sign-in | `POST /v1/oauth2/token` | 200 |
+| Disputes: list and read | `GET /v1/customer/disputes`, `GET /v1/customer/disputes/{id}` | 200, 200 |
+| Orders: create and read | `POST /v2/checkout/orders`, `GET /v2/checkout/orders/{id}` | 201, 200 |
+| Webhooks: list and verify a signature | `GET /v1/notifications/webhooks`, `POST /v1/notifications/verify-webhook-signature` | 200, 200 (`FAILURE` for a made-up event, as it should) |
+| Shipment tracking | `GET /v1/shipping/trackers` | **403**: the sandbox app doesn't have the tracking permission |
+| Transaction search | `GET /v1/reporting/transactions` | **403**: the sandbox app doesn't have Transaction Search |
+
+Both 403s are app permissions, not code: turn on **Transaction search** and **Shipment tracking** for the app under Apps & Credentials on developer.paypal.com. Until then the agent's `get_shipment_tracking` and `list_transactions` lookups fail on live disputes, and autopilot leaves those disputes for the seller (a failed PayPal lookup is one of its guardrails). Evidence, offers, refunds and the sandbox ruling were verified earlier through the app on real sandbox disputes (see the Simulator vs live sandbox table).
+
 ## How it uses AI
 
 Google Gemini (`gemini-3.5-flash-lite` on the free tier by default, falling back to `gemini-3.5-flash` if it is overloaded; set `GEMINI_MODEL` / `GEMINI_FALLBACK_MODELS` to change them) runs a function-calling loop in [`src/lib/agent.ts`](src/lib/agent.ts). Claude works too: set `AI_PROVIDER=claude` and `APP_ANTHROPIC_API_KEY`. Both sit behind one small adapter interface in [`src/lib/model`](src/lib/model).
