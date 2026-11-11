@@ -33,6 +33,8 @@ function load(): Promise<boolean> {
         ent.ContextMenuModule,
         ent.ColumnMenuModule,
         ent.ExcelExportModule,
+        ent.ServerSideRowModelModule,
+        ent.ServerSideRowModelApiModule,
         ent.IntegratedChartsModule.with(charts.AgChartsEnterpriseModule),
       ]);
       return true;

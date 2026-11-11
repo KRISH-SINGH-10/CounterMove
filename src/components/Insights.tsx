@@ -16,6 +16,7 @@ import GridAsk from "./GridAsk";
 import { useGridEnterprise } from "./gridEnterprise";
 import IncidentsPanel from "./IncidentsPanel";
 import InboxCharts from "./InboxCharts";
+import MillionTest from "./MillionTest";
 import ScaleTest from "./ScaleTest";
 import { Badge, BUTTON, Card, Kpi } from "./ui";
 
@@ -322,6 +323,8 @@ export default function Insights() {
       </Card>
 
       <ScaleTest />
+
+      {enterprise ? <MillionTest /> : null}
 
       <IncidentsPanel mode={data?.mode} refreshKey={(data?.cases ?? []).map((c) => c.updated_at).join("|")} />
 
